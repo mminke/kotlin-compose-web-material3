@@ -1,14 +1,12 @@
 package web.compose.material3.textfield
 
 import androidx.compose.runtime.Composable
-import androidx.compose.web.events.SyntheticEvent
 import org.jetbrains.compose.web.attributes.AttrsScope
 import org.jetbrains.compose.web.dom.AttrBuilderContext
 import org.jetbrains.compose.web.dom.ContentBuilder
 import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import org.w3c.dom.Element
-import org.w3c.dom.events.EventTarget
 import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.InvalidCallException
 
@@ -48,13 +46,6 @@ fun AttrsScope<MdOutlinedTextFieldElement>.onInput(handler: (MdInputEventWrapper
     addEventListener("input") {
         handler(MdInputEventWrapper(it))
     }
-}
-
-class MdInputEventWrapper internal constructor(private val syntheticEvent: SyntheticEvent<EventTarget>) {
-    val data: String?
-        get() = syntheticEvent.nativeEvent.target.asDynamic().value?.unsafeCast<String>()
-    val value: String?
-        get() = syntheticEvent.nativeEvent.target.asDynamic().value?.unsafeCast<String>()
 }
 
 //Properties coming from textfield/lib/text-field.ts
