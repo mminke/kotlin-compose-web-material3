@@ -15,7 +15,11 @@ import org.jetbrains.compose.web.dom.Text
 import org.jetbrains.compose.web.renderComposable
 import web.compose.extras.Column
 import web.compose.extras.Row
+import web.compose.material3.buttons.ElevatedButton
 import web.compose.material3.buttons.FilledButton
+import web.compose.material3.buttons.OutlinedButton
+import web.compose.material3.buttons.TextButton
+import web.compose.material3.buttons.TonalButton
 import web.compose.material3.buttons.label
 import web.compose.material3.icon.DataVariant
 import web.compose.material3.icon.Icon
@@ -32,6 +36,10 @@ external fun require(module: String): dynamic
 
 fun main() {
     require("@material/web/button/filled-button.js")
+    require("@material/web/button/outlined-button.js")
+    require("@material/web/button/elevated-button.js")
+    require("@material/web/button/text-button.js")
+    require("@material/web/button/tonal-button.js")
     require("@material/web/navigationbar/navigation-bar.js")
     require("@material/web/textfield/outlined-text-field.js")
     require("@material/web/textfield/filled-text-field.js")
@@ -50,7 +58,31 @@ fun main() {
                 Column {
                     H2 { Text("Buttons") }
 
-                    FilledButton({ label = "Filled Button"; onClick { textFieldValue = "filled button clicked" } })
+                    FilledButton({
+                        label = "Filled Button"; onClick {
+                        textFieldValue = "filled button clicked"
+                    }; style { padding(5.px) }
+                    })
+                    OutlinedButton({
+                        label = "Outlined Button"; onClick {
+                        textFieldValue = "outlined button clicked"
+                    }; style { padding(5.px) }
+                    })
+                    ElevatedButton({
+                        label = "Eevated Button"; onClick {
+                        textFieldValue = "elevated button clicked"
+                    }; style { padding(5.px) }
+                    })
+                    TextButton({
+                        label = "Text Button"; onClick {
+                        textFieldValue = "text button clicked"
+                    }; style { padding(5.px) }
+                    })
+                    TonalButton({
+                        label = "Tonal Button"; onClick {
+                        textFieldValue = "tonal button clicked"
+                    }; style { padding(5.px) }
+                    })
                 }
 
                 Column {
@@ -86,7 +118,6 @@ fun main() {
                     }
                 }
             }
-
 
 
         }
