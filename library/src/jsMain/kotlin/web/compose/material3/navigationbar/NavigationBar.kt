@@ -9,18 +9,18 @@ import org.w3c.dom.Element
 import web.compose.material3.ElementBuilderImplementation
 
 
-private val MdNavigationBarElementBuilder: ElementBuilder<MdNavigationBarElement> =
+private val NavigationBarElementBuilder: ElementBuilder<NavigationBarElement> =
     ElementBuilderImplementation("md-navigation-bar")
 
 
-abstract external class MdNavigationBarElement : Element
+abstract external class NavigationBarElement : Element
 
 @Composable
-fun MdNavigationBar(
-    attrs: AttrBuilderContext<MdNavigationBarElement>? = null,
-    content: ContentBuilder<MdNavigationBarElement>? = null
+fun NavigationBar(
+    attrs: AttrBuilderContext<NavigationBarElement>? = null,
+    content: ContentBuilder<NavigationBarElement>? = null
 ) = TagElement(
-    elementBuilder = MdNavigationBarElementBuilder,
+    elementBuilder = NavigationBarElementBuilder,
     applyAttrs = attrs,
     content = content
 )
