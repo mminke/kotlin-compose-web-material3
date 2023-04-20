@@ -9,16 +9,12 @@ import org.jetbrains.compose.web.dom.TagElement
 import org.w3c.dom.Element
 import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.InvalidCallException
+import web.compose.material3.MaterialTheme
 
-
-private val IconElementBuilder: ElementBuilder<MdIconElement> =
-    ElementBuilderImplementation("md-icon")
-
-
-abstract external class MdIconElement : Element
+abstract class MdIconElement : Element()
 
 @Composable
-fun Icon(
+fun MaterialTheme.Icon(
     attrs: AttrBuilderContext<MdIconElement>? = null,
     content: ContentBuilder<MdIconElement>? = null
 ) = TagElement(
@@ -26,6 +22,9 @@ fun Icon(
     applyAttrs = attrs,
     content = content
 )
+
+private val IconElementBuilder: ElementBuilder<MdIconElement> =
+    ElementBuilderImplementation("md-icon")
 
 var AttrsScope<MdIconElement>.dataVariant: DataVariant
     get() {

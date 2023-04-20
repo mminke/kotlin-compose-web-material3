@@ -10,13 +10,10 @@ import org.w3c.dom.Element
 import web.compose.material3.InvalidCallException
 import web.compose.material3.LitElementBuilderImplementation
 
-private val ListItemElementBuilder: ElementBuilder<MdListItemElement> =
-    LitElementBuilderImplementation("md-list-item")
-
-abstract external class MdListItemElement : Element
+abstract class MdListItemElement : Element()
 
 @Composable
-fun ListItem(
+fun ContentBuilder<MdListElement>.ListItem(
     attrs: AttrBuilderContext<MdListItemElement>? = null,
     content: ContentBuilder<MdListItemElement>? = null
 ) = TagElement(
@@ -24,6 +21,9 @@ fun ListItem(
     applyAttrs = attrs,
     content = content
 )
+
+private val ListItemElementBuilder: ElementBuilder<MdListItemElement> =
+    LitElementBuilderImplementation("md-list-item")
 
 var AttrsScope<MdListItemElement>.headline: String
     get() {

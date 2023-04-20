@@ -6,13 +6,10 @@ import org.jetbrains.compose.web.dom.ContentBuilder
 import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.ElementBuilderImplementation
-
-
-private val TonalButtonElementBuilder: ElementBuilder<MdButtonElement> =
-    ElementBuilderImplementation("md-tonal-button")
+import web.compose.material3.MaterialTheme
 
 @Composable
-fun TonalButton(
+fun MaterialTheme.TonalButton(
     attrs: AttrBuilderContext<MdButtonElement>? = null,
     content: ContentBuilder<MdButtonElement>? = null
 ) = TagElement(
@@ -20,3 +17,6 @@ fun TonalButton(
     applyAttrs = attrs,
     content = content
 )
+
+private val TonalButtonElementBuilder: ElementBuilder<MdButtonElement> =
+    ElementBuilderImplementation("md-tonal-button")

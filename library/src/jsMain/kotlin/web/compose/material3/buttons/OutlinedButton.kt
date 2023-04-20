@@ -6,12 +6,10 @@ import org.jetbrains.compose.web.dom.ContentBuilder
 import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.ElementBuilderImplementation
-
-private val OutlinedButtonElementBuilder: ElementBuilder<MdButtonElement> =
-    ElementBuilderImplementation("md-outlined-button")
+import web.compose.material3.MaterialTheme
 
 @Composable
-fun OutlinedButton(
+fun MaterialTheme.OutlinedButton(
     attrs: AttrBuilderContext<MdButtonElement>? = null,
     content: ContentBuilder<MdButtonElement>? = null
 ) = TagElement(
@@ -19,3 +17,6 @@ fun OutlinedButton(
     applyAttrs = attrs,
     content = content
 )
+
+private val OutlinedButtonElementBuilder: ElementBuilder<MdButtonElement> =
+    ElementBuilderImplementation("md-outlined-button")

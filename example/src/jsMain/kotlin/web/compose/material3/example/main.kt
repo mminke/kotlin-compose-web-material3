@@ -10,6 +10,7 @@ import org.jetbrains.compose.web.dom.Text
 import org.jetbrains.compose.web.renderComposable
 import web.compose.extras.Column
 import web.compose.extras.Row
+import web.compose.material3.MaterialTheme
 import web.compose.material3.buttons.ElevatedButton
 import web.compose.material3.buttons.FilledButton
 import web.compose.material3.buttons.OutlinedButton
@@ -29,36 +30,24 @@ import web.compose.material3.textfield.label
 import web.compose.material3.textfield.onInput
 import web.compose.material3.textfield.value
 
-external fun require(module: String): dynamic
 
 fun main() {
-    require("@material/web/button/filled-button.js")
-    require("@material/web/button/outlined-button.js")
-    require("@material/web/button/elevated-button.js")
-    require("@material/web/button/text-button.js")
-    require("@material/web/button/tonal-button.js")
-    require("@material/web/navigationbar/navigation-bar.js")
-    require("@material/web/textfield/outlined-text-field.js")
-    require("@material/web/textfield/filled-text-field.js")
-    require("@material/web/list/list.js")
-    require("@material/web/list/list-item.js")
-    require("@material/web/icon/icon.js")
-    require("@material/web/fab/fab.js")
 
     renderComposable(rootElementId = "root") {
         var textFieldValue by remember { mutableStateOf<String>("Initial text field value") }
 
-        Column {
-            // Column / Row concept ?!?!?
-            H1 { Text("Kotlin HTML - Material Design 3 Web Components Examples") }
-
+        MaterialTheme {
             Column {
-                H2 { Text("Navigation Bar") }
-                Row {
-                    NavigationBar {}
+                // Column / Row concept ?!?!?
+                H1 { Text("Kotlin HTML - Material Design theme 3 Web Components Examples") }
+
+                Column {
+                    H2 { Text("Navigation Bar") }
+                    Row {
+                        NavigationBar {}
+                    }
                 }
             }
-
             Row {
                 Column {
                     H2 { Text("Buttons") }
@@ -128,3 +117,4 @@ fun main() {
         }
     }
 }
+

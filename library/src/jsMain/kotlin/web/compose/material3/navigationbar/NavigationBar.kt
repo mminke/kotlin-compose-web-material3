@@ -7,16 +7,12 @@ import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import org.w3c.dom.Element
 import web.compose.material3.ElementBuilderImplementation
-
-
-private val NavigationBarElementBuilder: ElementBuilder<NavigationBarElement> =
-    ElementBuilderImplementation("md-navigation-bar")
-
+import web.compose.material3.MaterialTheme
 
 abstract external class NavigationBarElement : Element
 
 @Composable
-fun NavigationBar(
+fun MaterialTheme.NavigationBar(
     attrs: AttrBuilderContext<NavigationBarElement>? = null,
     content: ContentBuilder<NavigationBarElement>? = null
 ) = TagElement(
@@ -24,3 +20,6 @@ fun NavigationBar(
     applyAttrs = attrs,
     content = content
 )
+
+private val NavigationBarElementBuilder: ElementBuilder<NavigationBarElement> =
+    ElementBuilderImplementation("md-navigation-bar")

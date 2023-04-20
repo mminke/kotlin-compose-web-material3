@@ -7,21 +7,12 @@ import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import org.w3c.dom.HTMLElement
 import web.compose.material3.LitElementBuilderImplementation
+import web.compose.material3.MaterialTheme
 
-private val ListElementBuilder: ElementBuilder<MdListElement> =
-    LitElementBuilderImplementation("md-list")
-
-abstract external class MdListElement : HTMLElement
-//abstract external class MdListElement : ListElement
-//
-//external abstract class ListElement: LitElement
-//
-//external abstract class LitElement: ReactiveElement // Not abstract in lit itself
-//
-//external abstract class ReactiveElement: HTMLElement
+abstract class MdListElement : HTMLElement()
 
 @Composable
-fun List(
+fun MaterialTheme.List(
     attrs: AttrBuilderContext<MdListElement>? = null,
     content: ContentBuilder<MdListElement>? = null
 ) = TagElement(
@@ -30,3 +21,5 @@ fun List(
     content = content
 )
 
+private val ListElementBuilder: ElementBuilder<MdListElement> =
+    LitElementBuilderImplementation("md-list")
