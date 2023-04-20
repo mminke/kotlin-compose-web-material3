@@ -2,6 +2,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import kotlinx.coroutines.launch
+import org.jetbrains.compose.web.css.DisplayStyle.Companion.ListItem
 import org.jetbrains.compose.web.css.padding
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.H1
@@ -23,6 +25,10 @@ import web.compose.material3.icon.Icon
 import web.compose.material3.icon.Slot
 import web.compose.material3.icon.dataVariant
 import web.compose.material3.icon.slot
+import web.compose.material3.list.List
+import web.compose.material3.list.ListItem
+import web.compose.material3.list.headline
+import web.compose.material3.list.supportingText
 import web.compose.material3.navigationbar.NavigationBar
 import web.compose.material3.textfield.FilledTextField
 import web.compose.material3.textfield.OutlinedTextField
@@ -30,6 +36,14 @@ import web.compose.material3.textfield.label
 import web.compose.material3.textfield.onInput
 import web.compose.material3.textfield.value
 
+data class ListDataItem(
+    val name: String,
+    val organisation: String
+)
+val listData = listOf(
+    ListDataItem("John Doe", "Example.org"),
+    ListDataItem("Jane Doe", "Another.example.org")
+)
 
 fun main() {
 
@@ -78,6 +92,7 @@ fun main() {
                         style { padding(5.px) }
                     })
 
+                    H2 { Text("FAB") }
                     Fab()
                 }
 
@@ -111,6 +126,21 @@ fun main() {
                         Icon({ dataVariant = DataVariant.ICON; slot = Slot.START }) { Text("edit") }
                         Icon({ dataVariant = DataVariant.ICON; slot = Slot.START }) { Text("delete") }
                         Icon({ dataVariant = DataVariant.ICON; slot = Slot.END }) { Text("close") }
+                    }
+                }
+
+                Column {
+                    H2 { Text("List box") }
+                    List {
+                        listData.forEach { listDateItem ->
+                            ListItem({
+                                headline = listDateItem.name
+                                supportingText = listDateItem.organisation
+                                onClick {
+                                    textFieldValue = listDateItem.name
+                                }
+                            })
+                        }
                     }
                 }
             }

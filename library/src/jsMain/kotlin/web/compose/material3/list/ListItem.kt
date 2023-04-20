@@ -9,11 +9,12 @@ import org.jetbrains.compose.web.dom.TagElement
 import org.w3c.dom.Element
 import web.compose.material3.InvalidCallException
 import web.compose.material3.LitElementBuilderImplementation
+import web.compose.material3.MaterialTheme
 
 abstract class MdListItemElement : Element()
 
 @Composable
-fun ContentBuilder<MdListElement>.ListItem(
+fun MaterialTheme.ListItem(
     attrs: AttrBuilderContext<MdListItemElement>? = null,
     content: ContentBuilder<MdListItemElement>? = null
 ) = TagElement(
