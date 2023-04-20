@@ -2,8 +2,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import kotlinx.coroutines.launch
-import org.jetbrains.compose.web.css.DisplayStyle.Companion.ListItem
 import org.jetbrains.compose.web.css.padding
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.H1
@@ -20,9 +18,13 @@ import web.compose.material3.buttons.TextButton
 import web.compose.material3.buttons.TonalButton
 import web.compose.material3.buttons.label
 import web.compose.material3.fab.Fab
+import web.compose.material3.fab.FabSize.LARGE
+import web.compose.material3.fab.FabSize.SMALL
+import web.compose.material3.fab.size
 import web.compose.material3.icon.DataVariant
 import web.compose.material3.icon.Icon
 import web.compose.material3.icon.Slot
+import web.compose.material3.icon.Slot.ICON
 import web.compose.material3.icon.dataVariant
 import web.compose.material3.icon.slot
 import web.compose.material3.list.List
@@ -37,12 +39,11 @@ import web.compose.material3.textfield.onInput
 import web.compose.material3.textfield.value
 
 data class ListDataItem(
-    val name: String,
-    val organisation: String
+    val name: String, val organisation: String
 )
+
 val listData = listOf(
-    ListDataItem("John Doe", "Example.org"),
-    ListDataItem("Jane Doe", "Another.example.org")
+    ListDataItem("John Doe", "Example.org"), ListDataItem("Jane Doe", "Another.example.org")
 )
 
 fun main() {
@@ -93,7 +94,16 @@ fun main() {
                     })
 
                     H2 { Text("FAB") }
-                    Fab()
+                    Fab({ size = SMALL }) {
+                        Icon({ dataVariant = DataVariant.ICON; slot = ICON }) { Text("edit") }
+                    }
+                    Fab {
+                        Icon({ dataVariant = DataVariant.ICON; slot = ICON }) { Text("delete") }
+                    }
+                    Fab({ size = LARGE }) {
+                        Icon({ dataVariant = DataVariant.ICON; slot = ICON }) { Text("add") }
+                    }
+                    Fab({ label = "FAB" })
                 }
 
                 Column {

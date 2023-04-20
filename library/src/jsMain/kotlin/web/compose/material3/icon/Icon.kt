@@ -48,5 +48,6 @@ enum class DataVariant(val value: String) {
 
 enum class Slot(val value: String) {
     START("start"),
-    END("end")
+    END("end"),
+    ICON("icon")
 }
