@@ -6,6 +6,46 @@ import web.compose.material3.MdElement
 
 abstract class MdTextFieldElement : MdElement()
 
+var AttrsScope<MdTextFieldElement>.type: TextFieldType
+    get() {
+        throw InvalidCallException()
+    }
+    set(type) {
+        this.attr("type", type.value)
+    }
+
+var AttrsScope<MdTextFieldElement>.disabled: Boolean
+    get() {
+        throw InvalidCallException()
+    }
+    set(value) {
+        this.attr("disabled", value.toString())
+    }
+
+var AttrsScope<MdTextFieldElement>.required: Boolean
+    get() {
+        throw InvalidCallException()
+    }
+    set(value) {
+        this.attr("required", value.toString())
+    }
+
+var AttrsScope<MdTextFieldElement>.error: Boolean
+    get() {
+        throw InvalidCallException()
+    }
+    set(value) {
+        this.attr("error", value.toString())
+    }
+
+var AttrsScope<MdTextFieldElement>.errorText: String
+    get() {
+        throw InvalidCallException()
+    }
+    set(value) {
+        this.attr("errorText", value)
+    }
+
 var AttrsScope<MdTextFieldElement>.label: String
     get() {
         throw InvalidCallException()
@@ -27,3 +67,13 @@ fun AttrsScope<MdTextFieldElement>.onInput(handler: (MdInputEventWrapper) -> Uni
         handler(MdInputEventWrapper(it))
     }
 }
+
+enum class TextFieldType(val value: String) {
+    EMAIL("email"),
+    NUMBER("number"),
+    PASSWORD("password"),
+    SEARCH("search"),
+    TEXT("text"),
+    URL("url")
+}
+

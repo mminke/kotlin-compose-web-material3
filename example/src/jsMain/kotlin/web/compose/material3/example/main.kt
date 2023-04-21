@@ -2,6 +2,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import org.jetbrains.compose.web.css.height
 import org.jetbrains.compose.web.css.padding
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.H1
@@ -34,8 +35,18 @@ import web.compose.material3.list.supportingText
 import web.compose.material3.navigationbar.NavigationBar
 import web.compose.material3.textfield.FilledTextField
 import web.compose.material3.textfield.OutlinedTextField
+import web.compose.material3.textfield.TextFieldType.EMAIL
+import web.compose.material3.textfield.TextFieldType.NUMBER
+import web.compose.material3.textfield.TextFieldType.PASSWORD
+import web.compose.material3.textfield.TextFieldType.SEARCH
+import web.compose.material3.textfield.TextFieldType.URL
+import web.compose.material3.textfield.disabled
+import web.compose.material3.textfield.error
+import web.compose.material3.textfield.errorText
 import web.compose.material3.textfield.label
 import web.compose.material3.textfield.onInput
+import web.compose.material3.textfield.required
+import web.compose.material3.textfield.type
 import web.compose.material3.textfield.value
 
 data class ListDataItem(
@@ -118,6 +129,21 @@ fun main() {
                         style { padding(5.px) }
                     })
 
+                    FilledTextField({
+                        label = "Filled Text Field"
+                        value = textFieldValue
+                        disabled = true
+                        style { padding(5.px) }
+                    })
+
+                    FilledTextField({
+                        label = "Filled Text Field"
+                        value = "Some input"
+                        error = true
+                        errorText = "No valid input"
+                        style { padding(5.px) }
+                    })
+
                     OutlinedTextField({
                         label = "Outlined Text Field"
                         value = textFieldValue
@@ -125,6 +151,48 @@ fun main() {
                             textFieldValue = it.value ?: ""
                         }
                         style { padding(5.px) }
+                    })
+
+                    OutlinedTextField({
+                        label = "Input a number"
+                        value = "111"
+                        type = NUMBER
+                        required = true
+                        style { padding(5.px) }
+                    })
+
+                    OutlinedTextField({
+                        label = "Input a password"
+                        value = "Welkom"
+                        type = PASSWORD
+                        style { padding(5.px) }
+                    })
+
+                    OutlinedTextField({
+                        label = "Input an email"
+                        value = "john.doe@example.com"
+                        type = EMAIL
+                        style { padding(5.px) }
+                    })
+
+                    OutlinedTextField({
+                        label = "Input an url"
+                        value = "https://www.example.com"
+                        type = URL
+                        style { padding(5.px) }
+                    })
+
+                    OutlinedTextField({
+                        label = "Input an search"
+                        value = "Some search?"
+                        type = SEARCH
+                        style { padding(5.px) }
+                    })
+
+                    OutlinedTextField({
+                        label = "Multiline textfield"
+                        value = "This does not work yet!?!\nunfortunately"
+                        style { padding(5.px); height(400.px) }
                     })
                 }
 
