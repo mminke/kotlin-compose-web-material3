@@ -14,7 +14,7 @@ import web.compose.material3.MaterialTheme
 abstract class MdIconElement : Element()
 
 @Composable
-fun MaterialTheme.Icon(
+fun Icon(
     attrs: AttrBuilderContext<MdIconElement>? = null,
     content: ContentBuilder<MdIconElement>? = null
 ) = TagElement(

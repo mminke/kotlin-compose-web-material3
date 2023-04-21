@@ -12,7 +12,7 @@ import web.compose.material3.MaterialTheme
 import web.compose.material3.buttons.MdButtonElement
 
 @Composable
-fun MaterialTheme.Fab(
+fun Fab(
     attrs: AttrBuilderContext<MdButtonElement>? = null,
     content: ContentBuilder<MdButtonElement>? = null
 ) = TagElement(

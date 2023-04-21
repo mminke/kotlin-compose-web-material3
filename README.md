@@ -8,6 +8,8 @@ This project aims to implement the __Material3 Web Components__ for __Kotlin Com
 
 The Material3 Web Components are currently being developed and are still in alpha stage. Therefor this project is nowhere near stable as this project depends on the development of those web components.
 
+Also this project is in itself currently under development to get things working properly.
+
 Links:
 
 Material Design v3: https://m3.material.io/ 

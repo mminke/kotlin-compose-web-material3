@@ -12,7 +12,7 @@ import web.compose.material3.MaterialTheme
 abstract class MdListElement : HTMLElement()
 
 @Composable
-fun MaterialTheme.List(
+fun List(
     attrs: AttrBuilderContext<MdListElement>? = null,
     content: ContentBuilder<MdListElement>? = null
 ) = TagElement(

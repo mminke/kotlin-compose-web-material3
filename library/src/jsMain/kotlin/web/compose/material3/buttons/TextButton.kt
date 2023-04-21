@@ -9,7 +9,7 @@ import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.MaterialTheme
 
 @Composable
-fun MaterialTheme.TextButton(
+fun TextButton(
     attrs: AttrBuilderContext<MdButtonElement>? = null,
     content: ContentBuilder<MdButtonElement>? = null
 ) = TagElement(

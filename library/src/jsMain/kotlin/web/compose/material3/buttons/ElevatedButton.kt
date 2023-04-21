@@ -9,7 +9,7 @@ import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.MaterialTheme
 
 @Composable
-fun MaterialTheme.ElevatedButton(
+fun ElevatedButton(
     attrs: AttrBuilderContext<MdButtonElement>? = null,
     content: ContentBuilder<MdButtonElement>? = null
 ) = TagElement(

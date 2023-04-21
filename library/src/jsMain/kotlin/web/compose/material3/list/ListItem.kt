@@ -14,7 +14,7 @@ import web.compose.material3.MaterialTheme
 abstract class MdListItemElement : Element()
 
 @Composable
-fun MaterialTheme.ListItem(
+fun ListItem(
     attrs: AttrBuilderContext<MdListItemElement>? = null,
     content: ContentBuilder<MdListItemElement>? = null
 ) = TagElement(

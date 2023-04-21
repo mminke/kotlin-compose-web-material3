@@ -12,7 +12,7 @@ import web.compose.material3.MaterialTheme
 abstract external class NavigationBarElement : Element
 
 @Composable
-fun MaterialTheme.NavigationBar(
+fun NavigationBar(
     attrs: AttrBuilderContext<NavigationBarElement>? = null,
     content: ContentBuilder<NavigationBarElement>? = null
 ) = TagElement(

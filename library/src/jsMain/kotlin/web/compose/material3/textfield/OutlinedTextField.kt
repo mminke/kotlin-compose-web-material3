@@ -9,7 +9,7 @@ import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.MaterialTheme
 
 @Composable
-fun MaterialTheme.OutlinedTextField(
+fun OutlinedTextField(
     attrs: AttrBuilderContext<MdTextFieldElement>? = null,
     content: ContentBuilder<MdTextFieldElement>? = null
 ) = TagElement(
