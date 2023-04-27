@@ -6,12 +6,12 @@ import androidx.compose.runtime.setValue
 import org.jetbrains.compose.web.css.Style
 import org.jetbrains.compose.web.css.StyleSheet
 import org.jetbrains.compose.web.css.fontSize
-import org.jetbrains.compose.web.css.height
 import org.jetbrains.compose.web.css.padding
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.H1
 import org.jetbrains.compose.web.dom.H2
+import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
 import org.jetbrains.compose.web.renderComposable
 import org.w3c.files.File
@@ -71,7 +71,8 @@ fun main() {
 
     renderComposable(rootElementId = "root") {
 
-        var textFieldValue by remember { mutableStateOf<String>("Initial text field value") }
+        var textFieldValue by remember { mutableStateOf("Initial text field value") }
+        var checkboxStatus by remember { mutableStateOf(false) }
 
         MaterialTheme {
             Column {
@@ -216,6 +217,17 @@ fun main() {
                         Icon({ dataVariant = DataVariant.ICON; slot = Slot.START }) { Text("delete") }
                         Icon({ dataVariant = DataVariant.ICON; slot = Slot.END }) { Text("close") }
                     }
+                }
+                Column {
+                    H2 { Text("Checkbox") }
+
+                    Checkbox({
+                        checked(checkboxStatus)
+                        onClick {
+                            checkboxStatus = !checkboxStatus
+                        }
+                    })
+                    P { Text("Checkbox status: $checkboxStatus") }
                 }
 
                 Column {
