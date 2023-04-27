@@ -1,16 +1,24 @@
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import org.jetbrains.compose.web.css.Style
+import org.jetbrains.compose.web.css.StyleSheet
+import org.jetbrains.compose.web.css.fontSize
 import org.jetbrains.compose.web.css.height
 import org.jetbrains.compose.web.css.padding
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.H1
 import org.jetbrains.compose.web.dom.H2
 import org.jetbrains.compose.web.dom.Text
 import org.jetbrains.compose.web.renderComposable
+import org.w3c.files.File
 import web.compose.extras.Column
 import web.compose.extras.Row
+import web.compose.extras.fileupload.FileDragDropArea
+import web.compose.extras.fileupload.FilledFileInput
 import web.compose.material3.MaterialTheme
 import web.compose.material3.buttons.ElevatedButton
 import web.compose.material3.buttons.FilledButton
@@ -48,18 +56,21 @@ import web.compose.material3.textfield.onInput
 import web.compose.material3.textfield.required
 import web.compose.material3.textfield.type
 import web.compose.material3.textfield.value
+import kotlin.math.roundToInt
 
 data class ListDataItem(
     val name: String, val organisation: String
 )
 
 val listData = listOf(
-    ListDataItem("John Doe", "Example.org"), ListDataItem("Jane Doe", "Another.example.org")
+    ListDataItem("John Doe", "Example.org"),
+    ListDataItem("Jane Doe", "Another.example.org")
 )
 
 fun main() {
 
     renderComposable(rootElementId = "root") {
+
         var textFieldValue by remember { mutableStateOf<String>("Initial text field value") }
 
         MaterialTheme {
@@ -189,11 +200,11 @@ fun main() {
                         style { padding(5.px) }
                     })
 
-                    OutlinedTextField({
-                        label = "Multiline textfield"
-                        value = "This does not work yet!?!\nunfortunately"
-                        style { padding(5.px); height(400.px) }
-                    })
+//                    OutlinedTextField({
+//                        label = "Multiline textfield"
+//                        value = "This does not work yet!?!"
+//                        style { padding(5.px); height(100.px) }
+//                    })
                 }
 
                 Column {
@@ -222,7 +233,106 @@ fun main() {
                     }
                 }
             }
+
+            Column {
+                H1 { Text("Extra components") }
+
+                Row {
+                    var selectedFiles by remember { mutableStateOf<List<File>>(emptyList()) }
+                    Column {
+                        H2 { Text("File input button") }
+                        FilledFileInput("Upload files...") {
+                            if (it == null) return@FilledFileInput
+                            selectedFiles = it
+                        }
+
+                        FileList(selectedFiles)
+                    }
+                    Column {
+                        H2 { Text("File drag/drop area") }
+
+                        FileDragDropArea(
+                            onDrop = { list ->
+                                selectedFiles = list
+                            }
+                        ) {
+                            if (selectedFiles.isEmpty())
+                                Text("Drag & drop files here!")
+                            else
+                                FileListInfo(selectedFiles)
+                        }
+                    }
+                }
+            }
         }
     }
 }
 
+object FileListStyleSheet : StyleSheet() {
+    val filelist by style {
+        "Div" style {
+            fontSize(12.px)
+        }
+        self + hover style {
+        }
+    }
+}
+
+@Composable
+fun FileList(files: List<File>) {
+    Style(FileListStyleSheet)
+    Column({ classes(FileListStyleSheet.filelist) }) {
+        files.forEach {
+            Div {
+                Text("Filename: ${it.name} [${it.size}, ${it.type}], ${it.lastModified}")
+            }
+        }
+    }
+}
+
+@Composable
+fun FileListInfo(files: List<File>) {
+    val totalFileSize = files.sumOf { it.size.toInt() }
+    Div { Text("Number of files: ${files.size}") }
+    Div { Text("Total amount of bytes: ${formatBytes(totalFileSize)}") }
+}
+
+
+/**
+ * This generates formatting functions for applying aggregating units (e.g. Kilo, Mega)
+ * to values.  If you run out of units it gives up and shows the unit value.
+ * NB This method is usable verbatim in Kotlin/JS.
+ *
+ * @param base The unit base, e.g. 1024 for bytes, 1000 for metric units of measure.
+ * @param units the names of the units starting with the base unit (e.g. byte, meter).
+ */
+fun formatUnits(base: Int, units: List<String>): (Double, Int) -> String {
+    check(1 < base)
+    check(units.isNotEmpty())
+    return { value, precision ->
+        check(0 <= precision)
+        tailrec fun haveAtIt(unitsTail: List<String>, adj: Double): String {
+            if (unitsTail.isEmpty()) {
+                return "$value${units.first()}"
+            }
+            if (adj < base) {
+                val formatter: Double = precision.let {
+                    var i = 1.0
+                    for (q in 0 until precision)
+                        i *= 10.0
+                    i
+                }
+                val mag = ((adj * formatter).roundToInt() / formatter).toString().let {
+                    if (it.endsWith(".0")) it.substring(0..it.length - 3)
+                    else it
+                }
+                return "$mag${unitsTail.first()}"
+            }
+            return haveAtIt(unitsTail.drop(1), adj / base)
+        }
+        haveAtIt(units, value)
+    }
+}
+
+private val formatBytesImpl = formatUnits(1024, listOf("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"))
+fun formatBytes(bytes: Int): String = formatBytesImpl(bytes.toDouble(), 2)
