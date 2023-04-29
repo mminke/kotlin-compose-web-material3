@@ -7,7 +7,6 @@ import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import org.w3c.dom.Element
 import web.compose.material3.ElementBuilderImplementation
-import web.compose.material3.MaterialTheme
 
 abstract external class NavigationBarElement : Element
 
