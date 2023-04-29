@@ -5,7 +5,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import org.jetbrains.compose.web.css.CSSColorValue
 import org.jetbrains.compose.web.css.CSSStyleVariable
-import org.jetbrains.compose.web.css.Color
 import org.jetbrains.compose.web.css.Color.lightgray
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.Style
@@ -37,7 +36,6 @@ import web.compose.material3.buttons.FilledButton
 import web.compose.material3.buttons.OutlinedButton
 import web.compose.material3.buttons.TextButton
 import web.compose.material3.buttons.TonalButton
-import web.compose.material3.buttons.label
 import web.compose.material3.dialog.Dialog
 import web.compose.material3.dialog.onCancel
 import web.compose.material3.dialog.onClose
@@ -46,6 +44,7 @@ import web.compose.material3.divider.Divider
 import web.compose.material3.fab.Fab
 import web.compose.material3.fab.FabSize.LARGE
 import web.compose.material3.fab.FabSize.SMALL
+import web.compose.material3.fab.label
 import web.compose.material3.fab.size
 import web.compose.material3.icon.DataVariant
 import web.compose.material3.icon.Icon
@@ -124,36 +123,36 @@ object MyVariables {
 object GreenishColorScheme : StyleSheet() {
     init {
         universal style {
-            MyVariables.mdSysColorPrimary(Color("#006A6A"))
-            MyVariables.mdSysColorPrimaryContainer(Color("#6FF7F6"))
-            MyVariables.mdSysColorOnPrimary(Color("#FFFFFF"))
-            MyVariables.mdSysColorOnPrimaryContainer(Color("#002020"))
-            MyVariables.mdSysColorSecondary(Color("#4A6363"))
-            MyVariables.mdSysColorSecondaryContainer(Color("#CCE8E7"))
-            MyVariables.mdSysColorOnSecondary(Color("#FFFFFF"))
-            MyVariables.mdSysColorOnSecondaryContainer(Color("#051F1F"))
-            MyVariables.mdSysColorTertiary(Color("#4B607C"))
-            MyVariables.mdSysColorTertiaryContainer(Color("#D3E4FF"))
-            MyVariables.mdSysColorOnTertiary(Color("#FFFFFF"))
-            MyVariables.mdSysColorOnTertiaryContainer(Color("#041C35"))
-            MyVariables.mdSysColorError(Color("#BA1A1A"))
-            MyVariables.mdSysColorErrorContainer(Color("#FFDAD6"))
-            MyVariables.mdSysColorOnError(Color("#FFFFFF"))
-            MyVariables.mdSysColorOnErrorContainer(Color("#410002"))
-            MyVariables.mdSysColorOutline(Color("#6F7979"))
-            MyVariables.mdSysColorBackground(Color("#FAFDFC"))
-            MyVariables.mdSysColorOnBackground(Color("#191C1C"))
-            MyVariables.mdSysColorSurface(Color("#FAFDFC"))
-            MyVariables.mdSysColorOnSurface(Color("#191C1C"))
-            MyVariables.mdSysColorSurfaceVariant(Color("#DAE5E4"))
-            MyVariables.mdSysColorOnSurfaceVariant(Color("#3F4948"))
-            MyVariables.mdSysColorInverseSurface(Color("#2D3131"))
-            MyVariables.mdSysColorInverseOnSurface(Color("#EFF1F0"))
-            MyVariables.mdSysColorInversePrimary(Color("#4CDADA"))
-            MyVariables.mdSysColorShadow(Color("#000000"))
-            MyVariables.mdSysColorSurfaceTint(Color("#006A6A"))
-            MyVariables.mdSysColorOutlineVariant(Color("#BEC9C8"))
-            MyVariables.mdSysColorScrim(Color("#000000"))
+//            MyVariables.mdSysColorPrimary(Color("#006A6A"))
+//            MyVariables.mdSysColorPrimaryContainer(Color("#6FF7F6"))
+//            MyVariables.mdSysColorOnPrimary(Color("#FFFFFF"))
+//            MyVariables.mdSysColorOnPrimaryContainer(Color("#002020"))
+//            MyVariables.mdSysColorSecondary(Color("#4A6363"))
+//            MyVariables.mdSysColorSecondaryContainer(Color("#CCE8E7"))
+//            MyVariables.mdSysColorOnSecondary(Color("#FFFFFF"))
+//            MyVariables.mdSysColorOnSecondaryContainer(Color("#051F1F"))
+//            MyVariables.mdSysColorTertiary(Color("#4B607C"))
+//            MyVariables.mdSysColorTertiaryContainer(Color("#D3E4FF"))
+//            MyVariables.mdSysColorOnTertiary(Color("#FFFFFF"))
+//            MyVariables.mdSysColorOnTertiaryContainer(Color("#041C35"))
+//            MyVariables.mdSysColorError(Color("#BA1A1A"))
+//            MyVariables.mdSysColorErrorContainer(Color("#FFDAD6"))
+//            MyVariables.mdSysColorOnError(Color("#FFFFFF"))
+//            MyVariables.mdSysColorOnErrorContainer(Color("#410002"))
+//            MyVariables.mdSysColorOutline(Color("#6F7979"))
+//            MyVariables.mdSysColorBackground(Color("#FAFDFC"))
+//            MyVariables.mdSysColorOnBackground(Color("#191C1C"))
+//            MyVariables.mdSysColorSurface(Color("#FAFDFC"))
+//            MyVariables.mdSysColorOnSurface(Color("#191C1C"))
+//            MyVariables.mdSysColorSurfaceVariant(Color("#DAE5E4"))
+//            MyVariables.mdSysColorOnSurfaceVariant(Color("#3F4948"))
+//            MyVariables.mdSysColorInverseSurface(Color("#2D3131"))
+//            MyVariables.mdSysColorInverseOnSurface(Color("#EFF1F0"))
+//            MyVariables.mdSysColorInversePrimary(Color("#4CDADA"))
+//            MyVariables.mdSysColorShadow(Color("#000000"))
+//            MyVariables.mdSysColorSurfaceTint(Color("#006A6A"))
+//            MyVariables.mdSysColorOutlineVariant(Color("#BEC9C8"))
+//            MyVariables.mdSysColorScrim(Color("#000000"))
         }
     }
 }
@@ -200,30 +199,25 @@ fun main() {
                         H2 { Text("Buttons") }
 
                         FilledButton({
-                            label = "Filled Button"
                             onClick { textFieldValue = "filled button clicked" }
                             style { padding(5.px) }
-                        })
+                        }) { Text("Filled Button") }
                         OutlinedButton({
-                            label = "Outlined Button"
                             onClick { textFieldValue = "outlined button clicked" }
                             style { padding(5.px) }
-                        })
+                        }) { Text("Outlined Button")}
                         ElevatedButton({
-                            label = "Elevated Button"
                             onClick { textFieldValue = "elevated button clicked" }
                             style { padding(5.px) }
-                        })
+                        }) { Text("Elevated Button") }
                         TextButton({
-                            label = "Text Button"
                             onClick { textFieldValue = "text button clicked" }
                             style { padding(5.px) }
-                        })
+                        }) { Text("Text Button") }
                         TonalButton({
-                            label = "Tonal Button"
                             onClick { textFieldValue = "tonal button clicked" }
                             style { padding(5.px) }
-                        })
+                        }) { Text("Tonal Button") }
 
                         H2 { Text("FAB") }
                         Fab({ size = SMALL }) {
@@ -412,10 +406,10 @@ fun main() {
                     var selectedFiles by remember { mutableStateOf<List<File>>(emptyList()) }
                     Column {
                         H2 { Text("File input button") }
-                        FilledFileInput("Upload files...") {
+                        FilledFileInput( {
                             if (it == null) return@FilledFileInput
                             selectedFiles = it
-                        }
+                        }) {Text("Upload files...")}
 
                         FileList(selectedFiles)
                     }

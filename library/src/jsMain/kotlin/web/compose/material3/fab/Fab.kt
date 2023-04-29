@@ -8,23 +8,33 @@ import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.InvalidCallException
-import web.compose.material3.MaterialTheme
-import web.compose.material3.buttons.MdButtonElement
+import web.compose.material3.MdElement
+
+
+abstract class MdFabElement : MdElement()
 
 @Composable
 fun Fab(
-    attrs: AttrBuilderContext<MdButtonElement>? = null,
-    content: ContentBuilder<MdButtonElement>? = null
+    attrs: AttrBuilderContext<MdFabElement>? = null,
+    content: ContentBuilder<MdFabElement>? = null
 ) = TagElement(
     elementBuilder = FabElementBuilder,
     applyAttrs = attrs,
     content = content
 )
 
-private val FabElementBuilder: ElementBuilder<MdButtonElement> =
+private val FabElementBuilder: ElementBuilder<MdFabElement> =
     ElementBuilderImplementation("md-fab")
 
-var AttrsScope<MdButtonElement>.size: FabSize
+var AttrsScope<MdFabElement>.label: String
+    get() {
+        throw InvalidCallException()
+    }
+    set(value) {
+        this.attr("label", value)
+    }
+
+var AttrsScope<MdFabElement>.size: FabSize
     get() {
         throw InvalidCallException()
     }
