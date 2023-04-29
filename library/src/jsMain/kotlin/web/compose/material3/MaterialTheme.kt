@@ -22,6 +22,9 @@ class MaterialTheme{
         require("@material/web/fab/fab.js")
         require("@material/web/elevation/elevation.js")
         require("@material/web/checkbox/checkbox.js")
+        require("@material/web/navigationdrawer/navigation-drawer.js")
+        require("@material/web/divider/divider.js")
+        require("@material/web/dialog/dialog.js")
     }
 }
 
