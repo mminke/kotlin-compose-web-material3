@@ -4,13 +4,42 @@ on:
   push:
 
 jobs:
-  build-gradle-project:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout project sources
         uses: actions/checkout@v3
+      - name: Gradle build library and publish local
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: publishToMavenLocal
+          build-root-directory: library
       - name: Gradle build
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: build
-          build-root-directory: library
+          arguments: jsBrowserProductionWebpack
+          build-root-directory: example
+      - name: Upload artifact to gitlab pages
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: /build/distributions
+          
+  deploy:
+    needs: build
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Specify runner + deployment step
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2      
