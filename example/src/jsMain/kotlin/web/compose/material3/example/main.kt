@@ -48,10 +48,7 @@ import web.compose.material3.fab.label
 import web.compose.material3.fab.size
 import web.compose.material3.icon.DataVariant
 import web.compose.material3.icon.Icon
-import web.compose.material3.icon.Slot
-import web.compose.material3.icon.Slot.ICON
 import web.compose.material3.icon.dataVariant
-import web.compose.material3.icon.slot
 import web.compose.material3.list.List
 import web.compose.material3.list.ListItem
 import web.compose.material3.list.headline
@@ -221,13 +218,13 @@ fun main() {
 
                         H2 { Text("FAB") }
                         Fab({ size = SMALL }) {
-                            Icon({ dataVariant = DataVariant.ICON; slot = ICON }) { Text("edit") }
+                            Icon({ dataVariant = DataVariant.ICON; slot = "icon" }) { Text("edit") }
                         }
                         Fab {
-                            Icon({ dataVariant = DataVariant.ICON; slot = ICON }) { Text("delete") }
+                            Icon({ dataVariant = DataVariant.ICON; slot = "icon" }) { Text("delete") }
                         }
                         Fab({ size = LARGE }) {
-                            Icon({ dataVariant = DataVariant.ICON; slot = ICON }) { Text("add") }
+                            Icon({ dataVariant = DataVariant.ICON; slot = "icon" }) { Text("add") }
                         }
                         Fab({ label = "FAB" })
                     }
@@ -343,9 +340,9 @@ fun main() {
 
                         Row {
                             Text("Icons: ")
-                            Icon({ dataVariant = DataVariant.ICON; slot = Slot.START }) { Text("edit") }
-                            Icon({ dataVariant = DataVariant.ICON; slot = Slot.START }) { Text("delete") }
-                            Icon({ dataVariant = DataVariant.ICON; slot = Slot.END }) { Text("close") }
+                            Icon({ dataVariant = DataVariant.ICON; slot = "start" }) { Text("edit") }
+                            Icon({ dataVariant = DataVariant.ICON; slot = "start" }) { Text("delete") }
+                            Icon({ dataVariant = DataVariant.ICON; slot = "end" }) { Text("close") }
                         }
                     }
                     Column {

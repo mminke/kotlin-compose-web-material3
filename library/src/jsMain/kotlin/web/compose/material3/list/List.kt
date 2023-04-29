@@ -7,9 +7,9 @@ import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import org.w3c.dom.HTMLElement
 import web.compose.material3.LitElementBuilderImplementation
-import web.compose.material3.MaterialTheme
+import web.compose.material3.MdElement
 
-abstract class MdListElement : HTMLElement()
+abstract class MdListElement : MdElement()
 
 @Composable
 fun List(

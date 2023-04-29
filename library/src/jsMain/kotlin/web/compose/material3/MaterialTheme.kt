@@ -6,7 +6,7 @@ external fun require(module: String): dynamic
 
 typealias ThemeContent = @Composable MaterialTheme.() -> Unit
 
-class MaterialTheme{
+class MaterialTheme {
     constructor() {
         require("@material/web/button/filled-button.js")
         require("@material/web/button/outlined-button.js")

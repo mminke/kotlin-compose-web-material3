@@ -6,12 +6,11 @@ import org.jetbrains.compose.web.dom.AttrBuilderContext
 import org.jetbrains.compose.web.dom.ContentBuilder
 import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
-import org.w3c.dom.Element
 import web.compose.material3.InvalidCallException
 import web.compose.material3.LitElementBuilderImplementation
-import web.compose.material3.MaterialTheme
+import web.compose.material3.MdElement
 
-abstract class MdListItemElement : Element()
+abstract class MdListItemElement : MdElement()
 
 @Composable
 fun ListItem(
