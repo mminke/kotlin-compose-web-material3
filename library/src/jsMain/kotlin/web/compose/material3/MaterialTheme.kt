@@ -20,6 +20,8 @@ class MaterialTheme{
         require("@material/web/list/list-item.js")
         require("@material/web/icon/icon.js")
         require("@material/web/fab/fab.js")
+        require("@material/web/elevation/elevation.js")
+        require("@material/web/checkbox/checkbox.js")
     }
 }
 

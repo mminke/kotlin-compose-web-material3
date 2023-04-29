@@ -8,7 +8,6 @@ import org.w3c.dom.Element
 internal open class ElementBuilderImplementation<TElement : Element>(private val tagName: String) :
     ElementBuilder<TElement> {
     private val el: Element by lazy {
-        println("ElementBuilder: $tagName")
         document.createElement(tagName)
     }
 
@@ -19,7 +18,6 @@ internal open class ElementBuilderImplementation<TElement : Element>(private val
 internal open class LitElementBuilderImplementation<TElement : Element>(private val tagName: String) :
     ElementBuilder<TElement> {
     private val el: Element by lazy {
-        println("ElementBuilder: $tagName")
         val customElement: dynamic = window.customElements.get(tagName)
         js("new customElement()")
     }
