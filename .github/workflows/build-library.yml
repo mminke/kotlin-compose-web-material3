@@ -22,7 +22,7 @@ jobs:
       - name: Upload artifact to gitlab pages
         uses: actions/upload-pages-artifact@v1
         with:
-          path: /build/distributions
+          path: build/distributions
           
   deploy:
     needs: build
