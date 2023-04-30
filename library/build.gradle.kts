@@ -36,7 +36,7 @@ kotlin {
             dependencies {
                 implementation(compose.web.core)
                 implementation(compose.runtime)
-                implementation(npm("@material/web", "v1.0.0-pre.7"))
+                api(npm("@material/web", "v1.0.0-pre.7"))
             }
         }
         val jsTest by getting {
