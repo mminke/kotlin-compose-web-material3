@@ -83,8 +83,7 @@ val listData = listOf(
 )
 
 
-object MyVariables {
-    // declare a variable
+object MdSysColorVariables {
     val mdSysColorPrimary = CSSStyleVariable<CSSColorValue>("md-sys-color-primary")
     val mdSysColorPrimaryContainer = CSSStyleVariable<CSSColorValue>("md-sys-color-primary-container")
     val mdSysColorOnPrimary = CSSStyleVariable<CSSColorValue>("md-sys-color-on-primary")
@@ -336,25 +335,28 @@ fun main() {
                     }
 
                     Column {
-                        H2 { Text("Misc") }
+                        H2 { Text("Misc ") }
 
+                        H3 { Text("Icons") }
                         Row {
-                            Text("Icons: ")
                             Icon({ dataVariant = DataVariant.ICON; slot = "start" }) { Text("edit") }
                             Icon({ dataVariant = DataVariant.ICON; slot = "start" }) { Text("delete") }
                             Icon({ dataVariant = DataVariant.ICON; slot = "end" }) { Text("close") }
                         }
-                    }
-                    Column {
-                        H2 { Text("Checkbox") }
 
+                        H3 { Text("Checkbox") }
                         Checkbox({
                             checked(checkboxStatus)
                             onClick {
                                 checkboxStatus = !checkboxStatus
                             }
                         })
-                        P { Text("Checkbox status: $checkboxStatus") }
+
+                        H3 { Text("Switch") }
+                        Switch({
+                            selected(checkboxStatus)
+                            onClick { checkboxStatus = !checkboxStatus }
+                        })
                     }
 
                     Column {
