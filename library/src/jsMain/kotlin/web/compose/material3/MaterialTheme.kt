@@ -26,6 +26,7 @@ class MaterialTheme {
         require("@material/web/divider/divider.js")
         require("@material/web/dialog/dialog.js")
         require("@material/web/switch/switch.js")
+        require("@material/web/slider/slider.js")
     }
 }
 

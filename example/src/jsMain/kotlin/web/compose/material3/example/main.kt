@@ -357,6 +357,14 @@ fun main() {
                             selected(checkboxStatus)
                             onClick { checkboxStatus = !checkboxStatus }
                         })
+
+                        H3 { Text("Slider")}
+                        Slider({
+                            min = 100
+                            max = 200
+                            step = 2
+                            withLabel()
+                        }) {  }
                     }
 
                     Column {
