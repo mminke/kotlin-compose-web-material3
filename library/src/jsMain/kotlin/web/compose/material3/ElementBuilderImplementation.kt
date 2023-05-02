@@ -17,6 +17,8 @@ internal open class ElementBuilderImplementation<TElement : Element>(private val
 
 internal open class LitElementBuilderImplementation<TElement : Element>(private val tagName: String) :
     ElementBuilder<TElement> {
+
+    @Suppress("unused")
     private val el: Element by lazy {
         val customElement: dynamic = window.customElements.get(tagName)
         js("new customElement()")

@@ -34,7 +34,7 @@ kotlin {
     sourceSets {
         val jsMain by getting {
             dependencies {
-                implementation(compose.web.core)
+                implementation(compose.html.core)
                 implementation(compose.runtime)
                 api(npm("@material/web", "v1.0.0-pre.7"))
             }
