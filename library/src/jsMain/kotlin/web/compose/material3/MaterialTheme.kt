@@ -27,6 +27,7 @@ class MaterialTheme {
         require("@material/web/dialog/dialog.js")
         require("@material/web/switch/switch.js")
         require("@material/web/slider/slider.js")
+        require("@material/web/radio/radio.js")
     }
 }
 
