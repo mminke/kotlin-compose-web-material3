@@ -29,6 +29,13 @@ import web.compose.material3.list.headline
 import web.compose.material3.list.supportingText
 import web.compose.material3.navigationbar.NavigationBar
 import web.compose.material3.navigationdrawer.NavigationDrawer
+import web.compose.material3.select.FilledSelect
+import web.compose.material3.select.OutlinedSelect
+import web.compose.material3.select.SelectOption
+import web.compose.material3.select.headline
+import web.compose.material3.select.label
+import web.compose.material3.select.supportingText
+import web.compose.material3.select.value
 import web.compose.material3.slot
 import web.compose.material3.textfield.*
 import web.compose.material3.textfield.TextFieldType.*
@@ -331,6 +338,27 @@ fun main() {
                         Row { Radio({ id("r1"); name = "radio1"; value = "o1"}); Label("r1") { Text("Option 1") } }
                         Row { Radio({ id("r2"); name = "radio1"; value = "o2"}); Label("r2") { Text("Option 2") }}
                         Row { Radio({ id("r3"); name = "radio1"; value = "o3"}); Label("r3") { Text("Option 3") }}
+
+                        H3 { Text("Select")}
+                        FilledSelect({
+                            label = "Select label"
+                            supportingText = "Supporting text"
+                        }) {
+                            SelectOption {  }
+                            SelectOption({ value = "MD1"; headline = "Material Design 1" })
+                            SelectOption({ value = "MD2"; headline = "Material Design 2" })
+                            SelectOption({ value = "MD3"; headline = "Material Design 3" })
+                        }
+
+                        OutlinedSelect({
+                            label = "Select label"
+                            supportingText = "Supporting text"
+                        }) {
+                            SelectOption {  }
+                            SelectOption({ value = "MD1"; headline = "Material Design 1" })
+                            SelectOption({ value = "MD2"; headline = "Material Design 2" })
+                            SelectOption({ value = "MD3"; headline = "Material Design 3" })
+                        }
                     }
 
                     Column {

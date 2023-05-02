@@ -28,6 +28,9 @@ class MaterialTheme {
         require("@material/web/switch/switch.js")
         require("@material/web/slider/slider.js")
         require("@material/web/radio/radio.js")
+        require("@material/web/select/filled-select.js")
+        require("@material/web/select/outlined-select.js")
+        require("@material/web/select/select-option.js")
     }
 }
 
