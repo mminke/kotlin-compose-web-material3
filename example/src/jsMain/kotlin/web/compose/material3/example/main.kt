@@ -1,7 +1,30 @@
-import androidx.compose.runtime.*
-import org.jetbrains.compose.web.css.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import org.jetbrains.compose.web.css.CSSColorValue
+import org.jetbrains.compose.web.css.CSSStyleVariable
 import org.jetbrains.compose.web.css.Color.lightgray
-import org.jetbrains.compose.web.dom.*
+import org.jetbrains.compose.web.css.LineStyle
+import org.jetbrains.compose.web.css.Style
+import org.jetbrains.compose.web.css.StyleSheet
+import org.jetbrains.compose.web.css.border
+import org.jetbrains.compose.web.css.color
+import org.jetbrains.compose.web.css.fontSize
+import org.jetbrains.compose.web.css.padding
+import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.style
+import org.jetbrains.compose.web.css.width
+import org.jetbrains.compose.web.dom.A
+import org.jetbrains.compose.web.dom.Div
+import org.jetbrains.compose.web.dom.H1
+import org.jetbrains.compose.web.dom.H2
+import org.jetbrains.compose.web.dom.H3
+import org.jetbrains.compose.web.dom.Label
+import org.jetbrains.compose.web.dom.P
+import org.jetbrains.compose.web.dom.Span
+import org.jetbrains.compose.web.dom.Text
 import org.jetbrains.compose.web.renderComposable
 import org.w3c.files.File
 import web.compose.extras.Column
@@ -9,7 +32,11 @@ import web.compose.extras.Row
 import web.compose.extras.fileupload.FilledFileInput
 import web.compose.extras.fileupload.OutlinedFileDragDropArea
 import web.compose.material3.MaterialTheme
-import web.compose.material3.buttons.*
+import web.compose.material3.buttons.ElevatedButton
+import web.compose.material3.buttons.FilledButton
+import web.compose.material3.buttons.OutlinedButton
+import web.compose.material3.buttons.TextButton
+import web.compose.material3.buttons.TonalButton
 import web.compose.material3.dialog.Dialog
 import web.compose.material3.dialog.onCancel
 import web.compose.material3.dialog.onClose
@@ -34,11 +61,25 @@ import web.compose.material3.select.OutlinedSelect
 import web.compose.material3.select.SelectOption
 import web.compose.material3.select.headline
 import web.compose.material3.select.label
+import web.compose.material3.select.onChange
 import web.compose.material3.select.supportingText
 import web.compose.material3.select.value
 import web.compose.material3.slot
-import web.compose.material3.textfield.*
-import web.compose.material3.textfield.TextFieldType.*
+import web.compose.material3.textfield.FilledTextField
+import web.compose.material3.textfield.OutlinedTextField
+import web.compose.material3.textfield.TextFieldType.EMAIL
+import web.compose.material3.textfield.TextFieldType.NUMBER
+import web.compose.material3.textfield.TextFieldType.PASSWORD
+import web.compose.material3.textfield.TextFieldType.SEARCH
+import web.compose.material3.textfield.TextFieldType.URL
+import web.compose.material3.textfield.disabled
+import web.compose.material3.textfield.error
+import web.compose.material3.textfield.errorText
+import web.compose.material3.textfield.label
+import web.compose.material3.textfield.onInput
+import web.compose.material3.textfield.required
+import web.compose.material3.textfield.type
+import web.compose.material3.textfield.value
 import kotlin.math.roundToInt
 
 data class ListDataItem(
@@ -340,9 +381,14 @@ fun main() {
                         Row { Radio({ id("r3"); name = "radio1"; value = "o3"}); Label("r3") { Text("Option 3") }}
 
                         H3 { Text("Select")}
+                        var selectedValue by remember { mutableStateOf("") }
+
                         FilledSelect({
                             label = "Select label"
-                            supportingText = "Supporting text"
+                            supportingText = "Selected value $selectedValue"
+                            onChange {
+                                selectedValue = it.currentTarget?.asDynamic()?.value?: ""
+                            }
                         }) {
                             SelectOption {  }
                             SelectOption({ value = "MD1"; headline = "Material Design 1" })
@@ -352,7 +398,10 @@ fun main() {
 
                         OutlinedSelect({
                             label = "Select label"
-                            supportingText = "Supporting text"
+                            supportingText = "Selected value $selectedValue"
+                            onChange {
+                                selectedValue = it.currentTarget?.asDynamic()?.value?: ""
+                            }
                         }) {
                             SelectOption {  }
                             SelectOption({ value = "MD1"; headline = "Material Design 1" })

@@ -1,16 +1,18 @@
 package web.compose.material3.select
 
-import androidx.compose.runtime.Composable
+import androidx.compose.web.events.SyntheticEvent
 import org.jetbrains.compose.web.attributes.AttrsScope
-import org.jetbrains.compose.web.dom.AttrBuilderContext
-import org.jetbrains.compose.web.dom.ContentBuilder
-import org.jetbrains.compose.web.dom.ElementBuilder
-import org.jetbrains.compose.web.dom.TagElement
-import web.compose.material3.ElementBuilderImplementation
+import org.w3c.dom.events.EventTarget
 import web.compose.material3.InvalidCallException
 import web.compose.material3.MdElement
 
 abstract class MdSelectElement : MdElement()
+
+fun AttrsScope<MdSelectElement>.onChange(handler: (SyntheticEvent<EventTarget>) -> Unit) {
+    addEventListener("change") {
+        handler(it)
+    }
+}
 
 fun AttrsScope<MdSelectElement>.required(value: Boolean = true) {
     if (value) attr("required", "")
