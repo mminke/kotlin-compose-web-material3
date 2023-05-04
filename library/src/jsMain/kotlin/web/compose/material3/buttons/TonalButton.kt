@@ -6,6 +6,7 @@ import org.jetbrains.compose.web.dom.ContentBuilder
 import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.ElementBuilderImplementation
+import web.compose.material3.jsRequire
 
 @Composable
 fun TonalButton(
@@ -18,4 +19,6 @@ fun TonalButton(
 )
 
 private val TonalButtonElementBuilder: ElementBuilder<MdButtonElement> =
-    ElementBuilderImplementation("md-tonal-button")
+    ElementBuilderImplementation<MdButtonElement>("md-tonal-button").also {
+        jsRequire("@material/web/button/tonal-button.js")
+    }

@@ -12,16 +12,18 @@ abstract class RadioElement : MdElement()
 
 @Composable
 fun Radio(
-    attrs: AttrBuilderContext<RadioElement>? = null,
-    content: ContentBuilder<RadioElement>? = null
+        attrs: AttrBuilderContext<RadioElement>? = null,
+        content: ContentBuilder<RadioElement>? = null
 ) = TagElement(
-    elementBuilder = RadioElementBuilder,
-    applyAttrs = attrs,
-    content = content
+        elementBuilder = RadioElementBuilder,
+        applyAttrs = attrs,
+        content = content
 )
 
 private val RadioElementBuilder: ElementBuilder<RadioElement> =
-    ElementBuilderImplementation("md-radio")
+        ElementBuilderImplementation<RadioElement>("md-radio").also {
+            require("@material/web/radio/radio.js")
+        }
 
 fun AttrsScope<RadioElement>.disabled(value: Boolean = true) {
     if (value) attr("disabled", "")

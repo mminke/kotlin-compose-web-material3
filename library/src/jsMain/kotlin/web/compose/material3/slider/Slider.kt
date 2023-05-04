@@ -7,6 +7,7 @@ import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.InvalidCallException
 import web.compose.material3.MdElement
+import web.compose.material3.jsRequire
 
 abstract class SliderElement : MdElement()
 
@@ -21,7 +22,9 @@ fun Slider(
 )
 
 private val SliderElementBuilder: ElementBuilder<SliderElement> =
-    ElementBuilderImplementation("md-slider")
+    ElementBuilderImplementation<SliderElement>("md-slider").also {
+        jsRequire("@material/web/slider/slider.js")
+    }
 
 var AttrsScope<SliderElement>.min: Long
     get() {

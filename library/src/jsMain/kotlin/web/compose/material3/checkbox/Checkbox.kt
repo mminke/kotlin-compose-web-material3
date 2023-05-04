@@ -6,6 +6,7 @@ import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.MdElement
+import web.compose.material3.jsRequire
 
 abstract class CheckboxElement : MdElement()
 
@@ -20,7 +21,9 @@ fun Checkbox(
 )
 
 private val CheckboxElementBuilder: ElementBuilder<CheckboxElement> =
-    ElementBuilderImplementation("md-checkbox")
+    ElementBuilderImplementation<CheckboxElement>("md-checkbox").also {
+        jsRequire("@material/web/checkbox/checkbox.js")
+    }
 
 fun AttrsScope<CheckboxElement>.checked(value: Boolean = true) {
     if (value) attr("checked", "")

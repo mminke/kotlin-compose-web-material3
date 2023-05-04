@@ -9,6 +9,7 @@ import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.InvalidCallException
 import web.compose.material3.MdElement
+import web.compose.material3.jsRequire
 
 abstract class MdSelectOptionElement : MdElement()
 
@@ -23,7 +24,9 @@ fun SelectOption(
 )
 
 private val MdSelectOptionElementBuilder: ElementBuilder<MdSelectOptionElement> =
-    ElementBuilderImplementation("md-select-option")
+    ElementBuilderImplementation<MdSelectOptionElement>("md-select-option").also {
+        jsRequire("@material/web/select/select-option.js")
+    }
 
 var AttrsScope<MdSelectOptionElement>.value: String
     get() {

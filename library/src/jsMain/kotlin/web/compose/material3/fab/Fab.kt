@@ -9,6 +9,7 @@ import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.InvalidCallException
 import web.compose.material3.MdElement
+import web.compose.material3.jsRequire
 
 
 abstract class MdFabElement : MdElement()
@@ -24,7 +25,9 @@ fun Fab(
 )
 
 private val FabElementBuilder: ElementBuilder<MdFabElement> =
-    ElementBuilderImplementation("md-fab")
+    ElementBuilderImplementation<MdFabElement>("md-fab").also {
+        jsRequire("@material/web/fab/fab.js")
+    }
 
 var AttrsScope<MdFabElement>.label: String
     get() {

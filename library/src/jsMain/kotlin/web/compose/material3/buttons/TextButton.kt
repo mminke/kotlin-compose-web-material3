@@ -6,6 +6,7 @@ import org.jetbrains.compose.web.dom.ContentBuilder
 import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.ElementBuilderImplementation
+import web.compose.material3.jsRequire
 
 @Composable
 fun TextButton(
@@ -18,4 +19,6 @@ fun TextButton(
 )
 
 private val TextButtonElementBuilder: ElementBuilder<MdButtonElement> =
-    ElementBuilderImplementation("md-text-button")
+    ElementBuilderImplementation<MdButtonElement>("md-text-button").also {
+        jsRequire("@material/web/button/text-button.js")
+    }

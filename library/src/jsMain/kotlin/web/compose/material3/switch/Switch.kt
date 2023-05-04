@@ -6,6 +6,7 @@ import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.MdElement
+import web.compose.material3.jsRequire
 
 abstract class SwitchElement : MdElement()
 
@@ -20,7 +21,9 @@ fun Switch(
 )
 
 private val SwitchElementBuilder: ElementBuilder<SwitchElement> =
-    ElementBuilderImplementation("md-switch")
+    ElementBuilderImplementation<SwitchElement>("md-switch").also {
+        jsRequire("@material/web/switch/switch.js")
+    }
 
 fun AttrsScope<SwitchElement>.disabled(value: Boolean = true) {
     if (value) attr("disabled", "")

@@ -3,14 +3,11 @@ package web.compose.material3.dialog
 import androidx.compose.runtime.Composable
 import androidx.compose.web.events.SyntheticEvent
 import org.jetbrains.compose.web.attributes.AttrsScope
-import org.jetbrains.compose.web.dom.AttrBuilderContext
-import org.jetbrains.compose.web.dom.ContentBuilder
-import org.jetbrains.compose.web.dom.ElementBuilder
-import org.jetbrains.compose.web.dom.Span
-import org.jetbrains.compose.web.dom.TagElement
+import org.jetbrains.compose.web.dom.*
 import org.w3c.dom.events.EventTarget
 import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.MdElement
+import web.compose.material3.jsRequire
 import web.compose.material3.slot
 
 abstract class DialogElement : MdElement()
@@ -26,7 +23,9 @@ fun Dialog(
 )
 
 private val DialogElementBuilder: ElementBuilder<DialogElement> =
-    ElementBuilderImplementation("md-dialog")
+    ElementBuilderImplementation<DialogElement>("md-dialog").also {
+        jsRequire("@material/web/dialog/dialog.js")
+    }
 
 fun AttrsScope<DialogElement>.open(value: Boolean = true) {
     if (value) attr("open", "")

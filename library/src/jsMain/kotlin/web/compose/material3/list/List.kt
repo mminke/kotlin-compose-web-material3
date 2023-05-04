@@ -5,9 +5,9 @@ import org.jetbrains.compose.web.dom.AttrBuilderContext
 import org.jetbrains.compose.web.dom.ContentBuilder
 import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
-import org.w3c.dom.HTMLElement
 import web.compose.material3.LitElementBuilderImplementation
 import web.compose.material3.MdElement
+import web.compose.material3.jsRequire
 
 abstract class MdListElement : MdElement()
 
@@ -22,4 +22,6 @@ fun List(
 )
 
 private val ListElementBuilder: ElementBuilder<MdListElement> =
-    LitElementBuilderImplementation("md-list")
+    LitElementBuilderImplementation<MdListElement>("md-list").also {
+        jsRequire("@material/web/list/list.js")
+    }

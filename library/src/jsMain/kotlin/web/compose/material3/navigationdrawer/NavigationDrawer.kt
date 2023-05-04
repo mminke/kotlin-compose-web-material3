@@ -7,6 +7,7 @@ import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.MdElement
+import web.compose.material3.jsRequire
 
 abstract class NavigationDrawerElement : MdElement()
 
@@ -21,4 +22,6 @@ fun NavigationDrawer(
 )
 
 private val NavigationDrawerElementBuilder: ElementBuilder<NavigationDrawerElement> =
-    ElementBuilderImplementation("md-navigation-drawer")
+    ElementBuilderImplementation<NavigationDrawerElement>("md-navigation-drawer").also {
+        jsRequire("@material/web/navigationdrawer/navigation-drawer.js")
+    }

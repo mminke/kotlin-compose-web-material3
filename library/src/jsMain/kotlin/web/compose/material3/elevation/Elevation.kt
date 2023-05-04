@@ -5,9 +5,9 @@ import org.jetbrains.compose.web.dom.AttrBuilderContext
 import org.jetbrains.compose.web.dom.ContentBuilder
 import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
-import org.w3c.dom.Element
 import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.MdElement
+import web.compose.material3.jsRequire
 
 abstract class ElevationElement : MdElement()
 
@@ -22,4 +22,6 @@ fun Elevation(
 )
 
 private val ElevationElementBuilder: ElementBuilder<ElevationElement> =
-    ElementBuilderImplementation("md-elevation")
+    ElementBuilderImplementation<ElevationElement>("md-elevation").also {
+        jsRequire("@material/web/elevation/elevation.js")
+    }

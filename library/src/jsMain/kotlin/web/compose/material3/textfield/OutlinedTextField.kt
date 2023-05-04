@@ -6,6 +6,7 @@ import org.jetbrains.compose.web.dom.ContentBuilder
 import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.ElementBuilderImplementation
+import web.compose.material3.jsRequire
 
 @Composable
 fun OutlinedTextField(
@@ -18,4 +19,6 @@ fun OutlinedTextField(
 )
 
 private val OutlinedTextFieldElementBuilder: ElementBuilder<MdTextFieldElement> =
-    ElementBuilderImplementation("md-outlined-text-field")
+    ElementBuilderImplementation<MdTextFieldElement>("md-outlined-text-field").also {
+        jsRequire("@material/web/textfield/outlined-text-field.js")
+    }

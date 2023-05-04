@@ -9,6 +9,7 @@ import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.InvalidCallException
 import web.compose.material3.MdElement
+import web.compose.material3.jsRequire
 
 abstract class MdIconElement : MdElement()
 
@@ -23,7 +24,9 @@ fun Icon(
 )
 
 private val IconElementBuilder: ElementBuilder<MdIconElement> =
-    ElementBuilderImplementation("md-icon")
+    ElementBuilderImplementation<MdIconElement>("md-icon").also {
+        jsRequire("@material/web/icon/icon.js")
+    }
 
 var AttrsScope<MdIconElement>.dataVariant: DataVariant
     get() {

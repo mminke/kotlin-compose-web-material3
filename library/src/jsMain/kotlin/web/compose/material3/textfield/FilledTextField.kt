@@ -6,6 +6,7 @@ import org.jetbrains.compose.web.dom.ContentBuilder
 import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.ElementBuilderImplementation
+import web.compose.material3.jsRequire
 
 @Composable
 fun FilledTextField(
@@ -18,4 +19,6 @@ fun FilledTextField(
 )
 
 private val FilledTextFieldElementBuilder: ElementBuilder<MdTextFieldElement> =
-    ElementBuilderImplementation("md-filled-text-field")
+    ElementBuilderImplementation<MdTextFieldElement>("md-filled-text-field").also {
+        jsRequire("@material/web/textfield/filled-text-field.js")
+    }

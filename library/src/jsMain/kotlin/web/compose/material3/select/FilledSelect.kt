@@ -6,6 +6,7 @@ import org.jetbrains.compose.web.dom.ContentBuilder
 import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.ElementBuilderImplementation
+import web.compose.material3.jsRequire
 
 @Composable
 fun FilledSelect(
@@ -18,4 +19,6 @@ fun FilledSelect(
 )
 
 private val FilledSelectElementBuilder: ElementBuilder<MdSelectElement> =
-    ElementBuilderImplementation("md-filled-select")
+    ElementBuilderImplementation<MdSelectElement>("md-filled-select").also {
+        jsRequire("@material/web/select/filled-select.js")
+    }

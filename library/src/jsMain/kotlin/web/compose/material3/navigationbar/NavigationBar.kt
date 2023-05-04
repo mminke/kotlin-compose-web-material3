@@ -7,6 +7,7 @@ import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.MdElement
+import web.compose.material3.jsRequire
 
 abstract class NavigationBarElement : MdElement()
 
@@ -21,4 +22,6 @@ fun NavigationBar(
 )
 
 private val NavigationBarElementBuilder: ElementBuilder<NavigationBarElement> =
-    ElementBuilderImplementation("md-navigation-bar")
+    ElementBuilderImplementation<NavigationBarElement>("md-navigation-bar").also {
+        jsRequire("@material/web/navigationbar/navigation-bar.js")
+    }

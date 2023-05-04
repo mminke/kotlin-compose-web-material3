@@ -9,6 +9,7 @@ import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.InvalidCallException
 import web.compose.material3.LitElementBuilderImplementation
 import web.compose.material3.MdElement
+import web.compose.material3.jsRequire
 
 abstract class MdListItemElement : MdElement()
 
@@ -23,7 +24,9 @@ fun ListItem(
 )
 
 private val ListItemElementBuilder: ElementBuilder<MdListItemElement> =
-    LitElementBuilderImplementation("md-list-item")
+    LitElementBuilderImplementation<MdListItemElement>("md-list-item").also {
+        jsRequire("@material/web/list/list-item.js")
+    }
 
 var AttrsScope<MdListItemElement>.headline: String
     get() {
