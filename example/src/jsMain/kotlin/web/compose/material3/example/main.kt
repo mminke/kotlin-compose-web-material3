@@ -322,16 +322,20 @@ fun main() {
                         })
 
                         H3 { Text("Slider") }
+                        var sliderValue by remember { mutableStateOf(0L) }
                         Slider({
                             min = 100
                             max = 200
                             step = 2
+                            value = sliderValue
                             withLabel()
+                            onChange { sliderValue = it.currentTarget.asDynamic().value }
                         }) { }
                         Slider({
                             min = 100
                             max = 200
                             step = 2
+                            value = sliderValue
                             withLabel()
                             disabled()
                         }) { }
