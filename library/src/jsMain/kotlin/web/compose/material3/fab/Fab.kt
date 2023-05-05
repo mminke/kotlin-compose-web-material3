@@ -8,11 +8,11 @@ import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.InvalidCallException
-import web.compose.material3.MdElement
+import web.compose.material3.MdInputElement
 import web.compose.material3.jsRequire
 
 
-abstract class MdFabElement : MdElement()
+abstract class MdFabElement : MdInputElement()
 
 @Composable
 fun Fab(

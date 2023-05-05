@@ -6,9 +6,9 @@ import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.InvalidCallException
-import web.compose.material3.MdElement
+import web.compose.material3.MdInputElement
 
-abstract class RadioElement : MdElement()
+abstract class RadioElement : MdInputElement()
 
 @Composable
 fun Radio(
@@ -24,6 +24,10 @@ private val RadioElementBuilder: ElementBuilder<RadioElement> =
         ElementBuilderImplementation<RadioElement>("md-radio").also {
             require("@material/web/radio/radio.js")
         }
+
+fun AttrsScope<RadioElement>.checked(value: Boolean = true) {
+    if (value) attr("checked", "")
+}
 
 fun AttrsScope<RadioElement>.disabled(value: Boolean = true) {
     if (value) attr("disabled", "")

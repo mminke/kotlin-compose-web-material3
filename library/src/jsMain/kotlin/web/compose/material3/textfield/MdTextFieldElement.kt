@@ -2,9 +2,9 @@ package web.compose.material3.textfield
 
 import org.jetbrains.compose.web.attributes.AttrsScope
 import web.compose.material3.InvalidCallException
-import web.compose.material3.MdElement
+import web.compose.material3.MdInputElement
 
-abstract class MdTextFieldElement : MdElement()
+abstract class MdTextFieldElement : MdInputElement()
 
 var AttrsScope<MdTextFieldElement>.type: TextFieldType
     get() {

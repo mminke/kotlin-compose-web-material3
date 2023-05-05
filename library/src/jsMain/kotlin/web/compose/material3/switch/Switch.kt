@@ -5,10 +5,10 @@ import org.jetbrains.compose.web.dom.ContentBuilder
 import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.ElementBuilderImplementation
-import web.compose.material3.MdElement
+import web.compose.material3.MdInputElement
 import web.compose.material3.jsRequire
 
-abstract class SwitchElement : MdElement()
+abstract class SwitchElement : MdInputElement()
 
 @Composable
 fun Switch(

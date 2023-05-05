@@ -6,10 +6,10 @@ import org.jetbrains.compose.web.dom.ContentBuilder
 import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.LitElementBuilderImplementation
-import web.compose.material3.MdElement
+import web.compose.material3.MdInputElement
 import web.compose.material3.jsRequire
 
-abstract class MdListElement : MdElement()
+abstract class MdListElement : MdInputElement()
 
 @Composable
 fun List(
