@@ -18,9 +18,6 @@ fun AttrsScope<MdSelectElement>.required(value: Boolean = true) {
     if (value) attr("required", "")
 }
 
-fun AttrsScope<MdSelectElement>.disabled(value: Boolean = true) {
-    if (value) attr("disabled", "")
-}
 var AttrsScope<MdSelectElement>.label: String
     get() {
         throw InvalidCallException()

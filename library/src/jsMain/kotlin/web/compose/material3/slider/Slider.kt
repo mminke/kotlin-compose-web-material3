@@ -6,10 +6,10 @@ import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.InvalidCallException
-import web.compose.material3.MdElement
+import web.compose.material3.MdInputElement
 import web.compose.material3.jsRequire
 
-abstract class SliderElement : MdElement()
+abstract class SliderElement : MdInputElement()
 
 @Composable
 fun Slider(

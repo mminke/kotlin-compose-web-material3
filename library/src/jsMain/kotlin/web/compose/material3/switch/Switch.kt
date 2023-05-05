@@ -25,10 +25,6 @@ private val SwitchElementBuilder: ElementBuilder<SwitchElement> =
         jsRequire("@material/web/switch/switch.js")
     }
 
-fun AttrsScope<SwitchElement>.disabled(value: Boolean = true) {
-    if (value) attr("disabled", "")
-}
-
 fun AttrsScope<SwitchElement>.selected(value: Boolean = true) {
     if (value) attr("selected", "")
 }

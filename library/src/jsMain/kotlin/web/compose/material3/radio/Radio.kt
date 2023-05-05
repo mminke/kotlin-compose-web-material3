@@ -29,10 +29,6 @@ fun AttrsScope<RadioElement>.checked(value: Boolean = true) {
     if (value) attr("checked", "")
 }
 
-fun AttrsScope<RadioElement>.disabled(value: Boolean = true) {
-    if (value) attr("disabled", "")
-}
-
 var AttrsScope<RadioElement>.name: String
     get() {
         throw InvalidCallException()

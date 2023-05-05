@@ -14,14 +14,6 @@ var AttrsScope<MdTextFieldElement>.type: TextFieldType
         this.attr("type", type.value)
     }
 
-var AttrsScope<MdTextFieldElement>.disabled: Boolean
-    get() {
-        throw InvalidCallException()
-    }
-    set(value) {
-        this.attr("disabled", value.toString())
-    }
-
 var AttrsScope<MdTextFieldElement>.required: Boolean
     get() {
         throw InvalidCallException()

@@ -41,6 +41,7 @@ import web.compose.material3.dialog.Dialog
 import web.compose.material3.dialog.onCancel
 import web.compose.material3.dialog.onClose
 import web.compose.material3.dialog.open
+import web.compose.material3.disabled
 import web.compose.material3.divider.Divider
 import web.compose.material3.fab.Fab
 import web.compose.material3.fab.FabSize.LARGE
@@ -73,7 +74,6 @@ import web.compose.material3.textfield.TextFieldType.NUMBER
 import web.compose.material3.textfield.TextFieldType.PASSWORD
 import web.compose.material3.textfield.TextFieldType.SEARCH
 import web.compose.material3.textfield.TextFieldType.URL
-import web.compose.material3.textfield.disabled
 import web.compose.material3.textfield.error
 import web.compose.material3.textfield.errorText
 import web.compose.material3.textfield.label
@@ -221,7 +221,7 @@ fun main() {
                         FilledTextField({
                             label = "Filled Text Field"
                             value = textFieldValue
-                            disabled = true
+                            disabled()
                             style { padding(5.px) }
                         })
 
@@ -302,11 +302,23 @@ fun main() {
                                 checkboxStatus = !checkboxStatus
                             }
                         })
+                        Checkbox({
+                            checked(checkboxStatus)
+                            onClick {
+                                checkboxStatus = !checkboxStatus
+                            }
+                            disabled()
+                        })
 
                         H3 { Text("Switch") }
                         Switch({
                             selected(checkboxStatus)
                             onClick { checkboxStatus = !checkboxStatus }
+                        })
+                        Switch({
+                            selected(checkboxStatus)
+                            onClick { checkboxStatus = !checkboxStatus }
+                            disabled()
                         })
 
                         H3 { Text("Slider") }
@@ -316,13 +328,20 @@ fun main() {
                             step = 2
                             withLabel()
                         }) { }
+                        Slider({
+                            min = 100
+                            max = 200
+                            step = 2
+                            withLabel()
+                            disabled()
+                        }) { }
 
                         H3 { Text("Radio") }
                         var radioValue by remember { mutableStateOf<String?>(null) }
                         Row {
                             Radio({
                                 id("r1")
-                                name = "radio1"
+                                name = "radio-group"
                                 value = "o1"
                                 checked(radioValue == "o1")
                                 onChange { radioValue = "o1" }
@@ -332,7 +351,7 @@ fun main() {
                         Row {
                             Radio({
                                 id("r2")
-                                name = "radio1"
+                                name = "radio-group"
                                 value = "o2"
                                 checked(radioValue == "o2")
                                 onChange { radioValue = "o2" }
@@ -342,12 +361,23 @@ fun main() {
                         Row {
                             Radio({
                                 id("r3")
-                                name = "radio1"
+                                name = "radio-group"
                                 value = "o3"
                                 checked(radioValue == "o3")
                                 onChange { radioValue = "o3" }
                             })
                             Label("r3") { Text("Option 3") }
+                        }
+                        Row {
+                            Radio({
+                                id("r4")
+                                name = "radio-group"
+                                value = "o4"
+                                disabled()
+                                checked(radioValue == "o4")
+                                onChange { radioValue = "o4" }
+                            })
+                            Label("r4") { Text("Option 4") }
                         }
                         P { Text("Radio button selected: $radioValue") }
 

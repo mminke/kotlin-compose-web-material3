@@ -9,6 +9,10 @@ abstract class MdElement : Element()
 
 abstract class MdInputElement : MdElement()
 
+fun AttrsScope<MdInputElement>.disabled(value: Boolean = true) {
+    if (value) attr("disabled", "")
+}
+
 fun AttrsScope<MdInputElement>.onChange(handler: (SyntheticEvent<EventTarget>) -> Unit) {
     addEventListener("change") {
         handler(it)
