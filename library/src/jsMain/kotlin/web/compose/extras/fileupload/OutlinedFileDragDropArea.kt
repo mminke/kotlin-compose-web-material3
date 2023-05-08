@@ -1,7 +1,6 @@
 package web.compose.extras.fileupload
 
 import androidx.compose.runtime.Composable
-import org.jetbrains.compose.web.css.CSSColorValue
 import org.jetbrains.compose.web.css.CSSNumeric
 import org.jetbrains.compose.web.css.CSSStyleVariable
 import org.jetbrains.compose.web.css.Color
@@ -21,6 +20,7 @@ import org.jetbrains.compose.web.css.width
 import org.jetbrains.compose.web.dom.Div
 import org.w3c.dom.asList
 import org.w3c.files.File
+import web.compose.material3.MdSysColorVariables
 
 object DragDropAreaStyleSheet : StyleSheet() {
     init {
@@ -28,7 +28,7 @@ object DragDropAreaStyleSheet : StyleSheet() {
             overflow("hidden")
             border {
                 style(LineStyle.Solid)
-                color(CSSStyleVariable<CSSColorValue>("md-sys-color-outline").value(Color.red))
+                color(MdSysColorVariables.mdSysColorOutline.value(Color("#79747E")))
                 width(1.px)
             }
             borderRadius(CSSStyleVariable<CSSNumeric>("md-outlined-button-container-shape").value(4.px))
@@ -36,7 +36,7 @@ object DragDropAreaStyleSheet : StyleSheet() {
         className("dragdroparea") + hover style {
             border {
                 style(LineStyle.Dashed)
-                color(CSSStyleVariable<CSSColorValue>("md-sys-color-outline").value(Color.red))
+                color(MdSysColorVariables.mdSysColorOutline.value(Color("#79747E")))
                 width(1.px)
             }
             borderRadius(CSSStyleVariable<CSSNumeric>("md-outlined-button-container-shape").value(4.px))

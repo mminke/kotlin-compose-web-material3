@@ -81,6 +81,8 @@ import web.compose.material3.textfield.onInput
 import web.compose.material3.textfield.required
 import web.compose.material3.textfield.type
 import web.compose.material3.textfield.value
+import web.compose.material3.themes.defaultColorScheme
+import web.compose.material3.themes.defaultDarkColorScheme
 import kotlin.math.roundToInt
 
 data class ListDataItem(
@@ -94,22 +96,23 @@ val listData = listOf(
 
 
 fun main() {
-
     renderComposable(rootElementId = "root") {
         var textFieldValue by remember { mutableStateOf("Initial text field value") }
         var checkboxStatus by remember { mutableStateOf(false) }
-        var colorScheme by remember { mutableStateOf<ColorScheme?>(null) }
+        val lightColorScheme = defaultColorScheme
+        val darkColorScheme = defaultDarkColorScheme
+        var currentColorScheme by remember { mutableStateOf<ColorScheme?>(lightColorScheme) }
 
-        MaterialTheme(colorScheme) {
+        MaterialTheme(currentColorScheme) {
             NavigationBar {
                 Text("Switch theme")
                 Switch({
-                    selected(colorScheme != null)
+                    selected(currentColorScheme != lightColorScheme)
                     onClick {
-                        if (colorScheme == null)
-                            colorScheme = greenishColorScheme
+                        if (currentColorScheme == lightColorScheme)
+                            currentColorScheme = darkColorScheme
                         else
-                            colorScheme = null
+                            currentColorScheme = lightColorScheme
                     }
                 })
             }
@@ -590,3 +593,37 @@ val greenishColorScheme = ColorScheme(
     sysColorOutlineVariant = Color("#BEC9C8"),
     sysColorScrim = Color("#000000")
 )
+
+val alternativeDarkColorScheme = ColorScheme(
+    sysColorPrimary = Color("#4CDADA"),
+    sysColorPrimaryContainer = Color("#004F4F"),
+    sysColorOnPrimary = Color("#003737"),
+    sysColorOnPrimaryContainer = Color("#6FF7F6"),
+    sysColorSecondary = Color("#B0CCCB"),
+    sysColorSecondaryContainer = Color("#324B4B"),
+    sysColorOnSecondary = Color("#1B3534"),
+    sysColorOnSecondaryContainer = Color("#CCE8E7"),
+    sysColorTertiary = Color("#B3C8E8"),
+    sysColorTertiaryContainer = Color("#334863"),
+    sysColorOnTertiary = Color("#1C314B"),
+    sysColorOnTertiaryContainer = Color("#D3E4FF"),
+    sysColorError = Color("#FFB4AB"),
+    sysColorErrorContainer = Color("#93000A"),
+    sysColorOnError = Color("#690005"),
+    sysColorOnErrorContainer = Color("#FFDAD6"),
+    sysColorOutline = Color("#889392"),
+    sysColorBackground = Color("#191C1C"),
+    sysColorOnBackground = Color("#E0E3E2"),
+    sysColorSurface = Color("#191C1C"),
+    sysColorOnSurface = Color("#E0E3E2"),
+    sysColorSurfaceVariant = Color("#3F4948"),
+    sysColorOnSurfaceVariant = Color("#BEC9C8"),
+    sysColorInverseSurface = Color("#E0E3E2"),
+    sysColorInverseOnSurface = Color("#191C1C"),
+    sysColorInversePrimary = Color("#006A6A"),
+    sysColorShadow = Color("#000000"),
+    sysColorSurfaceTint = Color("#4CDADA"),
+    sysColorOutlineVariant = Color("#3F4948"),
+    sysColorScrim = Color("#000000")
+)
+

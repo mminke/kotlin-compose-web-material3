@@ -3,54 +3,69 @@ package web.compose.material3
 import androidx.compose.runtime.Composable
 import org.jetbrains.compose.web.css.CSSColorValue
 import org.jetbrains.compose.web.css.CSSStyleVariable
+import org.jetbrains.compose.web.css.Color
 import org.jetbrains.compose.web.css.Style
 import org.jetbrains.compose.web.css.StyleSheet
+import org.jetbrains.compose.web.css.backgroundColor
+import org.jetbrains.compose.web.css.color
+import org.jetbrains.compose.web.css.value
 
 @JsName("require")
 external fun jsRequire(module: String): dynamic
 
 @Composable
 fun MaterialTheme(colorScheme: ColorScheme? = null, content: @Composable () -> Unit) {
-    if(colorScheme != null) {
+    if (colorScheme != null) {
         Style(colorScheme.asStylesheet())
+    } else {
+        Style(StyleSheet().apply {
+            root style {
+                backgroundColor(MdSysColorVariables.mdSysColorBackground.value(Color("#FEF7FF")))
+            }
+        })
     }
 
     content()
 }
 
 data class ColorScheme(
-        val sysColorPrimary: CSSColorValue,
-        val sysColorPrimaryContainer: CSSColorValue,
-        val sysColorOnPrimary: CSSColorValue,
-        val sysColorOnPrimaryContainer: CSSColorValue,
-        val sysColorSecondary: CSSColorValue,
-        val sysColorSecondaryContainer: CSSColorValue,
-        val sysColorOnSecondary: CSSColorValue,
-        val sysColorOnSecondaryContainer: CSSColorValue,
-        val sysColorTertiary: CSSColorValue,
-        val sysColorTertiaryContainer: CSSColorValue,
-        val sysColorOnTertiary: CSSColorValue,
-        val sysColorOnTertiaryContainer: CSSColorValue,
-        val sysColorError: CSSColorValue,
-        val sysColorErrorContainer: CSSColorValue,
-        val sysColorOnError: CSSColorValue,
-        val sysColorOnErrorContainer: CSSColorValue,
-        val sysColorOutline: CSSColorValue,
-        val sysColorBackground: CSSColorValue,
-        val sysColorOnBackground: CSSColorValue,
-        val sysColorSurface: CSSColorValue,
-        val sysColorOnSurface: CSSColorValue,
-        val sysColorSurfaceVariant: CSSColorValue,
-        val sysColorOnSurfaceVariant: CSSColorValue,
-        val sysColorInverseSurface: CSSColorValue,
-        val sysColorInverseOnSurface: CSSColorValue,
-        val sysColorInversePrimary: CSSColorValue,
-        val sysColorShadow: CSSColorValue,
-        val sysColorSurfaceTint: CSSColorValue,
-        val sysColorOutlineVariant: CSSColorValue,
-        val sysColorScrim: CSSColorValue
+    val sysColorPrimary: CSSColorValue,
+    val sysColorPrimaryContainer: CSSColorValue,
+    val sysColorOnPrimary: CSSColorValue,
+    val sysColorOnPrimaryContainer: CSSColorValue,
+    val sysColorSecondary: CSSColorValue,
+    val sysColorSecondaryContainer: CSSColorValue,
+    val sysColorOnSecondary: CSSColorValue,
+    val sysColorOnSecondaryContainer: CSSColorValue,
+    val sysColorTertiary: CSSColorValue,
+    val sysColorTertiaryContainer: CSSColorValue,
+    val sysColorOnTertiary: CSSColorValue,
+    val sysColorOnTertiaryContainer: CSSColorValue,
+    val sysColorError: CSSColorValue,
+    val sysColorErrorContainer: CSSColorValue,
+    val sysColorOnError: CSSColorValue,
+    val sysColorOnErrorContainer: CSSColorValue,
+    val sysColorOutline: CSSColorValue,
+    val sysColorBackground: CSSColorValue,
+    val sysColorOnBackground: CSSColorValue,
+    val sysColorSurface: CSSColorValue,
+    val sysColorOnSurface: CSSColorValue,
+    val sysColorSurfaceVariant: CSSColorValue,
+    val sysColorOnSurfaceVariant: CSSColorValue,
+    val sysColorInverseSurface: CSSColorValue,
+    val sysColorInverseOnSurface: CSSColorValue,
+    val sysColorInversePrimary: CSSColorValue,
+    val sysColorShadow: CSSColorValue,
+    val sysColorSurfaceTint: CSSColorValue,
+    val sysColorOutlineVariant: CSSColorValue,
+    val sysColorScrim: CSSColorValue
 ) {
     fun asStylesheet(): StyleSheet = StyleSheet().apply {
+        root style {
+            backgroundColor(MdSysColorVariables.mdSysColorBackground.value())
+            color(MdSysColorVariables.mdSysColorOnBackground.value())
+        }
+
         universal style {
             MdSysColorVariables.mdSysColorPrimary(sysColorPrimary)
             MdSysColorVariables.mdSysColorPrimaryContainer(sysColorPrimaryContainer)
