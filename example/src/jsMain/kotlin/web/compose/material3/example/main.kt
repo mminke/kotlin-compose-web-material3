@@ -20,9 +20,8 @@ import web.compose.material3.fab.FabSize.LARGE
 import web.compose.material3.fab.FabSize.SMALL
 import web.compose.material3.fab.label
 import web.compose.material3.fab.size
-import web.compose.material3.icon.DataVariant
 import web.compose.material3.icon.Icon
-import web.compose.material3.icon.dataVariant
+import web.compose.material3.iconbutton.*
 import web.compose.material3.list.List
 import web.compose.material3.list.ListItem
 import web.compose.material3.list.headline
@@ -98,7 +97,7 @@ fun main() {
 
                 Row({ style { border { style(LineStyle.Dotted); width(2.px); color(lightgray) } } }) {
                     Column {
-                        H2 { Text("Buttons") }
+                        H3 { Text("Buttons") }
 
                         FilledButton({
                             onClick { textFieldValue = "filled button clicked" }
@@ -121,21 +120,50 @@ fun main() {
                             style { padding(5.px) }
                         }) { Text("Tonal Button") }
 
-                        H2 { Text("FAB") }
+                        H3 { Text("FAB") }
                         Fab({ size = SMALL }) {
-                            Icon({ dataVariant = DataVariant.ICON; slot = "icon" }) { Text("edit") }
+                            Icon({ slot = "icon" }) { Text("edit") }
                         }
                         Fab {
-                            Icon({ dataVariant = DataVariant.ICON; slot = "icon" }) { Text("delete") }
+                            Icon({ slot = "icon" }) { Text("delete") }
                         }
                         Fab({ size = LARGE }) {
-                            Icon({ dataVariant = DataVariant.ICON; slot = "icon" }) { Text("add") }
+                            Icon({ slot = "icon" }) { Text("add") }
                         }
                         Fab({ label = "FAB" })
                     }
 
                     Column {
-                        H2 { Text("Dialog") }
+                        H3 { Text("Icon Buttons") }
+
+                        FilledIconButton({
+                            onClick { textFieldValue = "filled icon button clicked" }
+                            style { padding(5.px) }
+                        }) { Text("star") }
+                        OutlinedIconButton({
+                            onClick { textFieldValue = "outlined icon button clicked" }
+                            style { padding(5.px) }
+                        }) { Text("login") }
+                        TonalIconButton({
+                            onClick { textFieldValue = "tonal icon button clicked" }
+                            style { padding(5.px) }
+                        }) { Text("public") }
+                        StandardIconButton({
+                            onClick { textFieldValue = "standard icon button clicked" }
+                            style { padding(5.px) }
+                        }) { Text("menu") }
+                        FilledIconButton({
+                            toggle()
+                            onClick { textFieldValue = "toggle button clicked" }
+                            style { padding(5.px) }
+                        }) {
+                            Icon({ slot = "onIcon" }) { Text("lock") }
+                            Icon({ slot = "offIcon" }) { Text("lock_open") }
+                        }
+                    }
+
+                    Column {
+                        H3 { Text("Dialog") }
                         var dialogOpen by remember { mutableStateOf(true) }
 
                         OutlinedButton({
@@ -162,7 +190,7 @@ fun main() {
                     }
 
                     Column {
-                        H2 { Text("Text Fields") }
+                        H3 { Text("Text Fields") }
 
                         FilledTextField({
                             label = "Filled Text Field"
@@ -241,13 +269,13 @@ fun main() {
                     }
 
                     Column {
-                        H2 { Text("Misc ") }
+                        H3 { Text("Misc ") }
 
                         H3 { Text("Icons") }
                         Row {
-                            Icon({ dataVariant = DataVariant.ICON; slot = "start" }) { Text("edit") }
-                            Icon({ dataVariant = DataVariant.ICON; slot = "start" }) { Text("delete") }
-                            Icon({ dataVariant = DataVariant.ICON; slot = "end" }) { Text("close") }
+                            Icon({ slot = "start" }) { Text("edit") }
+                            Icon({ slot = "start" }) { Text("delete") }
+                            Icon({ slot = "end" }) { Text("close") }
                         }
 
                         H3 { Text("Checkbox") }
@@ -371,7 +399,7 @@ fun main() {
                     }
 
                     Column {
-                        H2 { Text("List box") }
+                        H3 { Text("List box") }
                         List {
                             listData.forEach { listDateItem ->
                                 ListItem({
@@ -404,6 +432,7 @@ fun main() {
                         H3 { Text("Navigation Bar") }
                         Row {
                             NavigationBar {
+                                FilledIconButton { Text("star") }
                                 Text("Navigation Bar")
                             }
                         }
@@ -411,7 +440,7 @@ fun main() {
 
                     Column {
                         H3 { Text("Navigation Tab") }
-                        Row{
+                        Row {
                             NavigationTab {
                                 Text("Navigation Tab")
                             }
@@ -421,12 +450,12 @@ fun main() {
             }
 
             Column {
-                H1 { Text("Extra components") }
+                H2 { Text("Extra components") }
 
-                Row {
+                Row({ style { border { style(LineStyle.Dotted); width(2.px); color(lightgray) } } }) {
                     var selectedFiles by remember { mutableStateOf<List<File>>(emptyList()) }
                     Column {
-                        H2 { Text("File input button") }
+                        H3 { Text("File input button") }
                         FilledFileInput({
                             if (it == null) return@FilledFileInput
                             selectedFiles = it
@@ -435,7 +464,7 @@ fun main() {
                         FileList(selectedFiles)
                     }
                     Column {
-                        H2 { Text("File drag/drop area") }
+                        H3 { Text("File drag/drop area") }
 
                         OutlinedFileDragDropArea(
                             onDrop = { list ->
