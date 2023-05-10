@@ -1,3 +1,5 @@
+package web.compose.material3.example
+
 import androidx.compose.runtime.*
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.css.Color.lightgray
@@ -10,6 +12,8 @@ import web.compose.extras.fileupload.FilledFileInput
 import web.compose.extras.fileupload.OutlinedFileDragDropArea
 import web.compose.material3.*
 import web.compose.material3.buttons.*
+import web.compose.material3.checkbox.Checkbox
+import web.compose.material3.checkbox.checked
 import web.compose.material3.dialog.Dialog
 import web.compose.material3.dialog.onCancel
 import web.compose.material3.dialog.onClose
@@ -29,7 +33,14 @@ import web.compose.material3.list.supportingText
 import web.compose.material3.navigationbar.NavigationBar
 import web.compose.material3.navigationdrawer.NavigationDrawer
 import web.compose.material3.navigationtab.NavigationTab
+import web.compose.material3.radio.Radio
+import web.compose.material3.radio.checked
+import web.compose.material3.radio.name
+import web.compose.material3.radio.value
 import web.compose.material3.select.*
+import web.compose.material3.slider.*
+import web.compose.material3.switch.Switch
+import web.compose.material3.switch.selected
 import web.compose.material3.textfield.*
 import web.compose.material3.textfield.TextFieldType.*
 import web.compose.material3.themes.defaultColorScheme
@@ -60,10 +71,10 @@ fun main() {
                 Switch({
                     selected(currentColorScheme != lightColorScheme)
                     onClick {
-                        if (currentColorScheme == lightColorScheme)
-                            currentColorScheme = darkColorScheme
+                        currentColorScheme = if (currentColorScheme == lightColorScheme)
+                            darkColorScheme
                         else
-                            currentColorScheme = lightColorScheme
+                            lightColorScheme
                     }
                 })
             }
@@ -236,7 +247,7 @@ fun main() {
 
                         OutlinedTextField({
                             label = "Input a password"
-                            value = "Welkom"
+                            value = "Welcome"
                             type = PASSWORD
                             style { padding(5.px) }
                         })

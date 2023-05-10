@@ -8,7 +8,7 @@ This project aims to implement the __Material3 Web Components__ for __Kotlin Com
 
 The Material3 Web Components are currently being developed and are still in alpha stage. Therefor this project is nowhere near stable as this project depends on the development of those web components.
 
-Also this project is in itself currently under development to get things working properly.
+Also, this project is in itself currently under development to get things working properly.
 
 Links:
 
@@ -30,7 +30,7 @@ https://github.com/mpetuska/kmdc
 
 ## Usage
 
-Currently there is no general available artifact yet. Therefor the best way to start experimenting with this library is to:
+Currently, there is no general available artifact yet. Therefor the best way to start experimenting with this library is to:
 
 1. Checkout the code (use git clone)
 2. Build the library and publish the artifact to your local Maven repository:
@@ -61,4 +61,3 @@ Currently there is no general available artifact yet. Therefor the best way to s
         }
     }   
     ```
-   

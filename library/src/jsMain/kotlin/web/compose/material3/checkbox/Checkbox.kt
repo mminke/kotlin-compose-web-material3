@@ -1,3 +1,5 @@
+package web.compose.material3.checkbox
+
 import androidx.compose.runtime.Composable
 import org.jetbrains.compose.web.attributes.AttrsScope
 import org.jetbrains.compose.web.dom.AttrBuilderContext
