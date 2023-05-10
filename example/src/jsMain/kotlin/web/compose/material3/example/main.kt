@@ -1,6 +1,7 @@
 package web.compose.material3.example
 
 import androidx.compose.runtime.*
+import org.jetbrains.compose.web.attributes.rows
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.css.Color.lightgray
 import org.jetbrains.compose.web.dom.*
@@ -24,6 +25,7 @@ import web.compose.material3.fab.FabSize.LARGE
 import web.compose.material3.fab.FabSize.SMALL
 import web.compose.material3.fab.label
 import web.compose.material3.fab.size
+import web.compose.material3.field.*
 import web.compose.material3.icon.Icon
 import web.compose.material3.iconbutton.*
 import web.compose.material3.list.List
@@ -33,6 +35,7 @@ import web.compose.material3.list.supportingText
 import web.compose.material3.navigationbar.NavigationBar
 import web.compose.material3.navigationdrawer.NavigationDrawer
 import web.compose.material3.navigationtab.NavigationTab
+import web.compose.material3.navigationtab.label
 import web.compose.material3.radio.Radio
 import web.compose.material3.radio.checked
 import web.compose.material3.radio.name
@@ -92,14 +95,10 @@ fun main() {
             }
 
             Column {
-                H2 { Text("(Almost) stable widget") }
+                H2 { Text("Stable widgets") }
 
                 Row({ style { border { style(LineStyle.Dotted); width(2.px); color(lightgray) } } }) {
-                    Column {
-                        H3 { Text("Divider") }
 
-                        Divider()
-                    }
                 }
             }
 
@@ -107,6 +106,35 @@ fun main() {
                 H2 { Text("Beta widgets") }
 
                 Row({ style { border { style(LineStyle.Dotted); width(2.px); color(lightgray) } } }) {
+
+                    Column {
+                        H3 { Text("Divider") }
+
+                        Divider()
+
+                        H3 { Text("Fields") }
+
+                        FilledField({
+                        }) {
+                            TextArea(value = "Text area inside a filled field", { rows(5) })
+                        }
+
+                        OutlinedField({
+                            label = "An outlined field label"
+                            value = "Field value"
+                        }) {
+                            P { Text("Some text") }
+                        }
+                        OutlinedField({
+                            error()
+                            errorText = "An error occured"
+                            label = "An outlined field label"
+                            value = "Field value"
+                        }) {
+                            P { Text("Some text") }
+                        }
+                    }
+
                     Column {
                         H3 { Text("Buttons") }
 
@@ -444,8 +472,9 @@ fun main() {
                         H3 { Text("Navigation Bar") }
                         Row {
                             NavigationBar {
-                                FilledIconButton { Text("star") }
-                                Text("Navigation Bar")
+                                NavigationTab({ label = "Tab 1" })
+                                NavigationTab({ label = "Tab 2" })
+                                NavigationTab({ label = "Tab 3" })
                             }
                         }
                     }
@@ -453,9 +482,7 @@ fun main() {
                     Column {
                         H3 { Text("Navigation Tab") }
                         Row {
-                            NavigationTab {
-                                Text("Navigation Tab")
-                            }
+                            NavigationTab({ label = "Navigation Tab" })
                         }
                     }
                 }
