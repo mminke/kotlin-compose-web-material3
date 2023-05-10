@@ -472,17 +472,19 @@ fun main() {
                         H3 { Text("Navigation Bar") }
                         Row {
                             NavigationBar {
-                                NavigationTab({ label = "Tab 1" })
-                                NavigationTab({ label = "Tab 2" })
-                                NavigationTab({ label = "Tab 3" })
+                                NavigationTab({ label = "Tab 1" }) {
+                                    Icon({ slot = "activeIcon" }) { Text("home") }
+                                    Icon({ slot = "inactiveIcon" }) { Text("home") }
+                                }
+                                NavigationTab({ label = "Tab 2" }) {
+                                    Icon({ slot = "activeIcon" }) { Text("public") }
+                                    Icon({ slot = "inactiveIcon" }) { Text("public") }
+                                }
+                                NavigationTab({ label = "Tab 3" }) {
+                                    Icon({ slot = "activeIcon" }) { Text("edit_note") }
+                                    Icon({ slot = "inactiveIcon" }) { Text("edit_note") }
+                                }
                             }
-                        }
-                    }
-
-                    Column {
-                        H3 { Text("Navigation Tab") }
-                        Row {
-                            NavigationTab({ label = "Navigation Tab" })
                         }
                     }
                 }
