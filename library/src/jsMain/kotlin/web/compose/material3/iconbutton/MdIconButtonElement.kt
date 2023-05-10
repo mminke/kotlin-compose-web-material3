@@ -8,3 +8,7 @@ abstract class MdIconButtonElement : MdElement()
 fun AttrsScope<MdIconButtonElement>.toggle(value: Boolean = true) {
     if (value) attr("toggle", "")
 }
+
+fun AttrsScope<MdIconButtonElement>.selected(value: Boolean = true) {
+    if (value) attr("selected", "")
+}

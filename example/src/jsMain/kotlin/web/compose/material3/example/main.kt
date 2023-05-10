@@ -135,6 +135,7 @@ fun main() {
 
                     Column {
                         H3 { Text("Icon Buttons") }
+                        var toggleButtonSelected by remember { mutableStateOf(false) }
 
                         FilledIconButton({
                             onClick { textFieldValue = "filled icon button clicked" }
@@ -149,12 +150,12 @@ fun main() {
                             style { padding(5.px) }
                         }) { Text("public") }
                         StandardIconButton({
-                            onClick { textFieldValue = "standard icon button clicked" }
+                            onClick { toggleButtonSelected = !toggleButtonSelected }
                             style { padding(5.px) }
                         }) { Text("menu") }
                         FilledIconButton({
                             toggle()
-                            onClick { textFieldValue = "toggle button clicked" }
+                            selected(toggleButtonSelected)
                             style { padding(5.px) }
                         }) {
                             Icon({ slot = "onIcon" }) { Text("lock") }
