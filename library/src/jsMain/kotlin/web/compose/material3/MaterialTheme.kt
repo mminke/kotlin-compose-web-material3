@@ -1,14 +1,7 @@
 package web.compose.material3
 
 import androidx.compose.runtime.Composable
-import org.jetbrains.compose.web.css.CSSColorValue
-import org.jetbrains.compose.web.css.CSSStyleVariable
-import org.jetbrains.compose.web.css.Color
-import org.jetbrains.compose.web.css.Style
-import org.jetbrains.compose.web.css.StyleSheet
-import org.jetbrains.compose.web.css.backgroundColor
-import org.jetbrains.compose.web.css.color
-import org.jetbrains.compose.web.css.value
+import org.jetbrains.compose.web.css.*
 
 @JsName("require")
 external fun jsRequire(module: String): dynamic
@@ -20,7 +13,7 @@ fun MaterialTheme(colorScheme: ColorScheme? = null, content: @Composable () -> U
     } else {
         Style(StyleSheet().apply {
             root style {
-                backgroundColor(MdSysColorVariables.mdSysColorBackground.value(Color("#FEF7FF")))
+                backgroundColor(MdSysColorVariables.mdSysColorSurfaceContainerLowest.value(Color("#FFFFFF")))
             }
         })
     }
@@ -52,6 +45,14 @@ data class ColorScheme(
     val sysColorOnSurface: CSSColorValue,
     val sysColorSurfaceVariant: CSSColorValue,
     val sysColorOnSurfaceVariant: CSSColorValue,
+//sysColorSurfaceDim = Color("#141218"),
+//sysColorSurfaceBright = Color("#3B383E"),
+    val sysColorSurfaceContainerLowest: CSSColorValue,
+//sysColorSurfaceContainerLow = Color("#1D1B20"),
+//sysColorSurfaceContainer = Color("#211F26"),
+//sysColorSurfaceContainerHigh = Color("#2B2930"),
+//sysColorSurfaceContainerHighest = Color("#36343B"),
+
     val sysColorInverseSurface: CSSColorValue,
     val sysColorInverseOnSurface: CSSColorValue,
     val sysColorInversePrimary: CSSColorValue,
@@ -62,7 +63,7 @@ data class ColorScheme(
 ) {
     fun asStylesheet(): StyleSheet = StyleSheet().apply {
         root style {
-            backgroundColor(MdSysColorVariables.mdSysColorBackground.value())
+            backgroundColor(MdSysColorVariables.mdSysColorSurfaceContainerLowest.value())
             color(MdSysColorVariables.mdSysColorOnBackground.value())
         }
 
@@ -90,6 +91,7 @@ data class ColorScheme(
             MdSysColorVariables.mdSysColorOnSurface(sysColorOnSurface)
             MdSysColorVariables.mdSysColorSurfaceVariant(sysColorSurfaceVariant)
             MdSysColorVariables.mdSysColorOnSurfaceVariant(sysColorOnSurfaceVariant)
+            MdSysColorVariables.mdSysColorSurfaceContainerLowest(sysColorSurfaceContainerLowest)
             MdSysColorVariables.mdSysColorInverseSurface(sysColorInverseSurface)
             MdSysColorVariables.mdSysColorInverseOnSurface(sysColorInverseOnSurface)
             MdSysColorVariables.mdSysColorInversePrimary(sysColorInversePrimary)
@@ -125,6 +127,7 @@ object MdSysColorVariables {
     val mdSysColorOnSurface = CSSStyleVariable<CSSColorValue>("md-sys-color-on-surface")
     val mdSysColorSurfaceVariant = CSSStyleVariable<CSSColorValue>("md-sys-color-surface-variant")
     val mdSysColorOnSurfaceVariant = CSSStyleVariable<CSSColorValue>("md-sys-color-on-surface-variant")
+    val mdSysColorSurfaceContainerLowest = CSSStyleVariable<CSSColorValue>("md-sys-color-surface-container-lowest")
     val mdSysColorInverseSurface = CSSStyleVariable<CSSColorValue>("md-sys-color-inverse-surface")
     val mdSysColorInverseOnSurface = CSSStyleVariable<CSSColorValue>("md-sys-color-inverse-on-surface")
     val mdSysColorInversePrimary = CSSStyleVariable<CSSColorValue>("md-sys-color-inverse-primary")
