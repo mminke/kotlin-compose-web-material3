@@ -12,6 +12,8 @@ import web.compose.extras.Row
 import web.compose.extras.fileupload.FilledFileInput
 import web.compose.extras.fileupload.OutlinedFileDragDropArea
 import web.compose.material3.*
+import web.compose.material3.badge.Badge
+import web.compose.material3.badge.value
 import web.compose.material3.buttons.*
 import web.compose.material3.checkbox.Checkbox
 import web.compose.material3.checkbox.checked
@@ -300,12 +302,6 @@ fun main() {
                             type = SEARCH
                             style { padding(5.px) }
                         })
-
-//                    OutlinedTextField({
-//                        label = "Multiline textfield"
-//                        value = "This does not work yet!?!"
-//                        style { padding(5.px); height(100.px) }
-//                    })
                     }
 
                     Column {
@@ -317,6 +313,10 @@ fun main() {
                             Icon({ slot = "start" }) { Text("delete") }
                             Icon({ slot = "end" }) { Text("close") }
                         }
+
+                        H3 { Text("Badges")}
+                        Badge()
+                        Badge({value = "100"})
 
                         H3 { Text("Checkbox") }
                         Checkbox({
