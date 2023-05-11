@@ -38,6 +38,7 @@ import web.compose.material3.navigationbar.NavigationBar
 import web.compose.material3.navigationdrawer.NavigationDrawer
 import web.compose.material3.navigationtab.NavigationTab
 import web.compose.material3.navigationtab.label
+import web.compose.material3.progress.*
 import web.compose.material3.radio.Radio
 import web.compose.material3.radio.checked
 import web.compose.material3.radio.name
@@ -314,9 +315,34 @@ fun main() {
                             Icon({ slot = "end" }) { Text("close") }
                         }
 
-                        H3 { Text("Badges")}
+                        H3 { Text("Progress Indicators") }
+
+                        Div({ style { height(25.px) } }) {
+                            LinearProgress({
+                                progress = Progress(0.3f)
+                            })
+                        }
+                        Div({ style { height(25.px) } }) {
+                            LinearProgress({
+                                indeterminate()
+                                fourColor()
+                            })
+                        }
+                        Div {
+                            CircularProgress({
+                                progress = Progress(0.7f)
+                            })
+                        }
+                        Div {
+                            CircularProgress({
+                                indeterminate()
+                                fourColor()
+                            })
+                        }
+
+                        H3 { Text("Badges") }
                         Badge()
-                        Badge({value = "100"})
+                        Badge({ value = "100" })
 
                         H3 { Text("Checkbox") }
                         Checkbox({
