@@ -1,2 +1,4 @@
 package web.compose.material3
-external fun require(module: String): dynamic
+
+@JsName("require")
+external fun jsRequire(module: String): dynamic

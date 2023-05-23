@@ -5,7 +5,7 @@ import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div
 import org.w3c.dom.asList
 import org.w3c.files.File
-import web.compose.material3.MdSysColorVariables
+import web.compose.material3.theming.MdSysColorVariables
 
 object DragDropAreaStyleSheet : StyleSheet() {
     init {

@@ -1,7 +1,7 @@
 package web.compose.material3.themes
 
 import org.jetbrains.compose.web.css.Color
-import web.compose.material3.ColorScheme
+import web.compose.material3.theming.ColorScheme
 
 val defaultColorScheme = ColorScheme(
     sysColorPrimary = Color("#6750A4"),
