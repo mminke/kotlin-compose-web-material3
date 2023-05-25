@@ -1,9 +1,9 @@
 package web.compose.material3.example
 
 import org.jetbrains.compose.web.css.Color
-import web.compose.material3.ColorScheme
+import web.compose.material3.theming.SysColorScheme
 
-val greenishColorScheme = ColorScheme(
+val greenishColorScheme = SysColorScheme(
     sysColorPrimary = Color("#006A6A"),
     sysColorPrimaryContainer = Color("#6FF7F6"),
     sysColorOnPrimary = Color("#FFFFFF"),
@@ -37,7 +37,7 @@ val greenishColorScheme = ColorScheme(
     sysColorScrim = Color("#000000")
 )
 
-val alternativeDarkColorScheme = ColorScheme(
+val alternativeDarkColorScheme = SysColorScheme(
     sysColorPrimary = Color("#4CDADA"),
     sysColorPrimaryContainer = Color("#004F4F"),
     sysColorOnPrimary = Color("#003737"),

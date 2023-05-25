@@ -1,32 +1,24 @@
 package web.compose.material3.example
 
 import androidx.compose.runtime.Composable
-import org.jetbrains.compose.web.css.AlignItems
-import org.jetbrains.compose.web.css.DisplayStyle
-import org.jetbrains.compose.web.css.JustifyContent
-import org.jetbrains.compose.web.css.alignItems
-import org.jetbrains.compose.web.css.display
-import org.jetbrains.compose.web.css.gap
-import org.jetbrains.compose.web.css.justifyContent
-import org.jetbrains.compose.web.css.padding
-import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Text
 import web.compose.extras.BottomNavigationBar
-import web.compose.material3.ColorScheme
 import web.compose.material3.icon.Icon
 import web.compose.material3.navigationtab.NavigationTab
 import web.compose.material3.navigationtab.label
 import web.compose.material3.slot
 import web.compose.material3.switch.Switch
 import web.compose.material3.switch.selected
+import web.compose.material3.theming.SysColorScheme
 
 @Composable
 fun ExampleNavigationBar(
-    currentColorScheme: ColorScheme?,
-    lightColorScheme: ColorScheme,
-    darkColorScheme: ColorScheme,
-    setCurrentColorScheme: (ColorScheme) -> Unit,
+    currentColorScheme: SysColorScheme?,
+    lightColorScheme: SysColorScheme,
+    darkColorScheme: SysColorScheme,
+    setCurrentColorScheme: (SysColorScheme) -> Unit,
 ) {
 
     BottomNavigationBar {

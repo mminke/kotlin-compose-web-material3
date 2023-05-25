@@ -4,7 +4,7 @@ import org.jetbrains.compose.web.css.*
 
 //TODO: Palette: https://github.com/material-components/material-web/blob/main/tokens/v0_172/_md-ref-palette.scss
 
-data class ColorScheme(
+data class SysColorScheme(
     val sysColorPrimary: CSSColorValue,
     val sysColorPrimaryContainer: CSSColorValue,
     val sysColorOnPrimary: CSSColorValue,

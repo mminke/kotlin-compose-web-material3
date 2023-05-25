@@ -1,9 +1,9 @@
 package web.compose.material3.themes
 
 import org.jetbrains.compose.web.css.Color
-import web.compose.material3.theming.ColorScheme
+import web.compose.material3.theming.SysColorScheme
 
-val defaultColorScheme = ColorScheme(
+val defaultColorScheme = SysColorScheme(
     sysColorPrimary = Color("#6750A4"),
     sysColorPrimaryContainer = Color("#EADDFF"),
     sysColorOnPrimary = Color("#FFFFFF"),
@@ -43,7 +43,7 @@ val defaultColorScheme = ColorScheme(
     sysColorScrim = Color("#000000"),
 )
 
-val defaultDarkColorScheme = ColorScheme(
+val defaultDarkColorScheme = SysColorScheme(
     sysColorPrimary = Color("#D0BCFF"),
     sysColorPrimaryContainer = Color("#4F378B"),
     sysColorOnPrimary = Color("#371E73"),
