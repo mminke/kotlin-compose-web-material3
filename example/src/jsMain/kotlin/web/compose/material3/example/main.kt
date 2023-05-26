@@ -6,10 +6,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import org.jetbrains.compose.web.attributes.rows
+import org.jetbrains.compose.web.css.AlignItems
+import org.jetbrains.compose.web.css.DisplayStyle
+import org.jetbrains.compose.web.css.JustifyContent
 import org.jetbrains.compose.web.css.JustifyContent.Companion.SpaceEvenly
 import org.jetbrains.compose.web.css.Style
 import org.jetbrains.compose.web.css.StyleSheet
+import org.jetbrains.compose.web.css.alignItems
+import org.jetbrains.compose.web.css.display
 import org.jetbrains.compose.web.css.fontSize
+import org.jetbrains.compose.web.css.gap
 import org.jetbrains.compose.web.css.height
 import org.jetbrains.compose.web.css.justifyContent
 import org.jetbrains.compose.web.css.padding
@@ -168,6 +174,28 @@ fun MaterialThemeExamples() {
             )
 
             A(href = "https://github.com/material-components/material-web") { Text("https://github.com/material-components/material-web") }
+
+            Div({
+                style {
+                    display(DisplayStyle.Flex)
+                    alignItems(AlignItems.Center)
+                    justifyContent(JustifyContent.Center)
+                    gap(10.px)
+                    padding(30.px)
+                }
+            }) {
+                Text("Switch theme")
+                Switch({
+                    selected(currentColorScheme != lightColorScheme)
+                    onClick {
+                        currentColorScheme =
+                            if (currentColorScheme == lightColorScheme)
+                                darkColorScheme
+                            else
+                                lightColorScheme
+                    }
+                })
+            }
         }
 
         WidgetGroup("Stable widgets") {
@@ -645,9 +673,7 @@ fun MaterialThemeExamples() {
             }
         }
 
-        ExampleNavigationBar(currentColorScheme, lightColorScheme, darkColorScheme) {
-            currentColorScheme = it
-        }
+        ExampleNavigationBar()
     }
 }
 
