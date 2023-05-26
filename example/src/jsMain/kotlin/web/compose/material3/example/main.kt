@@ -115,6 +115,10 @@ import web.compose.material3.slider.withLabel
 import web.compose.material3.slot
 import web.compose.material3.switch.Switch
 import web.compose.material3.switch.selected
+import web.compose.material3.tabs.Tab
+import web.compose.material3.tabs.Tabs
+import web.compose.material3.tabs.disabled
+import web.compose.material3.tabs.inlineIcon
 import web.compose.material3.textfield.FilledTextField
 import web.compose.material3.textfield.OutlinedTextField
 import web.compose.material3.textfield.TextFieldType.EMAIL
@@ -196,6 +200,25 @@ fun MaterialThemeExamples() {
                     }
                 })
             }
+        }
+
+        var selectedTabName by remember { mutableStateOf("No tab clicked yet") }
+        Tabs {
+            Tab({ onClick { selectedTabName = "Stable widgets" } }) {
+                Icon("star")
+                Text("Stable widgets")
+            }
+            Tab({ inlineIcon(); onClick { selectedTabName = "Beta widgets" } }) {
+                Icon("circle")
+                Text("Beta widgets")
+            }
+            Tab({ disabled(); onClick { selectedTabName = "Alfa widgets" } }) {
+                Icon("square")
+                Text("Alfa widgets")
+            }
+        }
+        Column {
+            LargeTitle("Selected tab: $selectedTabName")
         }
 
         WidgetGroup("Stable widgets") {
