@@ -30,3 +30,7 @@ private val CheckboxElementBuilder: ElementBuilder<CheckboxElement> =
 fun AttrsScope<CheckboxElement>.checked(value: Boolean = true) {
     if (value) attr("checked", "")
 }
+
+fun AttrsScope<CheckboxElement>.indeterminate(value: Boolean = true) {
+    if (value) attr("indeterminate", "")
+}

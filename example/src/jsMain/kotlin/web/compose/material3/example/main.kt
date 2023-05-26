@@ -1,22 +1,56 @@
 package web.compose.material3.example
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import org.jetbrains.compose.web.attributes.rows
-import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.css.JustifyContent.Companion.SpaceEvenly
-import org.jetbrains.compose.web.dom.*
+import org.jetbrains.compose.web.css.Style
+import org.jetbrains.compose.web.css.StyleSheet
+import org.jetbrains.compose.web.css.fontSize
+import org.jetbrains.compose.web.css.height
+import org.jetbrains.compose.web.css.justifyContent
+import org.jetbrains.compose.web.css.padding
+import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.dom.A
+import org.jetbrains.compose.web.dom.Div
+import org.jetbrains.compose.web.dom.Label
+import org.jetbrains.compose.web.dom.Span
+import org.jetbrains.compose.web.dom.Text
+import org.jetbrains.compose.web.dom.TextArea
 import org.jetbrains.compose.web.renderComposable
 import org.w3c.files.File
 import web.compose.extras.Column
 import web.compose.extras.Row
 import web.compose.extras.fileupload.FilledFileInput
 import web.compose.extras.fileupload.OutlinedFileDragDropArea
-import web.compose.extras.text.*
+import web.compose.extras.text.LargeBody
+import web.compose.extras.text.LargeDisplay
+import web.compose.extras.text.LargeHeadline
+import web.compose.extras.text.LargeLabel
+import web.compose.extras.text.LargeTitle
+import web.compose.extras.text.MediumBody
+import web.compose.extras.text.MediumDisplay
+import web.compose.extras.text.MediumHeadline
+import web.compose.extras.text.MediumLabel
+import web.compose.extras.text.MediumTitle
+import web.compose.extras.text.SmallBody
+import web.compose.extras.text.SmallDisplay
+import web.compose.extras.text.SmallHeadline
+import web.compose.extras.text.SmallLabel
+import web.compose.extras.text.SmallTitle
 import web.compose.material3.badge.Badge
 import web.compose.material3.badge.value
-import web.compose.material3.buttons.*
+import web.compose.material3.buttons.ElevatedButton
+import web.compose.material3.buttons.FilledButton
+import web.compose.material3.buttons.OutlinedButton
+import web.compose.material3.buttons.TextButton
+import web.compose.material3.buttons.TonalButton
 import web.compose.material3.checkbox.Checkbox
 import web.compose.material3.checkbox.checked
+import web.compose.material3.checkbox.indeterminate
 import web.compose.material3.dialog.Dialog
 import web.compose.material3.dialog.onCancel
 import web.compose.material3.dialog.onClose
@@ -28,28 +62,67 @@ import web.compose.material3.fab.FabSize.LARGE
 import web.compose.material3.fab.FabSize.SMALL
 import web.compose.material3.fab.label
 import web.compose.material3.fab.size
-import web.compose.material3.field.*
+import web.compose.material3.field.FilledField
+import web.compose.material3.field.OutlinedField
+import web.compose.material3.field.error
+import web.compose.material3.field.errorText
+import web.compose.material3.field.label
+import web.compose.material3.field.value
 import web.compose.material3.icon.Icon
-import web.compose.material3.iconbutton.*
+import web.compose.material3.iconbutton.FilledIconButton
+import web.compose.material3.iconbutton.OutlinedIconButton
+import web.compose.material3.iconbutton.StandardIconButton
+import web.compose.material3.iconbutton.TonalIconButton
+import web.compose.material3.iconbutton.disabled
+import web.compose.material3.iconbutton.selected
+import web.compose.material3.iconbutton.toggle
 import web.compose.material3.list.List
 import web.compose.material3.list.ListItem
 import web.compose.material3.list.headline
 import web.compose.material3.list.supportingText
 import web.compose.material3.navigationdrawer.NavigationDrawer
 import web.compose.material3.onChange
-import web.compose.material3.progress.*
+import web.compose.material3.progress.CircularProgress
+import web.compose.material3.progress.LinearProgress
+import web.compose.material3.progress.Progress
+import web.compose.material3.progress.fourColor
+import web.compose.material3.progress.indeterminate
+import web.compose.material3.progress.progress
 import web.compose.material3.radio.Radio
 import web.compose.material3.radio.checked
 import web.compose.material3.radio.name
 import web.compose.material3.radio.value
-import web.compose.material3.select.*
+import web.compose.material3.select.FilledSelect
+import web.compose.material3.select.OutlinedSelect
+import web.compose.material3.select.SelectOption
+import web.compose.material3.select.headline
+import web.compose.material3.select.label
 import web.compose.material3.select.onChange
-import web.compose.material3.slider.*
+import web.compose.material3.select.supportingText
+import web.compose.material3.select.value
+import web.compose.material3.slider.Slider
+import web.compose.material3.slider.max
+import web.compose.material3.slider.min
+import web.compose.material3.slider.step
+import web.compose.material3.slider.value
+import web.compose.material3.slider.withLabel
 import web.compose.material3.slot
 import web.compose.material3.switch.Switch
 import web.compose.material3.switch.selected
-import web.compose.material3.textfield.*
-import web.compose.material3.textfield.TextFieldType.*
+import web.compose.material3.textfield.FilledTextField
+import web.compose.material3.textfield.OutlinedTextField
+import web.compose.material3.textfield.TextFieldType.EMAIL
+import web.compose.material3.textfield.TextFieldType.NUMBER
+import web.compose.material3.textfield.TextFieldType.PASSWORD
+import web.compose.material3.textfield.TextFieldType.SEARCH
+import web.compose.material3.textfield.TextFieldType.URL
+import web.compose.material3.textfield.error
+import web.compose.material3.textfield.errorText
+import web.compose.material3.textfield.label
+import web.compose.material3.textfield.onInput
+import web.compose.material3.textfield.required
+import web.compose.material3.textfield.type
+import web.compose.material3.textfield.value
 import web.compose.material3.themes.defaultColorScheme
 import web.compose.material3.themes.defaultDarkColorScheme
 import web.compose.material3.theming.MaterialTheme
@@ -158,13 +231,13 @@ fun MaterialThemeExamples() {
 
                         LargeTitle("FAB")
                         Fab({ size = SMALL }) {
-                            Icon({ slot = "icon" }) { Text("edit") }
+                            Icon({ slot = "icon" }, "edit")
                         }
                         Fab {
-                            Icon({ slot = "icon" }) { Text("delete") }
+                            Icon({ slot = "icon" }, "delete")
                         }
                         Fab({ size = LARGE }) {
-                            Icon({ slot = "icon" }) { Text("add") }
+                            Icon({ slot = "icon" }, "add")
                         }
                         Fab({ label = "FAB" })
                     }
@@ -176,28 +249,32 @@ fun MaterialThemeExamples() {
                         FilledIconButton({
                             onClick { textFieldValue = "filled icon button clicked" }
                             style { padding(5.px) }
-                        }) {
-                            Text("star")
-                        }
+                        }) { Icon("star") }
                         OutlinedIconButton({
                             onClick { textFieldValue = "outlined icon button clicked" }
                             style { padding(5.px) }
-                        }) { Text("login") }
+                        }) { Icon("login") }
                         TonalIconButton({
                             onClick { textFieldValue = "tonal icon button clicked" }
                             style { padding(5.px) }
-                        }) { Text("public") }
+                        }) { Icon("public") }
                         StandardIconButton({
                             onClick { toggleButtonSelected = !toggleButtonSelected }
                             style { padding(5.px) }
-                        }) { Text("menu") }
+                        }) { Icon("menu") }
                         FilledIconButton({
                             toggle()
                             selected(toggleButtonSelected)
                             style { padding(5.px) }
                         }) {
-                            Icon({ slot = "onIcon" }) { Text("lock") }
-                            Icon({ slot = "offIcon" }) { Text("lock_open") }
+                            Icon("lock")
+                            Icon({ slot = "selectedIcon" }, "lock_open")
+                        }
+                        FilledIconButton({
+                            disabled()
+                            style { padding(5.px) }
+                        }) {
+                            Icon("star")
                         }
                     }
 
@@ -306,9 +383,9 @@ fun MaterialThemeExamples() {
 
                         LargeTitle("Icons")
                         Row {
-                            Icon({ slot = "start" }) { Text("edit") }
-                            Icon({ slot = "start" }) { Text("delete") }
-                            Icon({ slot = "end" }) { Text("close") }
+                            Icon({ slot = "start" }, "edit")
+                            Icon({ slot = "start" }, "delete")
+                            Icon({ slot = "end" }, "close")
                         }
 
                         LargeTitle("Progress Indicators")
@@ -343,7 +420,7 @@ fun MaterialThemeExamples() {
                                 onClick { textFieldValue = "tonal icon button clicked" }
                                 style { padding(5.px) }
                             }) {
-                                Text("public")
+                                Icon("public")
                                 Badge()
                             }
 
@@ -351,7 +428,7 @@ fun MaterialThemeExamples() {
                                 onClick { textFieldValue = "tonal icon button clicked" }
                                 style { padding(5.px) }
                             }) {
-                                Text("public")
+                                Icon("public")
                                 Badge({ value = "1" })
                             }
 
@@ -359,7 +436,7 @@ fun MaterialThemeExamples() {
                                 onClick { textFieldValue = "tonal icon button clicked" }
                                 style { padding(5.px) }
                             }) {
-                                Text("public")
+                                Icon("public")
                                 Badge({ value = "999+" })
                             }
                         }
@@ -369,6 +446,9 @@ fun MaterialThemeExamples() {
                             onClick {
                                 checkboxStatus = !checkboxStatus
                             }
+                        })
+                        Checkbox({
+                            indeterminate()
                         })
                         Checkbox({
                             checked(checkboxStatus)

@@ -12,3 +12,7 @@ fun AttrsScope<MdIconButtonElement>.toggle(value: Boolean = true) {
 fun AttrsScope<MdIconButtonElement>.selected(value: Boolean = true) {
     if (value) attr("selected", "")
 }
+
+fun AttrsScope<MdIconButtonElement>.disabled(value: Boolean = true) {
+    if (value) attr("disabled", "")
+}

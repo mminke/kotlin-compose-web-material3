@@ -1,7 +1,15 @@
 package web.compose.material3.example
 
 import androidx.compose.runtime.Composable
-import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.css.AlignItems
+import org.jetbrains.compose.web.css.DisplayStyle
+import org.jetbrains.compose.web.css.JustifyContent
+import org.jetbrains.compose.web.css.alignItems
+import org.jetbrains.compose.web.css.display
+import org.jetbrains.compose.web.css.gap
+import org.jetbrains.compose.web.css.justifyContent
+import org.jetbrains.compose.web.css.padding
+import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Text
 import web.compose.extras.BottomNavigationBar
@@ -23,16 +31,16 @@ fun ExampleNavigationBar(
 
     BottomNavigationBar {
         NavigationTab({ label = "Home" }) {
-            Icon({ slot = "activeIcon" }) { Text("home") }
-            Icon({ slot = "inactiveIcon" }) { Text("home") }
+            Icon({ slot = "activeIcon" }, "home")
+            Icon({ slot = "inactiveIcon" }, "home")
         }
         NavigationTab({ label = "Explore" }) {
-            Icon({ slot = "activeIcon" }) { Text("public") }
-            Icon({ slot = "inactiveIcon" }) { Text("public") }
+            Icon({ slot = "activeIcon" }, "public")
+            Icon({ slot = "inactiveIcon" }, "public")
         }
         NavigationTab({ label = "Edit" }) {
-            Icon({ slot = "activeIcon" }) { Text("edit_note") }
-            Icon({ slot = "inactiveIcon" }) { Text("edit_note") }
+            Icon({ slot = "activeIcon" }, "edit_note")
+            Icon({ slot = "inactiveIcon" }, "edit_note")
         }
 
         Div({
