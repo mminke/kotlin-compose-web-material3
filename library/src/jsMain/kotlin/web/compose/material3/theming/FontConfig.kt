@@ -1,6 +1,23 @@
 package web.compose.material3.theming
 
-import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.css.CSSColorValue
+import org.jetbrains.compose.web.css.CSSNumeric
+import org.jetbrains.compose.web.css.CSSSizeValue
+import org.jetbrains.compose.web.css.CSSStyleVariable
+import org.jetbrains.compose.web.css.CSSUnit
+import org.jetbrains.compose.web.css.CSSUnitValueTyped
+import org.jetbrains.compose.web.css.StylePropertyString
+import org.jetbrains.compose.web.css.StyleScope
+import org.jetbrains.compose.web.css.StyleSheet
+import org.jetbrains.compose.web.css.cssRem
+import org.jetbrains.compose.web.css.fontFamily
+import org.jetbrains.compose.web.css.fontSize
+import org.jetbrains.compose.web.css.fontWeight
+import org.jetbrains.compose.web.css.letterSpacing
+import org.jetbrains.compose.web.css.lineHeight
+import org.jetbrains.compose.web.css.number
+import org.jetbrains.compose.web.css.unaryMinus
+import org.jetbrains.compose.web.css.value
 
 open class TypeScaleTokens(
     val tokenBase: String
@@ -17,9 +34,10 @@ open class TypeScaleTokens(
 
     companion object {
         fun StyleScope.applyStyle(role: Role) {
-            font(role.font.value().toString())
+            fontFamily(role.font.value().toString())
             fontSize(role.size.value())
             lineHeight(role.lineHeight.value())
+            letterSpacing(role.tracking.value())
             fontWeight(role.weight.value().toString())
         }
     }
@@ -58,7 +76,7 @@ data class FontConfig(
 )
 
 val Number.sp
-    get(): CSSSizeValue<CSSUnit.rem> = CSSUnitValueTyped(this.toFloat()*0.0625f, CSSUnit.rem)
+    get(): CSSSizeValue<CSSUnit.rem> = CSSUnitValueTyped(this.toFloat() * 0.0625f, CSSUnit.rem)
 
 
 data class SysFontScheme(
@@ -89,6 +107,7 @@ data class SysFontScheme(
         role.tracking(fontConfig.tracking)
         role.weight(fontConfig.weight)
     }
+
     fun asStyleSheet(): StyleSheet = StyleSheet().apply {
         universal style {
             configureTokenValues(MdSysTypeScaleTokens.displayLarge, displayLarge)
