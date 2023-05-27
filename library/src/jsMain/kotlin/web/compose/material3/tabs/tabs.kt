@@ -1,16 +1,17 @@
 package web.compose.material3.tabs
 
 import androidx.compose.runtime.Composable
+import androidx.compose.web.events.SyntheticEvent
 import org.jetbrains.compose.web.attributes.AttrsScope
 import org.jetbrains.compose.web.dom.AttrBuilderContext
 import org.jetbrains.compose.web.dom.ContentBuilder
 import org.jetbrains.compose.web.dom.ElementBuilder
 import org.jetbrains.compose.web.dom.TagElement
+import org.w3c.dom.events.EventTarget
 import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.InvalidCallException
 import web.compose.material3.MdElement
 import web.compose.material3.jsRequire
-import web.compose.material3.switch.SwitchElement
 
 abstract class MdTabsElement : MdElement()
 
@@ -45,12 +46,18 @@ var AttrsScope<MdTabsElement>.selected: Int
         this.attr("selected", value.toString())
     }
 
-fun AttrsScope<SwitchElement>.disabled(value: Boolean = true) {
+fun AttrsScope<MdTabsElement>.disabled(value: Boolean = true) {
     if (value) attr("disabled", "")
 }
 
-fun AttrsScope<SwitchElement>.selectOnFocus(value: Boolean = true) {
+fun AttrsScope<MdTabsElement>.selectOnFocus(value: Boolean = true) {
     if (value) attr("selectOnFocus", "")
+}
+
+fun AttrsScope<MdTabsElement>.onChange(handler: (SyntheticEvent<EventTarget>) -> Unit) {
+    addEventListener("change") {
+        handler(it)
+    }
 }
 
 enum class Variant(val value: String) {
