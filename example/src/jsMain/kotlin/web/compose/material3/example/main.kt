@@ -1,69 +1,22 @@
 package web.compose.material3.example
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import org.jetbrains.compose.web.attributes.rows
-import org.jetbrains.compose.web.css.AlignItems
+import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.css.DisplayStyle.Companion.Flex
-import org.jetbrains.compose.web.css.JustifyContent
-import org.jetbrains.compose.web.css.JustifyContent.Companion.Center
 import org.jetbrains.compose.web.css.JustifyContent.Companion.SpaceEvenly
 import org.jetbrains.compose.web.css.Position.Companion.Relative
-import org.jetbrains.compose.web.css.Style
-import org.jetbrains.compose.web.css.StyleSheet
-import org.jetbrains.compose.web.css.alignItems
-import org.jetbrains.compose.web.css.backgroundColor
-import org.jetbrains.compose.web.css.borderRadius
-import org.jetbrains.compose.web.css.borderWidth
-import org.jetbrains.compose.web.css.color
-import org.jetbrains.compose.web.css.display
-import org.jetbrains.compose.web.css.fontSize
-import org.jetbrains.compose.web.css.gap
-import org.jetbrains.compose.web.css.height
-import org.jetbrains.compose.web.css.justifyContent
-import org.jetbrains.compose.web.css.margin
-import org.jetbrains.compose.web.css.padding
-import org.jetbrains.compose.web.css.position
-import org.jetbrains.compose.web.css.px
-import org.jetbrains.compose.web.css.value
-import org.jetbrains.compose.web.css.width
-import org.jetbrains.compose.web.dom.A
-import org.jetbrains.compose.web.dom.Div
-import org.jetbrains.compose.web.dom.Label
-import org.jetbrains.compose.web.dom.Span
-import org.jetbrains.compose.web.dom.Text
-import org.jetbrains.compose.web.dom.TextArea
+import org.jetbrains.compose.web.dom.*
 import org.jetbrains.compose.web.renderComposable
 import org.w3c.files.File
 import web.compose.extras.Column
 import web.compose.extras.Row
 import web.compose.extras.fileupload.FilledFileInput
 import web.compose.extras.fileupload.OutlinedFileDragDropArea
-import web.compose.extras.text.LargeBody
-import web.compose.extras.text.LargeDisplay
-import web.compose.extras.text.LargeHeadline
-import web.compose.extras.text.LargeLabel
-import web.compose.extras.text.LargeTitle
-import web.compose.extras.text.MediumBody
-import web.compose.extras.text.MediumDisplay
-import web.compose.extras.text.MediumHeadline
-import web.compose.extras.text.MediumLabel
-import web.compose.extras.text.MediumTitle
-import web.compose.extras.text.SmallBody
-import web.compose.extras.text.SmallDisplay
-import web.compose.extras.text.SmallHeadline
-import web.compose.extras.text.SmallLabel
-import web.compose.extras.text.SmallTitle
+import web.compose.extras.text.*
 import web.compose.material3.badge.Badge
 import web.compose.material3.badge.value
-import web.compose.material3.buttons.ElevatedButton
-import web.compose.material3.buttons.FilledButton
-import web.compose.material3.buttons.OutlinedButton
-import web.compose.material3.buttons.TextButton
-import web.compose.material3.buttons.TonalButton
+import web.compose.material3.buttons.*
 import web.compose.material3.checkbox.Checkbox
 import web.compose.material3.checkbox.checked
 import web.compose.material3.checkbox.indeterminate
@@ -79,79 +32,35 @@ import web.compose.material3.fab.FabSize.LARGE
 import web.compose.material3.fab.FabSize.SMALL
 import web.compose.material3.fab.label
 import web.compose.material3.fab.size
-import web.compose.material3.field.FilledField
-import web.compose.material3.field.OutlinedField
-import web.compose.material3.field.error
-import web.compose.material3.field.errorText
-import web.compose.material3.field.label
-import web.compose.material3.field.value
+import web.compose.material3.field.*
 import web.compose.material3.icon.Icon
-import web.compose.material3.iconbutton.FilledIconButton
-import web.compose.material3.iconbutton.OutlinedIconButton
-import web.compose.material3.iconbutton.StandardIconButton
-import web.compose.material3.iconbutton.TonalIconButton
-import web.compose.material3.iconbutton.disabled
-import web.compose.material3.iconbutton.selected
-import web.compose.material3.iconbutton.toggle
+import web.compose.material3.iconbutton.*
 import web.compose.material3.list.List
 import web.compose.material3.list.ListItem
 import web.compose.material3.list.headline
 import web.compose.material3.list.supportingText
 import web.compose.material3.navigationdrawer.NavigationDrawer
 import web.compose.material3.onChange
-import web.compose.material3.progress.CircularProgress
-import web.compose.material3.progress.LinearProgress
-import web.compose.material3.progress.Progress
-import web.compose.material3.progress.fourColor
-import web.compose.material3.progress.indeterminate
-import web.compose.material3.progress.progress
+import web.compose.material3.progress.*
 import web.compose.material3.radio.Radio
 import web.compose.material3.radio.checked
 import web.compose.material3.radio.name
 import web.compose.material3.radio.value
-import web.compose.material3.select.FilledSelect
-import web.compose.material3.select.OutlinedSelect
-import web.compose.material3.select.SelectOption
-import web.compose.material3.select.headline
-import web.compose.material3.select.label
+import web.compose.material3.select.*
 import web.compose.material3.select.onChange
-import web.compose.material3.select.supportingText
-import web.compose.material3.select.value
-import web.compose.material3.slider.Slider
-import web.compose.material3.slider.max
-import web.compose.material3.slider.min
-import web.compose.material3.slider.step
-import web.compose.material3.slider.value
-import web.compose.material3.slider.withLabel
+import web.compose.material3.slider.*
 import web.compose.material3.slot
 import web.compose.material3.switch.Switch
 import web.compose.material3.switch.selected
-import web.compose.material3.tabs.Tab
-import web.compose.material3.tabs.Tabs
-import web.compose.material3.tabs.Variant
-import web.compose.material3.tabs.onChange
-import web.compose.material3.tabs.selected
-import web.compose.material3.tabs.variant
-import web.compose.material3.textfield.FilledTextField
-import web.compose.material3.textfield.OutlinedTextField
-import web.compose.material3.textfield.TextFieldType.EMAIL
-import web.compose.material3.textfield.TextFieldType.NUMBER
-import web.compose.material3.textfield.TextFieldType.PASSWORD
-import web.compose.material3.textfield.TextFieldType.SEARCH
-import web.compose.material3.textfield.TextFieldType.URL
-import web.compose.material3.textfield.error
-import web.compose.material3.textfield.errorText
-import web.compose.material3.textfield.label
-import web.compose.material3.textfield.onInput
-import web.compose.material3.textfield.required
-import web.compose.material3.textfield.type
-import web.compose.material3.textfield.value
+import web.compose.material3.tabs.*
+import web.compose.material3.textfield.*
+import web.compose.material3.textfield.TextFieldType.*
 import web.compose.material3.themes.defaultColorScheme
 import web.compose.material3.themes.defaultDarkColorScheme
+import web.compose.material3.themes.defaultFontScheme
 import web.compose.material3.theming.MaterialTheme
 import web.compose.material3.theming.MdSysColorVariables
 import web.compose.material3.theming.SysColorScheme
-import web.compose.material3.theming.SysFontScheme
 
 data class ListDataItem(
     val name: String, val organisation: String
@@ -179,7 +88,7 @@ fun MaterialThemeExamples() {
     val darkColorScheme = defaultDarkColorScheme
     var currentColorScheme by remember { mutableStateOf<SysColorScheme?>(lightColorScheme) }
 
-    MaterialTheme(currentColorScheme, SysFontScheme()) {
+    MaterialTheme(currentColorScheme, defaultFontScheme) {
 
         LargeDisplay("Kotlin HTML - Material Design 3 Web Components Examples")
 
@@ -263,7 +172,7 @@ fun MaterialThemeExamples() {
                                     borderRadius(16.px);
                                     color(MdSysColorVariables.mdSysColorOnPrimaryContainer.value())
                                     display(Flex)
-                                    justifyContent(Center)
+                                    justifyContent(JustifyContent.Center)
                                     position(Relative) /* This is needed for Elevation to work correctly */
                                     width(80.px)
                                 }
@@ -564,22 +473,31 @@ fun MaterialThemeExamples() {
                                     }
                                 }
                                 LargeTitle("Checkbox")
-                                Checkbox({
-                                    checked(checkboxStatus)
-                                    onClick {
-                                        checkboxStatus = !checkboxStatus
-                                    }
-                                })
-                                Checkbox({
-                                    indeterminate()
-                                })
-                                Checkbox({
-                                    checked(checkboxStatus)
-                                    onClick {
-                                        checkboxStatus = !checkboxStatus
-                                    }
-                                    disabled()
-                                })
+                                Label(null, {style { display(Flex); alignItems(AlignItems.Center) }}) {
+                                    Checkbox({
+                                        checked(checkboxStatus)
+                                        onClick {
+                                            checkboxStatus = !checkboxStatus
+                                        }
+                                    })
+                                    LargeLabel("Enabled checkbox", true)
+                                }
+                                Label(null, {style { display(Flex); alignItems(AlignItems.Center) }}) {
+                                    Checkbox({
+                                        indeterminate()
+                                    })
+                                    LargeLabel("Indeterminate checkbox", true)
+                                }
+                                Label(null, {style { display(Flex); alignItems(AlignItems.Center) }}) {
+                                    Checkbox({
+                                        checked(checkboxStatus)
+                                        onClick {
+                                            checkboxStatus = !checkboxStatus
+                                        }
+                                        disabled()
+                                    })
+                                    LargeLabel("Disabled checkbox", true)
+                                }
 
                                 LargeTitle("Switch")
                                 Switch({
@@ -613,46 +531,42 @@ fun MaterialThemeExamples() {
 
                                 LargeTitle("Radio")
                                 var radioValue by remember { mutableStateOf<String?>(null) }
-                                Row {
+                                Label(null, {style { display(Flex); alignItems(AlignItems.Center) }}) {
                                     Radio({
-                                        id("r1")
                                         name = "radio-group"
                                         value = "o1"
                                         checked(radioValue == "o1")
                                         onChange { radioValue = "o1" }
                                     })
-                                    Label("r1") { Text("Option 1") }
+                                    LargeLabel("Option 1", inline = true)
                                 }
-                                Row {
+                                Label(null, {style { display(Flex); alignItems(AlignItems.Center) }}) {
                                     Radio({
-                                        id("r2")
                                         name = "radio-group"
                                         value = "o2"
                                         checked(radioValue == "o2")
                                         onChange { radioValue = "o2" }
                                     })
-                                    Label("r2") { Text("Option 2") }
+                                    LargeLabel("Option 2", inline = true)
                                 }
-                                Row {
+                                Label(null, {style { display(Flex); alignItems(AlignItems.Center) }}) {
                                     Radio({
-                                        id("r3")
                                         name = "radio-group"
                                         value = "o3"
                                         checked(radioValue == "o3")
                                         onChange { radioValue = "o3" }
                                     })
-                                    Label("r3") { Text("Option 3") }
+                                    LargeLabel("Option 3", inline = true)
                                 }
-                                Row {
+                                Label(null, {style { display(Flex); alignItems(AlignItems.Center) }}) {
                                     Radio({
-                                        id("r4")
                                         name = "radio-group"
                                         value = "o4"
                                         disabled()
                                         checked(radioValue == "o4")
                                         onChange { radioValue = "o4" }
                                     })
-                                    Label("r4") { Text("Option 4") }
+                                    LargeLabel("Option 4", inline = true)
                                 }
                                 LargeBody("Radio button selected: $radioValue")
 
@@ -762,7 +676,7 @@ fun MaterialThemeExamples() {
                             }
                         ) {
                             if (selectedFiles.isEmpty())
-                                Text("Drag & drop files here!")
+                                LargeBody("Drag & drop files here!")
                             else
                                 FileListInfo(selectedFiles)
                         }
@@ -775,24 +689,11 @@ fun MaterialThemeExamples() {
     }
 }
 
-object FileListStyleSheet : StyleSheet() {
-    val filelist by style {
-        "Div" style {
-            fontSize(12.px)
-        }
-        self + hover style {
-        }
-    }
-}
-
 @Composable
 fun FileList(files: List<File>) {
-    Style(FileListStyleSheet)
-    Column({ classes(FileListStyleSheet.filelist) }) {
+    Column() {
         files.forEach {
-            Div {
-                Text("Filename: ${it.name} [${it.size}, ${it.type}], ${it.lastModified}")
-            }
+            LargeLabel("Filename: ${it.name} [${it.size}, ${it.type}], ${it.lastModified}")
         }
     }
 }
@@ -800,6 +701,6 @@ fun FileList(files: List<File>) {
 @Composable
 fun FileListInfo(files: List<File>) {
     val totalFileSize = files.sumOf { it.size.toInt() }
-    Div { Text("Number of files: ${files.size}") }
-    Div { Text("Total amount of bytes: ${formatBytes(totalFileSize)}") }
+    LargeLabel("Number of files: ${files.size}")
+    LargeLabel("Total amount of bytes: ${formatBytes(totalFileSize)}")
 }
