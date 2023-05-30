@@ -1,7 +1,11 @@
 package web.compose.material3.themes
 
 import org.jetbrains.compose.web.css.Color
+import org.jetbrains.compose.web.css.cssRem
+import web.compose.material3.theming.FontConfig
 import web.compose.material3.theming.SysColorScheme
+import web.compose.material3.theming.SysFontScheme
+import web.compose.material3.theming.sp
 
 val defaultColorScheme = SysColorScheme(
     sysColorPrimary = Color("#6750A4"),
@@ -81,4 +85,22 @@ val defaultDarkColorScheme = SysColorScheme(
     sysColorShadow = Color("#000000"),
     sysColorSurfaceTint = Color("#D0BCFF"),
     sysColorScrim = Color("#000000"),
+)
+
+val defaultFontScheme = SysFontScheme(
+    displayLarge = FontConfig("Roboto", 57.sp, 64.sp, (-0.25/57).cssRem, "400"),
+    displayMedium = FontConfig("Roboto", 45.sp, 52.sp, 0.cssRem, "400"),
+    displaySmall = FontConfig("Roboto", 36.sp, 44.sp, 0.cssRem, "400"),
+    headlineLarge = FontConfig("Roboto", 32.sp, 40.sp, 0.cssRem, "400"),
+    headlineMedium = FontConfig("Roboto", 28.sp, 36.sp, 0.cssRem, "400"),
+    headlineSmall = FontConfig("Roboto", 24.sp, 32.sp, 0.cssRem, "400"),
+    titleLarge = FontConfig("Roboto", 22.sp, 28.sp, 0.cssRem, "400"),
+    titleMedium = FontConfig("Roboto", 16.sp, 24.sp, (0.15/16).cssRem, "500"),
+    titleSmall = FontConfig("Roboto", 14.sp, 20.sp, (0.1/14).cssRem, "500"),
+    bodyLarge = FontConfig("Roboto", 16.sp, 24.sp, (0.5/16).cssRem, "400"),
+    bodyMedium = FontConfig("Roboto", 14.sp, 20.sp, (0.25/14).cssRem, "400"),
+    bodySmall = FontConfig("Roboto", 12.sp, 16.sp, (0.4/12).cssRem, "400"),
+    labelLarge = FontConfig("Roboto", 14.sp, 20.sp, (0.1/14).cssRem, "500"),
+    labelMedium = FontConfig("Roboto", 12.sp, 16.sp, (0.5/12).cssRem, "500"),
+    labelSmall = FontConfig("Roboto", 11.sp, 16.sp, (0.5/11).cssRem, "500"),
 )
