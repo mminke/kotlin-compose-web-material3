@@ -1,7 +1,9 @@
 package web.compose.material3.example
 
 import androidx.compose.runtime.*
+import org.jetbrains.compose.web.attributes.TextAreaWrap
 import org.jetbrains.compose.web.attributes.rows
+import org.jetbrains.compose.web.attributes.wrap
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.css.DisplayStyle.Companion.Flex
 import org.jetbrains.compose.web.css.JustifyContent.Companion.SpaceEvenly
@@ -60,7 +62,9 @@ import web.compose.material3.themes.defaultDarkColorScheme
 import web.compose.material3.themes.defaultFontScheme
 import web.compose.material3.theming.MaterialTheme
 import web.compose.material3.theming.MdSysColorVariables
+import web.compose.material3.theming.MdSysTypeScaleTokens
 import web.compose.material3.theming.SysColorScheme
+import web.compose.material3.theming.TypeScaleTokens.Companion.applyStyle
 
 data class ListDataItem(
     val name: String, val organisation: String
@@ -90,7 +94,8 @@ fun MaterialThemeExamples() {
 
     MaterialTheme(currentColorScheme, defaultFontScheme) {
 
-        LargeDisplay("Kotlin HTML - Material Design 3 Web Components Examples")
+        LargeDisplay("Kotlin HTML")
+        LargeHeadline("Material Design 3 Web Components Examples")
 
         LargeBody {
             Text(
@@ -210,8 +215,14 @@ fun MaterialThemeExamples() {
                                 LargeTitle("Fields")
 
                                 FilledField({
+                                    label = "A label"
                                 }) {
-                                    TextArea(value = "Text area inside a filled field", { rows(5) })
+                                    LargeBody("Some text")
+
+                                    Icon({slot = "start"}, "search")
+                                    Icon({slot = "end"}, "event")
+                                    Span({slot = "supporting-text"}) { Text("Supporting text") }
+                                    Span({slot = "supporting-text-end"}) { Text("Supporting text end") }
                                 }
 
                                 OutlinedField({
@@ -654,6 +665,44 @@ fun MaterialThemeExamples() {
                                 SmallBody("Small Body")
                                 SmallLabel("Small Label")
                             }
+                        }
+                    }
+
+                    Column {
+                        LargeTitle("Text area")
+
+                        FilledField {
+                            TextArea(attrs = {
+                                defaultValue("Some Default Text")
+                                style {
+                                    outline("none")
+                                    background("transparent")
+                                    boxSizing("border-box")
+                                    border {style = LineStyle.None}
+                                    width(100.percent)
+                                    applyStyle(MdSysTypeScaleTokens.bodyLarge)
+                                }
+                                wrap(TextAreaWrap.Off)
+                                rows(5) }
+                            )
+                            Span({slot = "supporting-text"}) { Text("Some longer supporting text") }
+                        }
+
+                        OutlinedField {
+                            TextArea(attrs = {
+                                defaultValue("Some Default Text")
+                                style {
+                                    outline("none")
+                                    background("transparent")
+                                    boxSizing("border-box")
+                                    border {style = LineStyle.None}
+                                    width(100.percent)
+                                    applyStyle(MdSysTypeScaleTokens.bodyLarge)
+                                }
+                                wrap(TextAreaWrap.Off)
+                                rows(5) }
+                            )
+                            Span({slot = "supporting-text"}) { Text("Some longer supporting text") }
                         }
                     }
 
