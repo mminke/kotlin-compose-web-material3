@@ -41,7 +41,9 @@ import web.compose.material3.list.List
 import web.compose.material3.list.ListItem
 import web.compose.material3.list.headline
 import web.compose.material3.list.supportingText
+import web.compose.material3.navigationdrawer.ModalNavigationDrawer
 import web.compose.material3.navigationdrawer.NavigationDrawer
+import web.compose.material3.navigationdrawer.opened
 import web.compose.material3.onChange
 import web.compose.material3.progress.*
 import web.compose.material3.radio.Radio
@@ -456,33 +458,6 @@ fun MaterialThemeExamples() {
                                     })
                                 }
 
-                                LargeTitle("Badges")
-
-                                Row {
-                                    TonalIconButton({
-                                        onClick { textFieldValue = "tonal icon button clicked" }
-                                        style { padding(5.px) }
-                                    }) {
-                                        Icon("public")
-                                        Badge()
-                                    }
-
-                                    TonalIconButton({
-                                        onClick { textFieldValue = "tonal icon button clicked" }
-                                        style { padding(5.px) }
-                                    }) {
-                                        Icon("public")
-                                        Badge({ value = "1" })
-                                    }
-
-                                    TonalIconButton({
-                                        onClick { textFieldValue = "tonal icon button clicked" }
-                                        style { padding(5.px) }
-                                    }) {
-                                        Icon("public")
-                                        Badge({ value = "999+" })
-                                    }
-                                }
                                 LargeTitle("Checkbox")
                                 Label(null, {style { display(Flex); alignItems(AlignItems.Center) }}) {
                                     Checkbox({
@@ -632,9 +607,60 @@ fun MaterialThemeExamples() {
                 2 -> WidgetGroup("Alpha widgets") {
                     Column {
                         LargeTitle("Navigation Drawer")
+                        var opened by remember { mutableStateOf(false) }
 
-                        NavigationDrawer {
-                            Text("Navigation drawer")
+                        OutlinedButton({
+                            onClick { opened = !opened }
+                            style { padding(5.px) }
+                        }) { Text("${if(opened) "close" else "open"} drawer") }
+
+                        NavigationDrawer({opened(opened)}) {
+                            LargeBody("Navigation drawer")
+                        }
+                    }
+
+                    Column {
+                        LargeTitle("Modal Navigation Drawer")
+
+                        var opened by remember { mutableStateOf(false) }
+
+                        OutlinedButton({
+                            onClick { opened = !opened }
+                            style { padding(5.px) }
+                        }) { Text("${if(opened) "close" else "open"} drawer") }
+
+                        ModalNavigationDrawer({opened(opened)}) {
+                            LargeBody("Modal navigation drawer")
+                        }
+                    }
+
+                    Column {
+                        LargeTitle("Badges")
+
+                        Row {
+                            TonalIconButton({
+                                onClick { textFieldValue = "tonal icon button clicked" }
+                                style { padding(5.px) }
+                            }) {
+                                Icon("public")
+                                Badge()
+                            }
+
+                            TonalIconButton({
+                                onClick { textFieldValue = "tonal icon button clicked" }
+                                style { padding(5.px) }
+                            }) {
+                                Icon("public")
+                                Badge({ value = "1" })
+                            }
+
+                            TonalIconButton({
+                                onClick { textFieldValue = "tonal icon button clicked" }
+                                style { padding(5.px) }
+                            }) {
+                                Icon("public")
+                                Badge({ value = "999+" })
+                            }
                         }
                     }
                 }
