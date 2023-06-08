@@ -25,7 +25,7 @@ fun NavigationTab(
 
 private val NavigationTabElementBuilder: ElementBuilder<NavigationTabElement> =
     ElementBuilderImplementation<NavigationTabElement>("md-navigation-tab").also {
-        jsRequire("@material/web/navigationtab/navigation-tab.js")
+        jsRequire("@material/web/labs/navigationtab/navigation-tab.js")
     }
 
 var AttrsScope<NavigationTabElement>.label: String

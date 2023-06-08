@@ -23,5 +23,5 @@ fun NavigationBar(
 
 private val NavigationBarElementBuilder: ElementBuilder<NavigationBarElement> =
     ElementBuilderImplementation<NavigationBarElement>("md-navigation-bar").also {
-        jsRequire("@material/web/navigationbar/navigation-bar.js")
+        jsRequire("@material/web/labs/navigationbar/navigation-bar.js")
     }

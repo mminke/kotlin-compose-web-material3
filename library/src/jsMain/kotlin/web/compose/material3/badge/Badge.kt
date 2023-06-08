@@ -25,7 +25,7 @@ fun Badge(
 
 private val BadgeElementBuilder: ElementBuilder<BadgeElement> =
     ElementBuilderImplementation<BadgeElement>("md-badge").also {
-        jsRequire("@material/web/badge/badge.js")
+        jsRequire("@material/web/labs/badge/badge.js")
     }
 
 var AttrsScope<BadgeElement>.value: String

@@ -23,5 +23,5 @@ fun NavigationDrawer(
 
 private val NavigationDrawerElementBuilder: ElementBuilder<NavigationDrawerElement> =
     ElementBuilderImplementation<NavigationDrawerElement>("md-navigation-drawer").also {
-        jsRequire("@material/web/navigationdrawer/navigation-drawer.js")
+        jsRequire("@material/web/labs/navigationdrawer/navigation-drawer.js")
     }
