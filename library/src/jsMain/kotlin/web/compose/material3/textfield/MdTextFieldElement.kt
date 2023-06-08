@@ -7,49 +7,37 @@ import web.compose.material3.MdInputElement
 abstract class MdTextFieldElement : MdInputElement()
 
 var AttrsScope<MdTextFieldElement>.type: TextFieldType
-    get() {
-        throw InvalidCallException()
-    }
+    get() = throw InvalidCallException()
     set(type) {
         this.attr("type", type.value)
     }
 
 var AttrsScope<MdTextFieldElement>.required: Boolean
-    get() {
-        throw InvalidCallException()
-    }
+    get() = throw InvalidCallException()
     set(value) {
-        this.attr("required", value.toString())
+        if (value) attr("required", "")
     }
 
 var AttrsScope<MdTextFieldElement>.error: Boolean
-    get() {
-        throw InvalidCallException()
-    }
+    get() = throw InvalidCallException()
     set(value) {
-        this.attr("error", value.toString())
+        if (value) attr("error", "")
     }
 
 var AttrsScope<MdTextFieldElement>.errorText: String
-    get() {
-        throw InvalidCallException()
-    }
+    get() = throw InvalidCallException()
     set(value) {
         this.attr("errorText", value)
     }
 
 var AttrsScope<MdTextFieldElement>.label: String
-    get() {
-        throw InvalidCallException()
-    }
+    get() = throw InvalidCallException()
     set(value) {
         this.attr("label", value)
     }
 
 var AttrsScope<MdTextFieldElement>.value: String
-    get() {
-        throw InvalidCallException()
-    }
+    get() = throw InvalidCallException()
     set(value) {
         this.attr("value", value)
     }
