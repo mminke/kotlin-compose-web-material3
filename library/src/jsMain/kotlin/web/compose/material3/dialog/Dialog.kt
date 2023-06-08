@@ -35,14 +35,26 @@ fun AttrsScope<DialogElement>.fullscreen(value: Boolean = true) {
     if (value) attr("fullscreen", "")
 }
 
-fun AttrsScope<DialogElement>.onCancel(handler: (SyntheticEvent<EventTarget>) -> Unit) {
-    addEventListener("cancel") {
+fun AttrsScope<DialogElement>.onOpening(handler: (SyntheticEvent<EventTarget>) -> Unit) {
+    addEventListener("opening") {
         handler(it)
     }
 }
 
-fun AttrsScope<DialogElement>.onClose(handler: (SyntheticEvent<EventTarget>) -> Unit) {
-    addEventListener("close") {
+fun AttrsScope<DialogElement>.onOpened(handler: (SyntheticEvent<EventTarget>) -> Unit) {
+    addEventListener("opened") {
+        handler(it)
+    }
+}
+
+fun AttrsScope<DialogElement>.onClosing(handler: (SyntheticEvent<EventTarget>) -> Unit) {
+    addEventListener("closing") {
+        handler(it)
+    }
+}
+
+fun AttrsScope<DialogElement>.onClosed(handler: (SyntheticEvent<EventTarget>) -> Unit) {
+    addEventListener("closed") {
         handler(it)
     }
 }

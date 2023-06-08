@@ -23,8 +23,8 @@ import web.compose.material3.checkbox.Checkbox
 import web.compose.material3.checkbox.checked
 import web.compose.material3.checkbox.indeterminate
 import web.compose.material3.dialog.Dialog
-import web.compose.material3.dialog.onCancel
-import web.compose.material3.dialog.onClose
+import web.compose.material3.dialog.onClosed
+import web.compose.material3.dialog.onClosing
 import web.compose.material3.dialog.open
 import web.compose.material3.disabled
 import web.compose.material3.divider.Divider
@@ -319,32 +319,33 @@ fun MaterialThemeExamples() {
                             Column {
                                 LargeTitle("Dialog")
                                 var dialogOpen by remember { mutableStateOf(false) }
+                                var dialogClosing by remember { mutableStateOf(false) }
 
                                 OutlinedButton({
                                     onClick {
-                                        console.log("Toggle dialog")
                                         dialogOpen = !dialogOpen
                                     }
                                 }) { Text("Open dialog") }
 
-                                if (dialogOpen) {
+                                if (dialogOpen || dialogClosing) {
                                     Dialog({
-                                        open(true)
-                                        onClose {
-                                            console.log("Closing dialog")
+                                        open(dialogOpen&&!dialogClosing)
+                                        onClosed {
                                             dialogOpen = false
+                                            dialogClosing = false
                                         }
-                                        onCancel {
-                                            console.log("Cancel dialog")
-                                            dialogOpen = false
+                                        onClosing {
+                                            dialogClosing = true
                                         }
                                     }) {
                                         Span({ slot = "headline" }) { Text("Dialog") }
                                         Divider()
                                         OutlinedButton({
-                                            slot = "footer"; onClick {
-                                            dialogOpen = false
-                                        }
+                                            slot = "footer"
+                                            onClick {
+                                                console.log(it)
+                                                dialogClosing = true
+                                            }
                                         }) { Text("Close") }
                                     }
                                 }
