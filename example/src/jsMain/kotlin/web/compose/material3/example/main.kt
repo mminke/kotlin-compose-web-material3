@@ -16,36 +16,18 @@ import web.compose.extras.Row
 import web.compose.extras.fileupload.FilledFileInput
 import web.compose.extras.fileupload.OutlinedFileDragDropArea
 import web.compose.extras.text.*
-import web.compose.material3.badge.Badge
-import web.compose.material3.badge.value
-import web.compose.material3.buttons.*
-import web.compose.material3.checkbox.Checkbox
-import web.compose.material3.checkbox.checked
-import web.compose.material3.checkbox.indeterminate
-import web.compose.material3.dialog.Dialog
-import web.compose.material3.dialog.onClosed
-import web.compose.material3.dialog.onClosing
-import web.compose.material3.dialog.open
+import web.compose.material3.buttons.OutlinedButton
 import web.compose.material3.disabled
 import web.compose.material3.divider.Divider
 import web.compose.material3.elevation.Elevation
-import web.compose.material3.fab.Fab
-import web.compose.material3.fab.FabSize.LARGE
-import web.compose.material3.fab.FabSize.SMALL
-import web.compose.material3.fab.label
-import web.compose.material3.fab.size
-import web.compose.material3.field.*
+import web.compose.material3.example.components.*
+import web.compose.material3.field.FilledField
+import web.compose.material3.field.OutlinedField
 import web.compose.material3.icon.Icon
-import web.compose.material3.iconbutton.*
-import web.compose.material3.list.List
-import web.compose.material3.list.ListItem
-import web.compose.material3.list.headline
-import web.compose.material3.list.supportingText
 import web.compose.material3.navigationdrawer.ModalNavigationDrawer
 import web.compose.material3.navigationdrawer.NavigationDrawer
 import web.compose.material3.navigationdrawer.opened
 import web.compose.material3.onChange
-import web.compose.material3.progress.*
 import web.compose.material3.radio.Radio
 import web.compose.material3.radio.checked
 import web.compose.material3.radio.name
@@ -57,8 +39,6 @@ import web.compose.material3.slot
 import web.compose.material3.switch.Switch
 import web.compose.material3.switch.selected
 import web.compose.material3.tabs.*
-import web.compose.material3.textfield.*
-import web.compose.material3.textfield.TextFieldType.*
 import web.compose.material3.themes.defaultColorScheme
 import web.compose.material3.themes.defaultDarkColorScheme
 import web.compose.material3.themes.defaultFontScheme
@@ -88,8 +68,6 @@ fun main() {
 
 @Composable
 fun MaterialThemeExamples() {
-    var textFieldValue by remember { mutableStateOf("Initial text field value") }
-    var checkboxStatus by remember { mutableStateOf(false) }
     val lightColorScheme = defaultColorScheme
     val darkColorScheme = defaultDarkColorScheme
     var currentColorScheme by remember { mutableStateOf<SysColorScheme?>(lightColorScheme) }
@@ -141,7 +119,6 @@ fun MaterialThemeExamples() {
             Tab {
                 Icon("check_circle")
                 Text("Stable widgets")
-
             }
             Tab {
                 Icon("circle")
@@ -214,214 +191,23 @@ fun MaterialThemeExamples() {
                     Column {
                         Row {
                             Column {
-                                LargeTitle("Fields")
-
-                                FilledField({
-                                    label = "A label"
-                                }) {
-                                    LargeBody("Some text")
-
-                                    Icon({slot = "start"}, "search")
-                                    Icon({slot = "end"}, "event")
-                                    Span({slot = "supporting-text"}) { Text("Supporting text") }
-                                    Span({slot = "supporting-text-end"}) { Text("Supporting text end") }
-                                }
-
-                                OutlinedField({
-                                    label = "An outlined field label"
-                                    value = "Field value"
-                                }) {
-                                    LargeBody("Some text")
-                                }
-                                OutlinedField({
-                                    error()
-                                    errorText = "An error occured"
-                                    label = "An outlined field label"
-                                    value = "Field value"
-                                }) {
-                                    LargeBody("Some text")
-                                }
+                                FieldsShowcase()
                             }
 
                             Column {
-                                LargeTitle("Buttons")
-
-                                FilledButton({
-                                    onClick { textFieldValue = "filled button clicked" }
-                                    style { padding(5.px) }
-                                }) { Text("Filled Button") }
-                                OutlinedButton({
-                                    onClick { textFieldValue = "outlined button clicked" }
-                                    style { padding(5.px) }
-                                }) { Text("Outlined Button") }
-                                ElevatedButton({
-                                    onClick { textFieldValue = "elevated button clicked" }
-                                    style { padding(5.px) }
-                                }) { Text("Elevated Button") }
-                                TextButton({
-                                    onClick { textFieldValue = "text button clicked" }
-                                    style { padding(5.px) }
-                                }) { Text("Text Button") }
-                                TonalButton({
-                                    onClick { textFieldValue = "tonal button clicked" }
-                                    style { padding(5.px) }
-                                }) { Text("Tonal Button") }
-
-                                LargeTitle("FAB")
-                                Fab({ size = SMALL }) {
-                                    Icon({ slot = "icon" }, "edit")
-                                }
-                                Fab {
-                                    Icon({ slot = "icon" }, "delete")
-                                }
-                                Fab({ size = LARGE }) {
-                                    Icon({ slot = "icon" }, "add")
-                                }
-                                Fab({ label = "FAB" })
+                                ButtonShowcase()
                             }
 
                             Column {
-                                LargeTitle("Icon Buttons")
-                                var toggleButtonSelected by remember { mutableStateOf(false) }
-
-                                FilledIconButton({
-                                    onClick { textFieldValue = "filled icon button clicked" }
-                                    style { padding(5.px) }
-                                }) { Icon("star") }
-                                OutlinedIconButton({
-                                    onClick { textFieldValue = "outlined icon button clicked" }
-                                    style { padding(5.px) }
-                                }) { Icon("login") }
-                                TonalIconButton({
-                                    onClick { textFieldValue = "tonal icon button clicked" }
-                                    style { padding(5.px) }
-                                }) { Icon("public") }
-                                StandardIconButton({
-                                    onClick { toggleButtonSelected = !toggleButtonSelected }
-                                    style { padding(5.px) }
-                                }) { Icon("menu") }
-                                FilledIconButton({
-                                    toggle()
-                                    selected(toggleButtonSelected)
-                                    style { padding(5.px) }
-                                }) {
-                                    Icon("lock")
-                                    Icon({ slot = "selectedIcon" }, "lock_open")
-                                }
-                                FilledIconButton({
-                                    disabled()
-                                    style { padding(5.px) }
-                                }) {
-                                    Icon("star")
-                                }
+                                IconButtonsShowcase()
                             }
 
                             Column {
-                                LargeTitle("Dialog")
-                                var dialogOpen by remember { mutableStateOf(false) }
-                                var dialogClosing by remember { mutableStateOf(false) }
-
-                                OutlinedButton({
-                                    onClick {
-                                        dialogOpen = !dialogOpen
-                                    }
-                                }) { Text("Open dialog") }
-
-                                if (dialogOpen || dialogClosing) {
-                                    Dialog({
-                                        open(dialogOpen&&!dialogClosing)
-                                        onClosed {
-                                            dialogOpen = false
-                                            dialogClosing = false
-                                        }
-                                        onClosing {
-                                            dialogClosing = true
-                                        }
-                                    }) {
-                                        Span({ slot = "headline" }) { Text("Dialog") }
-                                        Divider()
-                                        OutlinedButton({
-                                            slot = "footer"
-                                            onClick {
-                                                console.log(it)
-                                                dialogClosing = true
-                                            }
-                                        }) { Text("Close") }
-                                    }
-                                }
+                                DialogShowcase()
                             }
 
                             Column {
-                                LargeTitle("Text Fields")
-
-                                FilledTextField({
-                                    label = "Filled Text Field"
-                                    value = textFieldValue
-                                    onInput {
-                                        textFieldValue = it.value ?: ""
-                                    }
-                                    style { padding(5.px) }
-                                })
-
-                                FilledTextField({
-                                    label = "Filled Text Field"
-                                    value = textFieldValue
-                                    disabled()
-                                    style { padding(5.px) }
-                                })
-
-                                FilledTextField({
-                                    label = "Filled Text Field"
-                                    value = "Some input"
-                                    error = true
-                                    errorText = "No valid input"
-                                    style { padding(5.px) }
-                                })
-
-                                OutlinedTextField({
-                                    label = "Outlined Text Field"
-                                    value = textFieldValue
-                                    onInput {
-                                        textFieldValue = it.value ?: ""
-                                    }
-                                    style { padding(5.px) }
-                                })
-
-                                OutlinedTextField({
-                                    label = "Input a number"
-                                    value = "111"
-                                    type = NUMBER
-                                    required = true
-                                    style { padding(5.px) }
-                                })
-
-                                OutlinedTextField({
-                                    label = "Input a password"
-                                    value = "Welcome"
-                                    type = PASSWORD
-                                    style { padding(5.px) }
-                                })
-
-                                OutlinedTextField({
-                                    label = "Input an email"
-                                    value = "john.doe@example.com"
-                                    type = EMAIL
-                                    style { padding(5.px) }
-                                })
-
-                                OutlinedTextField({
-                                    label = "Input an url"
-                                    value = "https://www.example.com"
-                                    type = URL
-                                    style { padding(5.px) }
-                                })
-
-                                OutlinedTextField({
-                                    label = "Input an search"
-                                    value = "Some search?"
-                                    type = SEARCH
-                                    style { padding(5.px) }
-                                })
+                                TextFieldShowcase()
                             }
 
                             Column {
@@ -434,68 +220,11 @@ fun MaterialThemeExamples() {
                                     Icon({ slot = "end" }, "close")
                                 }
 
-                                LargeTitle("Progress Indicators")
+                                ProgressIndicatorShowcase()
 
-                                Div({ style { height(25.px) } }) {
-                                    LinearProgress({
-                                        progress = Progress(0.3f)
-                                    })
-                                }
-                                Div({ style { height(25.px) } }) {
-                                    LinearProgress({
-                                        indeterminate()
-                                        fourColor()
-                                    })
-                                }
-                                Div {
-                                    CircularProgress({
-                                        progress = Progress(0.7f)
-                                    })
-                                }
-                                Div {
-                                    CircularProgress({
-                                        indeterminate()
-                                        fourColor()
-                                    })
-                                }
+                                CheckboxShowcase()
 
-                                LargeTitle("Checkbox")
-                                Label(null, {style { display(Flex); alignItems(AlignItems.Center) }}) {
-                                    Checkbox({
-                                        checked(checkboxStatus)
-                                        onClick {
-                                            checkboxStatus = !checkboxStatus
-                                        }
-                                    })
-                                    LargeLabel("Enabled checkbox", true)
-                                }
-                                Label(null, {style { display(Flex); alignItems(AlignItems.Center) }}) {
-                                    Checkbox({
-                                        indeterminate()
-                                    })
-                                    LargeLabel("Indeterminate checkbox", true)
-                                }
-                                Label(null, {style { display(Flex); alignItems(AlignItems.Center) }}) {
-                                    Checkbox({
-                                        checked(checkboxStatus)
-                                        onClick {
-                                            checkboxStatus = !checkboxStatus
-                                        }
-                                        disabled()
-                                    })
-                                    LargeLabel("Disabled checkbox", true)
-                                }
-
-                                LargeTitle("Switch")
-                                Switch({
-                                    selected(checkboxStatus)
-                                    onClick { checkboxStatus = !checkboxStatus }
-                                })
-                                Switch({
-                                    selected(checkboxStatus)
-                                    onClick { checkboxStatus = !checkboxStatus }
-                                    disabled()
-                                })
+                                SwitchShowcase()
 
                                 LargeTitle("Slider")
                                 var sliderValue by remember { mutableStateOf(0L) }
@@ -518,9 +247,10 @@ fun MaterialThemeExamples() {
 
                                 LargeTitle("Radio")
                                 var radioValue by remember { mutableStateOf<String?>(null) }
+                                val radioGroupName = "radio-group"
                                 Label(null, {style { display(Flex); alignItems(AlignItems.Center) }}) {
                                     Radio({
-                                        name = "radio-group"
+                                        name = radioGroupName
                                         value = "o1"
                                         checked(radioValue == "o1")
                                         onChange { radioValue = "o1" }
@@ -529,7 +259,7 @@ fun MaterialThemeExamples() {
                                 }
                                 Label(null, {style { display(Flex); alignItems(AlignItems.Center) }}) {
                                     Radio({
-                                        name = "radio-group"
+                                        name = radioGroupName
                                         value = "o2"
                                         checked(radioValue == "o2")
                                         onChange { radioValue = "o2" }
@@ -538,7 +268,7 @@ fun MaterialThemeExamples() {
                                 }
                                 Label(null, {style { display(Flex); alignItems(AlignItems.Center) }}) {
                                     Radio({
-                                        name = "radio-group"
+                                        name = radioGroupName
                                         value = "o3"
                                         checked(radioValue == "o3")
                                         onChange { radioValue = "o3" }
@@ -547,7 +277,7 @@ fun MaterialThemeExamples() {
                                 }
                                 Label(null, {style { display(Flex); alignItems(AlignItems.Center) }}) {
                                     Radio({
-                                        name = "radio-group"
+                                        name = radioGroupName
                                         value = "o4"
                                         disabled()
                                         checked(radioValue == "o4")
@@ -588,18 +318,7 @@ fun MaterialThemeExamples() {
                             }
 
                             Column {
-                                LargeTitle("List box")
-                                List {
-                                    listData.forEach { listDateItem ->
-                                        ListItem({
-                                            headline = listDateItem.name
-                                            supportingText = listDateItem.organisation
-                                            onClick {
-                                                textFieldValue = listDateItem.name
-                                            }
-                                        })
-                                    }
-                                }
+                                ListboxShowcase()
                             }
                         }
                     }
@@ -636,33 +355,7 @@ fun MaterialThemeExamples() {
                     }
 
                     Column {
-                        LargeTitle("Badges")
-
-                        Row {
-                            TonalIconButton({
-                                onClick { textFieldValue = "tonal icon button clicked" }
-                                style { padding(5.px) }
-                            }) {
-                                Icon("public")
-                                Badge()
-                            }
-
-                            TonalIconButton({
-                                onClick { textFieldValue = "tonal icon button clicked" }
-                                style { padding(5.px) }
-                            }) {
-                                Icon("public")
-                                Badge({ value = "1" })
-                            }
-
-                            TonalIconButton({
-                                onClick { textFieldValue = "tonal icon button clicked" }
-                                style { padding(5.px) }
-                            }) {
-                                Icon("public")
-                                Badge({ value = "999+" })
-                            }
-                        }
+                        BadgeShowcase()
                     }
                 }
 
