@@ -3,22 +3,18 @@ package web.compose.material3.textfield
 import androidx.compose.runtime.Composable
 import org.jetbrains.compose.web.dom.AttrBuilderContext
 import org.jetbrains.compose.web.dom.ContentBuilder
-import org.jetbrains.compose.web.dom.ElementBuilder
-import org.jetbrains.compose.web.dom.TagElement
-import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.jsRequire
 
 @Composable
 fun OutlinedTextField(
     attrs: AttrBuilderContext<MdTextFieldElement>? = null,
     content: ContentBuilder<MdTextFieldElement>? = null
-) = TagElement(
-    elementBuilder = OutlinedTextFieldElementBuilder,
+) = MdTextFieldTagElement(
+    tagName = "md-outlined-text-field",
     applyAttrs = attrs,
     content = content
-)
+).also {
+    webComponentLoader
+}
 
-private val OutlinedTextFieldElementBuilder: ElementBuilder<MdTextFieldElement> =
-    ElementBuilderImplementation<MdTextFieldElement>("md-outlined-text-field").also {
-        jsRequire("@material/web/textfield/outlined-text-field.js")
-    }
+private val webComponentLoader = jsRequire("@material/web/textfield/outlined-text-field.js")

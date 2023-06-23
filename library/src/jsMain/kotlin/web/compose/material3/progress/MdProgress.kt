@@ -1,10 +1,27 @@
 package web.compose.material3.progress
 
+import androidx.compose.runtime.Composable
 import org.jetbrains.compose.web.attributes.AttrsScope
+import org.jetbrains.compose.web.dom.ElementScope
 import web.compose.material3.InvalidCallException
 import web.compose.material3.MdInputElement
+import web.compose.material3.MdTagElement
 
 abstract class MdProgressElement : MdInputElement()
+
+@Composable
+fun <TElement : MdProgressElement> MdProgressTagElement(
+    tagName: String,
+    applyAttrs: (AttrsScope<TElement>.() -> Unit)?,
+    content: (@Composable ElementScope<TElement>.() -> Unit)?
+) = MdTagElement(
+    tagName = tagName,
+    applyAttrs = {
+        classes("md-progress")
+        applyAttrs?.invoke(this)
+    },
+    content = content
+)
 
 var AttrsScope<MdProgressElement>.progress: Progress
     get() {

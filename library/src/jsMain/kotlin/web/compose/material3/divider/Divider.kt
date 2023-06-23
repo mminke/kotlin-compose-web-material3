@@ -3,23 +3,20 @@ package web.compose.material3.divider
 import androidx.compose.runtime.Composable
 import org.jetbrains.compose.web.dom.AttrBuilderContext
 import org.jetbrains.compose.web.dom.ContentBuilder
-import org.jetbrains.compose.web.dom.ElementBuilder
-import org.jetbrains.compose.web.dom.TagElement
-import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.MdElement
+import web.compose.material3.MdTagElement
 import web.compose.material3.jsRequire
 
 @Composable
 fun Divider(
     attrs: AttrBuilderContext<MdElement>? = null,
     content: ContentBuilder<MdElement>? = null
-) = TagElement(
-    elementBuilder = DividerElementBuilder,
+) = MdTagElement(
+    tagName = "md-divider",
     applyAttrs = attrs,
     content = content
-)
+).also {
+    webComponentLoader
+}
 
-private val DividerElementBuilder: ElementBuilder<MdElement> =
-    ElementBuilderImplementation<MdElement>("md-divider").also {
-        jsRequire("@material/web/divider/divider.js")
-    }
+private val webComponentLoader = jsRequire("@material/web/divider/divider.js")

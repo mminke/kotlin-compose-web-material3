@@ -4,11 +4,9 @@ import androidx.compose.runtime.Composable
 import org.jetbrains.compose.web.attributes.AttrsScope
 import org.jetbrains.compose.web.dom.AttrBuilderContext
 import org.jetbrains.compose.web.dom.ContentBuilder
-import org.jetbrains.compose.web.dom.ElementBuilder
-import org.jetbrains.compose.web.dom.TagElement
-import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.InvalidCallException
 import web.compose.material3.MdElement
+import web.compose.material3.MdTagElement
 import web.compose.material3.jsRequire
 
 abstract class NavigationTabElement : MdElement()
@@ -17,16 +15,15 @@ abstract class NavigationTabElement : MdElement()
 fun NavigationTab(
     attrs: AttrBuilderContext<NavigationTabElement>? = null,
     content: ContentBuilder<NavigationTabElement>? = null
-) = TagElement(
-    elementBuilder = NavigationTabElementBuilder,
+) = MdTagElement(
+    tagName = "md-navigation-tab",
     applyAttrs = attrs,
     content = content
-)
+).also {
+    webComponentLoader
+}
 
-private val NavigationTabElementBuilder: ElementBuilder<NavigationTabElement> =
-    ElementBuilderImplementation<NavigationTabElement>("md-navigation-tab").also {
-        jsRequire("@material/web/labs/navigationtab/navigation-tab.js")
-    }
+private val webComponentLoader = jsRequire("@material/web/labs/navigationtab/navigation-tab.js")
 
 var AttrsScope<NavigationTabElement>.label: String
     get() {

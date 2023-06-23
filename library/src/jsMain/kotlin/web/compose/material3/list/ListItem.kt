@@ -4,11 +4,9 @@ import androidx.compose.runtime.Composable
 import org.jetbrains.compose.web.attributes.AttrsScope
 import org.jetbrains.compose.web.dom.AttrBuilderContext
 import org.jetbrains.compose.web.dom.ContentBuilder
-import org.jetbrains.compose.web.dom.ElementBuilder
-import org.jetbrains.compose.web.dom.TagElement
 import web.compose.material3.InvalidCallException
-import web.compose.material3.LitElementBuilderImplementation
 import web.compose.material3.MdElement
+import web.compose.material3.MdTagElement
 import web.compose.material3.jsRequire
 
 abstract class MdListItemElement : MdElement()
@@ -17,16 +15,15 @@ abstract class MdListItemElement : MdElement()
 fun ListItem(
     attrs: AttrBuilderContext<MdListItemElement>? = null,
     content: ContentBuilder<MdListItemElement>? = null
-) = TagElement(
-    elementBuilder = ListItemElementBuilder,
+) = MdTagElement(
+    tagName = "md-list-item",
     applyAttrs = attrs,
     content = content
-)
+).also {
+    webComponentLoader
+}
 
-private val ListItemElementBuilder: ElementBuilder<MdListItemElement> =
-    LitElementBuilderImplementation<MdListItemElement>("md-list-item").also {
-        jsRequire("@material/web/list/list-item.js")
-    }
+private val webComponentLoader = jsRequire("@material/web/list/list-item.js")
 
 var AttrsScope<MdListItemElement>.headline: String
     get() {

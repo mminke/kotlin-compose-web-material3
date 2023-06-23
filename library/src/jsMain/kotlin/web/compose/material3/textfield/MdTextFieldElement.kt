@@ -1,10 +1,27 @@
 package web.compose.material3.textfield
 
+import androidx.compose.runtime.Composable
 import org.jetbrains.compose.web.attributes.AttrsScope
+import org.jetbrains.compose.web.dom.ElementScope
 import web.compose.material3.InvalidCallException
 import web.compose.material3.MdInputElement
+import web.compose.material3.MdTagElement
 
 abstract class MdTextFieldElement : MdInputElement()
+
+@Composable
+fun <TElement : MdTextFieldElement> MdTextFieldTagElement(
+    tagName: String,
+    applyAttrs: (AttrsScope<TElement>.() -> Unit)?,
+    content: (@Composable ElementScope<TElement>.() -> Unit)?
+) = MdTagElement(
+    tagName = tagName,
+    applyAttrs = {
+        classes("md-text-field")
+        applyAttrs?.invoke(this)
+    },
+    content = content
+)
 
 var AttrsScope<MdTextFieldElement>.type: TextFieldType
     get() = throw InvalidCallException()

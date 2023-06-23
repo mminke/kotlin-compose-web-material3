@@ -5,12 +5,10 @@ import androidx.compose.web.events.SyntheticEvent
 import org.jetbrains.compose.web.attributes.AttrsScope
 import org.jetbrains.compose.web.dom.AttrBuilderContext
 import org.jetbrains.compose.web.dom.ContentBuilder
-import org.jetbrains.compose.web.dom.ElementBuilder
-import org.jetbrains.compose.web.dom.TagElement
 import org.w3c.dom.events.EventTarget
-import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.InvalidCallException
 import web.compose.material3.MdElement
+import web.compose.material3.MdTagElement
 import web.compose.material3.jsRequire
 
 abstract class MdTabsElement : MdElement()
@@ -19,16 +17,15 @@ abstract class MdTabsElement : MdElement()
 fun Tabs(
     attrs: AttrBuilderContext<MdTabsElement>? = null,
     content: ContentBuilder<MdTabsElement>? = null
-) = TagElement(
-    elementBuilder = TabElementBuilder,
+) = MdTagElement(
+    tagName = "md-tabs",
     applyAttrs = attrs,
     content = content
-)
+).also {
+    webComponentLoader
+}
 
-private val TabElementBuilder: ElementBuilder<MdTabsElement> =
-    ElementBuilderImplementation<MdTabsElement>("md-tabs").also {
-        jsRequire("@material/web/tabs/tabs.js")
-    }
+private val webComponentLoader = jsRequire("@material/web/tabs/tabs.js")
 
 var AttrsScope<MdTabsElement>.variant: Variant
     get() {

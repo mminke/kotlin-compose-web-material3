@@ -4,13 +4,10 @@ import androidx.compose.runtime.Composable
 import org.jetbrains.compose.web.attributes.AttrsScope
 import org.jetbrains.compose.web.dom.AttrBuilderContext
 import org.jetbrains.compose.web.dom.ContentBuilder
-import org.jetbrains.compose.web.dom.ElementBuilder
-import org.jetbrains.compose.web.dom.TagElement
-import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.InvalidCallException
 import web.compose.material3.MdInputElement
+import web.compose.material3.MdTagElement
 import web.compose.material3.jsRequire
-
 
 abstract class MdFabElement : MdInputElement()
 
@@ -18,16 +15,15 @@ abstract class MdFabElement : MdInputElement()
 fun Fab(
     attrs: AttrBuilderContext<MdFabElement>? = null,
     content: ContentBuilder<MdFabElement>? = null
-) = TagElement(
-    elementBuilder = FabElementBuilder,
+) = MdTagElement(
+    tagName = "md-fab",
     applyAttrs = attrs,
     content = content
-)
+).also {
+    webComponentLoader
+}
 
-private val FabElementBuilder: ElementBuilder<MdFabElement> =
-    ElementBuilderImplementation<MdFabElement>("md-fab").also {
-        jsRequire("@material/web/fab/fab.js")
-    }
+private val webComponentLoader = jsRequire("@material/web/fab/fab.js")
 
 var AttrsScope<MdFabElement>.label: String
     get() {

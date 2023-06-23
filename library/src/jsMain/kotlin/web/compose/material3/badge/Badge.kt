@@ -4,11 +4,9 @@ import androidx.compose.runtime.Composable
 import org.jetbrains.compose.web.attributes.AttrsScope
 import org.jetbrains.compose.web.dom.AttrBuilderContext
 import org.jetbrains.compose.web.dom.ContentBuilder
-import org.jetbrains.compose.web.dom.ElementBuilder
-import org.jetbrains.compose.web.dom.TagElement
-import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.InvalidCallException
 import web.compose.material3.MdInputElement
+import web.compose.material3.MdTagElement
 import web.compose.material3.jsRequire
 
 abstract class BadgeElement : MdInputElement()
@@ -17,16 +15,15 @@ abstract class BadgeElement : MdInputElement()
 fun Badge(
     attrs: AttrBuilderContext<BadgeElement>? = null,
     content: ContentBuilder<BadgeElement>? = null
-) = TagElement(
-    elementBuilder = BadgeElementBuilder,
+) = MdTagElement(
+    tagName = "md-badge",
     applyAttrs = attrs,
     content = content
-)
+).also {
+    webComponentLoader
+}
 
-private val BadgeElementBuilder: ElementBuilder<BadgeElement> =
-    ElementBuilderImplementation<BadgeElement>("md-badge").also {
-        jsRequire("@material/web/labs/badge/badge.js")
-    }
+private val webComponentLoader = jsRequire("@material/web/labs/badge/badge.js")
 
 var AttrsScope<BadgeElement>.value: String
     get() {

@@ -4,11 +4,9 @@ import androidx.compose.runtime.Composable
 import org.jetbrains.compose.web.attributes.AttrsScope
 import org.jetbrains.compose.web.dom.AttrBuilderContext
 import org.jetbrains.compose.web.dom.ContentBuilder
-import org.jetbrains.compose.web.dom.ElementBuilder
-import org.jetbrains.compose.web.dom.TagElement
-import web.compose.material3.ElementBuilderImplementation
 import web.compose.material3.InvalidCallException
 import web.compose.material3.MdInputElement
+import web.compose.material3.MdTagElement
 import web.compose.material3.jsRequire
 
 abstract class SliderElement : MdInputElement()
@@ -17,16 +15,15 @@ abstract class SliderElement : MdInputElement()
 fun Slider(
     attrs: AttrBuilderContext<SliderElement>? = null,
     content: ContentBuilder<SliderElement>? = null
-) = TagElement(
-    elementBuilder = SliderElementBuilder,
+) = MdTagElement(
+    tagName = "md-slider",
     applyAttrs = attrs,
     content = content
-)
+).also {
+    webComponentLoader
+}
 
-private val SliderElementBuilder: ElementBuilder<SliderElement> =
-    ElementBuilderImplementation<SliderElement>("md-slider").also {
-        jsRequire("@material/web/slider/slider.js")
-    }
+private val webComponentLoader = jsRequire("@material/web/slider/slider.js")
 
 var AttrsScope<SliderElement>.min: Long
     get() {
