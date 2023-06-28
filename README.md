@@ -22,6 +22,8 @@ There are two parts, the library which contains the components which can be used
 
 The examples project also is a good starting point to see how the components can be used.
 
+The follow github page shows the current state of the components: https://mminke.github.io/kotlin-compose-web-material3/
+
 ## Alternative
 
 If you are looking for a much more mature library for material design (as far as I can see material design 2), please have a look at:
@@ -45,19 +47,4 @@ Currently, there is no general available artifact yet. Therefor the best way to 
    dependencies {
       implementation("web.compose.material3:web-material3-js:1.0-SNAPSHOT")
    }
-    ```
-
-4. All components can only be created if enclosed in the _MaterialTheme_ composable. 
-
-   For example
-
-    ```kotlin
-    MaterialTheme {
-        Row {
-            NavigationBar {}
-            Column { 
-                FilledButton( { label = "Click me!" })
-            }
-        }
-    }   
     ```
