@@ -7,6 +7,7 @@ import org.jetbrains.compose.web.attributes.wrap
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.css.DisplayStyle.Companion.Flex
 import org.jetbrains.compose.web.css.JustifyContent.Companion.SpaceEvenly
+import org.jetbrains.compose.web.css.LineStyle.Companion.Solid
 import org.jetbrains.compose.web.css.Position.Companion.Relative
 import org.jetbrains.compose.web.dom.*
 import org.jetbrains.compose.web.renderComposable
@@ -141,9 +142,33 @@ fun MaterialThemeExamples() {
                         Column {
                             LargeTitle("Divider")
 
-                            LargeBody("Some content divided")
-                            Divider()
-                            LargeBody("by a divider")
+                            val dividerStyleSheet = object : StyleSheet() {
+                                val list by style {
+                                    border(1.px, Solid, MdSysColorVariables.mdSysColorOutline.value())
+                                    margin(0.px)
+                                    padding(0.px)
+                                    width(200.px)
+                                }
+                                val listItem by style {
+                                    color(MdSysColorVariables.mdSysColorOnBackground.value())
+                                    fontFamily("system-ui")
+                                    listStyle("none")
+                                    margin(16.px)
+                                }
+                            }
+                            Style(dividerStyleSheet)
+
+                            Ul({ classes(dividerStyleSheet.list) }) {
+                                Li({ classes(dividerStyleSheet.listItem) }) { LargeLabel("Default divider") }
+                                Divider()
+                                Li({ classes(dividerStyleSheet.listItem) }) { LargeLabel("Divider (inset = true)") }
+                                Divider(inset = true)
+                                Li({ classes(dividerStyleSheet.listItem) }) { LargeLabel("Divider (insetStart = true)") }
+                                Divider(insetStart = true)
+                                Li({ classes(dividerStyleSheet.listItem) }) { LargeLabel("Divider (insetEnd = true)") }
+                                Divider(insetEnd = true)
+                                Li({ classes(dividerStyleSheet.listItem) }) { LargeLabel("Final item") }
+                            }
                         }
                         Column {
                             LargeTitle("Elevation")
@@ -248,7 +273,7 @@ fun MaterialThemeExamples() {
                                 LargeTitle("Radio")
                                 var radioValue by remember { mutableStateOf<String?>(null) }
                                 val radioGroupName = "radio-group"
-                                Label(null, {style { display(Flex); alignItems(AlignItems.Center) }}) {
+                                Label(null, { style { display(Flex); alignItems(AlignItems.Center) } }) {
                                     Radio({
                                         name = radioGroupName
                                         value = "o1"
@@ -257,7 +282,7 @@ fun MaterialThemeExamples() {
                                     })
                                     LargeLabel("Option 1", inline = true)
                                 }
-                                Label(null, {style { display(Flex); alignItems(AlignItems.Center) }}) {
+                                Label(null, { style { display(Flex); alignItems(AlignItems.Center) } }) {
                                     Radio({
                                         name = radioGroupName
                                         value = "o2"
@@ -266,7 +291,7 @@ fun MaterialThemeExamples() {
                                     })
                                     LargeLabel("Option 2", inline = true)
                                 }
-                                Label(null, {style { display(Flex); alignItems(AlignItems.Center) }}) {
+                                Label(null, { style { display(Flex); alignItems(AlignItems.Center) } }) {
                                     Radio({
                                         name = radioGroupName
                                         value = "o3"
@@ -275,7 +300,7 @@ fun MaterialThemeExamples() {
                                     })
                                     LargeLabel("Option 3", inline = true)
                                 }
-                                Label(null, {style { display(Flex); alignItems(AlignItems.Center) }}) {
+                                Label(null, { style { display(Flex); alignItems(AlignItems.Center) } }) {
                                     Radio({
                                         name = radioGroupName
                                         value = "o4"
@@ -332,9 +357,9 @@ fun MaterialThemeExamples() {
                         OutlinedButton({
                             onClick { opened = !opened }
                             style { padding(5.px) }
-                        }) { Text("${if(opened) "close" else "open"} drawer") }
+                        }) { Text("${if (opened) "close" else "open"} drawer") }
 
-                        NavigationDrawer({opened(opened)}) {
+                        NavigationDrawer({ opened(opened) }) {
                             LargeBody("Navigation drawer")
                         }
                     }
@@ -347,9 +372,9 @@ fun MaterialThemeExamples() {
                         OutlinedButton({
                             onClick { opened = !opened }
                             style { padding(5.px) }
-                        }) { Text("${if(opened) "close" else "open"} drawer") }
+                        }) { Text("${if (opened) "close" else "open"} drawer") }
 
-                        ModalNavigationDrawer({opened(opened)}) {
+                        ModalNavigationDrawer({ opened(opened) }) {
                             LargeBody("Modal navigation drawer")
                         }
                     }
@@ -398,14 +423,15 @@ fun MaterialThemeExamples() {
                                     outline("none")
                                     background("transparent")
                                     boxSizing("border-box")
-                                    border {style = LineStyle.None}
+                                    border { style = LineStyle.None }
                                     width(100.percent)
                                     applyStyle(MdSysTypeScaleTokens.bodyLarge)
                                 }
                                 wrap(TextAreaWrap.Off)
-                                rows(5) }
+                                rows(5)
+                            }
                             )
-                            Span({slot = "supporting-text"}) { Text("Some longer supporting text") }
+                            Span({ slot = "supporting-text" }) { Text("Some longer supporting text") }
                         }
 
                         OutlinedField {
@@ -415,14 +441,15 @@ fun MaterialThemeExamples() {
                                     outline("none")
                                     background("transparent")
                                     boxSizing("border-box")
-                                    border {style = LineStyle.None}
+                                    border { style = LineStyle.None }
                                     width(100.percent)
                                     applyStyle(MdSysTypeScaleTokens.bodyLarge)
                                 }
                                 wrap(TextAreaWrap.Off)
-                                rows(5) }
+                                rows(5)
+                            }
                             )
-                            Span({slot = "supporting-text"}) { Text("Some longer supporting text") }
+                            Span({ slot = "supporting-text" }) { Text("Some longer supporting text") }
                         }
                     }
 
