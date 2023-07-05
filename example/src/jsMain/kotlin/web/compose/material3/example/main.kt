@@ -141,7 +141,7 @@ fun Material3WidgetShowCase() {
                         }
 
                         Column {
-                            LargeTitle("Focus Ring")
+                            FocusRingShowcase()
                         }
                         Column {
                             LargeTitle("Ripple")
