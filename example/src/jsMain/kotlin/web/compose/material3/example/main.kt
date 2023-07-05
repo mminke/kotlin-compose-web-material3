@@ -7,8 +7,6 @@ import org.jetbrains.compose.web.attributes.wrap
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.css.DisplayStyle.Companion.Flex
 import org.jetbrains.compose.web.css.JustifyContent.Companion.SpaceEvenly
-import org.jetbrains.compose.web.css.LineStyle.Companion.Solid
-import org.jetbrains.compose.web.css.Position.Companion.Relative
 import org.jetbrains.compose.web.dom.*
 import org.jetbrains.compose.web.renderComposable
 import org.w3c.files.File
@@ -19,8 +17,6 @@ import web.compose.extras.fileupload.OutlinedFileDragDropArea
 import web.compose.extras.text.*
 import web.compose.material3.buttons.OutlinedButton
 import web.compose.material3.disabled
-import web.compose.material3.divider.Divider
-import web.compose.material3.elevation.Elevation
 import web.compose.material3.example.components.*
 import web.compose.material3.field.FilledField
 import web.compose.material3.field.OutlinedField
@@ -44,7 +40,6 @@ import web.compose.material3.themes.defaultColorScheme
 import web.compose.material3.themes.defaultDarkColorScheme
 import web.compose.material3.themes.defaultFontScheme
 import web.compose.material3.theming.MaterialTheme
-import web.compose.material3.theming.MdSysColorVariables
 import web.compose.material3.theming.MdSysTypeScaleTokens
 import web.compose.material3.theming.SysColorScheme
 import web.compose.material3.theming.TypeScaleTokens.Companion.applyStyle
@@ -58,17 +53,16 @@ val listData = listOf(
     ListDataItem("Jane Doe", "Another.example.org")
 )
 
-
 fun main() {
     renderComposable(rootElementId = "root") {
 
-        MaterialThemeExamples()
+        Material3WidgetShowCase()
 
     }
 }
 
 @Composable
-fun MaterialThemeExamples() {
+fun Material3WidgetShowCase() {
     val lightColorScheme = defaultColorScheme
     val darkColorScheme = defaultDarkColorScheme
     var currentColorScheme by remember { mutableStateOf<SysColorScheme?>(lightColorScheme) }
@@ -140,74 +134,17 @@ fun MaterialThemeExamples() {
                 0 -> WidgetGroup("Stable widgets") {
                     Row {
                         Column {
-                            LargeTitle("Divider")
-
-                            val dividerStyleSheet = object : StyleSheet() {
-                                val list by style {
-                                    border(1.px, Solid, MdSysColorVariables.mdSysColorOutline.value())
-                                    margin(0.px)
-                                    padding(0.px)
-                                    width(200.px)
-                                }
-                                val listItem by style {
-                                    color(MdSysColorVariables.mdSysColorOnBackground.value())
-                                    fontFamily("system-ui")
-                                    listStyle("none")
-                                    margin(16.px)
-                                }
-                            }
-                            Style(dividerStyleSheet)
-
-                            Ul({ classes(dividerStyleSheet.list) }) {
-                                Li({ classes(dividerStyleSheet.listItem) }) { LargeLabel("Default divider") }
-                                Divider()
-                                Li({ classes(dividerStyleSheet.listItem) }) { LargeLabel("Divider (inset = true)") }
-                                Divider(inset = true)
-                                Li({ classes(dividerStyleSheet.listItem) }) { LargeLabel("Divider (insetStart = true)") }
-                                Divider(insetStart = true)
-                                Li({ classes(dividerStyleSheet.listItem) }) { LargeLabel("Divider (insetEnd = true)") }
-                                Divider(insetEnd = true)
-                                Li({ classes(dividerStyleSheet.listItem) }) { LargeLabel("Final item") }
-                            }
+                            DividerShowcase()
                         }
                         Column {
-                            LargeTitle("Elevation")
+                            ElevationShowcase()
+                        }
 
-                            val elevationStyleSheet = object : StyleSheet() {
-                                val box by style {
-                                    margin(8.px)
-                                    backgroundColor(MdSysColorVariables.mdSysColorPrimaryContainer.value())
-                                    borderWidth(0.px);
-                                    borderRadius(16.px);
-                                    color(MdSysColorVariables.mdSysColorOnPrimaryContainer.value())
-                                    display(Flex)
-                                    justifyContent(JustifyContent.Center)
-                                    position(Relative) /* This is needed for Elevation to work correctly */
-                                    width(80.px)
-                                }
-                            }
-                            Style(elevationStyleSheet)
-
-                            Div({ classes(elevationStyleSheet.box) }) {
-                                LargeBody("Level 0")
-                                Elevation(0)
-                            }
-                            Div({ classes(elevationStyleSheet.box) }) {
-                                LargeBody("Level 1")
-                                Elevation(1)
-                            }
-                            Div({ classes(elevationStyleSheet.box) }) {
-                                LargeBody("Level 2")
-                                Elevation(2)
-                            }
-                            Div({ classes(elevationStyleSheet.box) }) {
-                                LargeBody("Level 3")
-                                Elevation(3)
-                            }
-                            Div({ classes(elevationStyleSheet.box) }) {
-                                LargeBody("Level 4")
-                                Elevation(4)
-                            }
+                        Column {
+                            LargeTitle("Focus Ring")
+                        }
+                        Column {
+                            LargeTitle("Ripple")
                         }
                     }
                 }
