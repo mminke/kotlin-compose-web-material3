@@ -132,20 +132,18 @@ fun Material3WidgetShowCase() {
         Div {
             when (activeTab) {
                 0 -> WidgetGroup("Stable widgets") {
-                    Row {
-                        Column {
-                            DividerShowcase()
-                        }
-                        Column {
-                            ElevationShowcase()
-                        }
+                    Column({style { flex(1) }}) {
+                        DividerShowcase()
+                    }
+                    Column({style { flex(1) }}) {
+                        ElevationShowcase()
+                    }
 
-                        Column {
-                            FocusRingShowcase()
-                        }
-                        Column {
-                            LargeTitle("Ripple")
-                        }
+                    Column({style { flex(1) }}) {
+                        FocusRingShowcase()
+                    }
+                    Column({style { flex(1) }}) {
+                        RippleShowcase()
                     }
                 }
 
