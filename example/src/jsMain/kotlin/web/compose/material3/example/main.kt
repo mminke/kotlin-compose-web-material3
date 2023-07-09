@@ -1,11 +1,13 @@
 package web.compose.material3.example
 
 import androidx.compose.runtime.*
+import org.jetbrains.compose.web.ExperimentalComposeWebApi
 import org.jetbrains.compose.web.attributes.TextAreaWrap
 import org.jetbrains.compose.web.attributes.rows
 import org.jetbrains.compose.web.attributes.wrap
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.css.DisplayStyle.Companion.Flex
+import org.jetbrains.compose.web.css.DisplayStyle.Companion.None
 import org.jetbrains.compose.web.css.JustifyContent.Companion.SpaceEvenly
 import org.jetbrains.compose.web.dom.*
 import org.jetbrains.compose.web.renderComposable
@@ -53,13 +55,139 @@ val listData = listOf(
     ListDataItem("Jane Doe", "Another.example.org")
 )
 
+object MainStyleSheet : StyleSheet() {
+    init {
+        "body" style {
+            height(100.vh)
+            margin(0.px)
+            padding(0.px)
+        }
+
+        "#root" style {
+            height(100.percent)
+            margin(0.px)
+            padding(0.px)
+        }
+    }
+}
+
 fun main() {
     renderComposable(rootElementId = "root") {
+        Style(MainStyleSheet)
 
-        Material3WidgetShowCase()
+        var westHidden by remember { mutableStateOf(false) }
+        var westAnimating by remember { mutableStateOf(false) }
+
+        var transitionState by remember { mutableStateOf(TransitionStates.SHOWN) }
+        // hide, hiding, hidden
+        // animate, animating, animated
+
+        console.log("Redraw with state: " + transitionState)
+        BorderLayout {
+            North {
+                LargeBody(loremIpsum.take(200))
+            }
+            West({
+                @OptIn(ExperimentalComposeWebApi::class)
+                style {
+                    if (
+                        transitionState == TransitionStates.HIDE
+                        || transitionState == TransitionStates.HIDING
+                        || transitionState == TransitionStates.HIDDEN
+                    ) {
+                        flex(0.px)
+                        if (transitionState == TransitionStates.HIDE)
+                            transitionState = TransitionStates.HIDING
+
+                        console.log("flex 0px: " + transitionState)
+                    }
+                    if (
+                        transitionState == TransitionStates.SHOWING
+                        || transitionState == TransitionStates.SHOWN
+                    ) {
+                        flex(175.px)
+
+                        console.log("flex 175px: " + transitionState)
+                    }
+
+                    //                    if (westHidden && !westAnimating) {
+                    if (transitionState == TransitionStates.HIDDEN) {
+                        display(None)
+                        console.log("Toggled display(none) " + transitionState)
+                    }
+                    if(transitionState == TransitionStates.SHOW) {
+                        transitionState = TransitionStates.SHOWING
+                    }
+
+                    transitions {
+                        "flex" { duration(2.s) }
+                    }
+                }
+                addEventListener("transitionend") {
+                    if( transitionState == TransitionStates.SHOWING) {
+                        transitionState = TransitionStates.SHOWN
+                    }
+                    if( transitionState == TransitionStates.HIDING) {
+                        transitionState = TransitionStates.HIDDEN
+                    }
+//                    westAnimating = false
+                    console.log("Animation ended " + transitionState)
+                }
+            }) {
+                LargeBody(loremIpsum.take(200))
+            }
+            Center {
+                LargeHeadline("Inner border layout center")
+                Button({
+                    onClick {
+                        console.log("Button 1 " + transitionState)
+                        if (transitionState == TransitionStates.SHOWN)
+                            transitionState = TransitionStates.HIDE
+                        else
+                            transitionState = TransitionStates.SHOW
+//                        westAnimating = true
+//                        westHidden = !westHidden
+                        console.log("Button 2 " + transitionState)
+                    }
+                }) {
+                    Text("Toggle west")
+                }
+                LargeBody(loremIpsum)
+            }
+            East {
+                Div({ style { width(175.px) } }) {
+                    LargeBody(loremIpsum.take(200))
+                }
+            }
+            South {
+                LargeBody(loremIpsum.take(200))
+            }
+        }
+//        Material3WidgetShowCase()
 
     }
 }
+
+enum class TransitionStates {
+    HIDE,
+    HIDING,
+    HIDDEN,
+    SHOW,
+    SHOWING,
+    SHOWN,
+}
+
+const val loremIpsum = """
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel sodales leo. Morbi in ultricies ante, sit amet venenatis elit. Curabitur justo nunc, sagittis quis ullamcorper a, efficitur quis risus. Praesent at tempor libero. Maecenas tincidunt viverra justo, a finibus risus rutrum et. Donec vitae posuere tellus. Sed luctus, nulla sit amet aliquam lacinia, diam felis sagittis enim, nec vestibulum risus ipsum ac augue. Praesent faucibus ac dui in luctus. Nam vitae ex ac dui consequat ultricies ac et risus. Donec fringilla purus eget sem placerat, a faucibus mi lacinia. Sed metus tellus, iaculis ut sem id, pharetra porttitor ipsum. Morbi laoreet pellentesque dolor eu laoreet. Nam semper consectetur metus, non porttitor ex imperdiet sed. Etiam laoreet vitae ligula finibus vulputate. Nam sed sollicitudin enim, eu mollis nunc. Vestibulum facilisis mollis est ornare tincidunt.
+
+Suspendisse potenti. In at eleifend arcu, in aliquam leo. Nunc feugiat diam sed tortor imperdiet dignissim. Praesent rutrum, lacus sed ornare luctus, eros dui placerat felis, ut condimentum ante felis vel nisl. Suspendisse varius mi ac condimentum egestas. Praesent consequat interdum ex, at dapibus dui vestibulum tempus. Phasellus finibus sollicitudin felis, id placerat urna condimentum at.
+
+Vivamus faucibus, est commodo placerat efficitur, dolor nulla accumsan justo, at gravida elit purus non nulla. Fusce maximus imperdiet consequat. Maecenas vehicula, sem non congue cursus, lectus felis dapibus eros, at interdum mi mi sed leo. Cras suscipit efficitur faucibus. Aenean sit amet eros quis quam laoreet consequat tincidunt in ligula. Sed tincidunt libero eget massa suscipit, quis pretium justo sodales. Pellentesque aliquet, massa quis laoreet commodo, nulla justo elementum ante, eget condimentum sapien ligula at arcu. Integer feugiat at enim nec ultrices. Morbi ornare nisi in aliquet congue. Pellentesque placerat nunc vitae aliquet mollis. Vestibulum dapibus nisl vitae nisl faucibus viverra.
+
+Pellentesque porttitor dapibus vehicula. Proin pretium nibh in condimentum condimentum. Pellentesque fringilla metus ac nulla sodales sagittis. Ut molestie nisi erat, imperdiet consectetur risus dapibus quis. Etiam a convallis libero, in tincidunt ligula. Nam volutpat elementum est sed semper. Praesent in pulvinar purus. Vivamus at nisi ac tortor pulvinar commodo et vel neque. Vivamus tempus a nulla eget facilisis. Morbi pretium porttitor mattis. Phasellus eleifend ex odio, eget pharetra diam varius quis. Donec eu nulla viverra turpis sodales sollicitudin eu consectetur dolor. In consequat leo in tincidunt consectetur.
+
+Sed ac orci eget elit fringilla faucibus. Duis in ex sed est ornare condimentum. Vestibulum sit amet lorem ultrices, rhoncus purus ac, consectetur tortor. Suspendisse tempor cursus lacus, nec dapibus libero eleifend eu. Quisque rhoncus mauris sed porta suscipit. Vestibulum blandit dolor vel justo tristique, vitae consectetur massa vestibulum. Sed maximus lectus ex, pellentesque vestibulum quam blandit vulputate. Donec ut vulputate dolor. Vestibulum nec malesuada purus. Aenean justo velit, dictum id dapibus id, viverra in sapien. Praesent dapibus risus consequat orci consectetur ullamcorper. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus egestas nec orci non placerat. Etiam vitae erat tempor sapien tincidunt tempus vitae efficitur neque.    
+"""
 
 @Composable
 fun Material3WidgetShowCase() {
@@ -132,17 +260,17 @@ fun Material3WidgetShowCase() {
         Div {
             when (activeTab) {
                 0 -> WidgetGroup("Stable widgets") {
-                    Column({style { flex(1) }}) {
+                    Column({ style { flex(1) } }) {
                         DividerShowcase()
                     }
-                    Column({style { flex(1) }}) {
+                    Column({ style { flex(1) } }) {
                         ElevationShowcase()
                     }
 
-                    Column({style { flex(1) }}) {
+                    Column({ style { flex(1) } }) {
                         FocusRingShowcase()
                     }
-                    Column({style { flex(1) }}) {
+                    Column({ style { flex(1) } }) {
                         RippleShowcase()
                     }
                 }
