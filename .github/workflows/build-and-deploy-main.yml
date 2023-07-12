@@ -2,6 +2,8 @@ name: Build library
 
 on:
   push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -14,12 +16,12 @@ jobs:
         with:
           arguments: publishToMavenLocal
           build-root-directory: library
-      - name: Gradle build
+      - name: Gradle build showcase
         uses: gradle/gradle-build-action@v2
         with:
           arguments: jsBrowserProductionWebpack
           build-root-directory: example
-      - name: Upload artifact to gitlab pages
+      - name: Create github pages artifact
         uses: actions/upload-pages-artifact@v1
         with:
           path: example/build/distributions
@@ -40,6 +42,6 @@ jobs:
     # Specify runner + deployment step
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy github pages artifact
         id: deployment
         uses: actions/deploy-pages@v2      

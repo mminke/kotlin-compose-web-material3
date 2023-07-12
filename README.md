@@ -47,12 +47,12 @@ Currently, there is no general available artifact yet. Therefor the best way to 
    }
     ```
 
-4. All components can only be created if enclosed in the _MaterialTheme_ composable. 
+4. To use the correct material design 3 styles and fonts use the MaterialTheme composable as a top level wrapper.
 
    For example
 
     ```kotlin
-    MaterialTheme {
+    MaterialTheme(defaultColorScheme, defaultFontScheme) {
         Row {
             NavigationBar {}
             Column { 
@@ -61,3 +61,4 @@ Currently, there is no general available artifact yet. Therefor the best way to 
         }
     }   
     ```
+This uses the default color and font schemes.
