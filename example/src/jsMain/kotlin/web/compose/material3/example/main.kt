@@ -1,13 +1,11 @@
 package web.compose.material3.example
 
 import androidx.compose.runtime.*
-import org.jetbrains.compose.web.ExperimentalComposeWebApi
 import org.jetbrains.compose.web.attributes.TextAreaWrap
 import org.jetbrains.compose.web.attributes.rows
 import org.jetbrains.compose.web.attributes.wrap
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.css.DisplayStyle.Companion.Flex
-import org.jetbrains.compose.web.css.DisplayStyle.Companion.None
 import org.jetbrains.compose.web.css.JustifyContent.Companion.SpaceEvenly
 import org.jetbrains.compose.web.dom.*
 import org.jetbrains.compose.web.renderComposable
@@ -16,6 +14,8 @@ import web.compose.extras.Column
 import web.compose.extras.Row
 import web.compose.extras.fileupload.FilledFileInput
 import web.compose.extras.fileupload.OutlinedFileDragDropArea
+import web.compose.extras.layout.BorderLayout
+import web.compose.extras.panel.CollapsiblePanel
 import web.compose.extras.text.*
 import web.compose.material3.buttons.OutlinedButton
 import web.compose.material3.disabled
@@ -75,87 +75,109 @@ fun main() {
     renderComposable(rootElementId = "root") {
         Style(MainStyleSheet)
 
-        var westHidden by remember { mutableStateOf(false) }
-        var westAnimating by remember { mutableStateOf(false) }
+        var westOpened by remember { mutableStateOf(true) }
+        var eastOpened by remember { mutableStateOf(true) }
 
-        var transitionState by remember { mutableStateOf(TransitionStates.SHOWN) }
-        // hide, hiding, hidden
-        // animate, animating, animated
+//        var transitionState by remember { mutableStateOf(TransitionStates.SHOWN) }
+//        console.log("Redraw with state: " + transitionState)
 
-        console.log("Redraw with state: " + transitionState)
         BorderLayout {
             North {
                 LargeBody(loremIpsum.take(200))
             }
             West({
-                @OptIn(ExperimentalComposeWebApi::class)
-                style {
-                    if (
-                        transitionState == TransitionStates.HIDE
-                        || transitionState == TransitionStates.HIDING
-                        || transitionState == TransitionStates.HIDDEN
-                    ) {
-                        flex(0.px)
-                        if (transitionState == TransitionStates.HIDE)
-                            transitionState = TransitionStates.HIDING
-
-                        console.log("flex 0px: " + transitionState)
-                    }
-                    if (
-                        transitionState == TransitionStates.SHOWING
-                        || transitionState == TransitionStates.SHOWN
-                    ) {
-                        flex(175.px)
-
-                        console.log("flex 175px: " + transitionState)
-                    }
-
-                    //                    if (westHidden && !westAnimating) {
-                    if (transitionState == TransitionStates.HIDDEN) {
-                        display(None)
-                        console.log("Toggled display(none) " + transitionState)
-                    }
-                    if(transitionState == TransitionStates.SHOW) {
-                        transitionState = TransitionStates.SHOWING
-                    }
-
-                    transitions {
-                        "flex" { duration(2.s) }
-                    }
+//                @OptIn(ExperimentalComposeWebApi::class)
+//                style {
+//                    if (
+//                        transitionState == TransitionStates.HIDE
+//                        || transitionState == TransitionStates.HIDING
+//                        || transitionState == TransitionStates.HIDDEN
+//                    ) {
+//                        flex(0.px)
+//                        if (transitionState == TransitionStates.HIDE)
+//                            transitionState = TransitionStates.HIDING
+//
+//                        console.log("flex 0px: " + transitionState)
+//                    }
+//                    if (
+//                        transitionState == TransitionStates.SHOWING
+//                        || transitionState == TransitionStates.SHOWN
+//                    ) {
+//                        flex(175.px)
+//
+//                        console.log("flex 175px: " + transitionState)
+//                    }
+//
+//                    //                    if (westHidden && !westAnimating) {
+//                    if (transitionState == TransitionStates.HIDDEN) {
+//                        display(None)
+//                        console.log("Toggled display(none) " + transitionState)
+//                    }
+//                    if (transitionState == TransitionStates.SHOW) {
+//                        transitionState = TransitionStates.SHOWING
+//                    }
+//
+//                    transitions {
+//                        "flex" { duration(2.s) }
+//                    }
+//                }
+//                addEventListener("transitionend") {
+//                    if (transitionState == TransitionStates.SHOWING) {
+//                        transitionState = TransitionStates.SHOWN
+//                    }
+//                    if (transitionState == TransitionStates.HIDING) {
+//                        transitionState = TransitionStates.HIDDEN
+//                    }
+////                    westAnimating = false
+//                    console.log("Animation ended " + transitionState)
+//                }
+            }) {
+                CollapsiblePanel(westOpened) {
+                    LargeBody(loremIpsum.take(200))
                 }
-                addEventListener("transitionend") {
-                    if( transitionState == TransitionStates.SHOWING) {
-                        transitionState = TransitionStates.SHOWN
-                    }
-                    if( transitionState == TransitionStates.HIDING) {
-                        transitionState = TransitionStates.HIDDEN
-                    }
-//                    westAnimating = false
-                    console.log("Animation ended " + transitionState)
+            }
+            Center({
+                style {
+                    backgroundColor(Color.lightblue)
+                    borderRadius(25.px)
                 }
             }) {
-                LargeBody(loremIpsum.take(200))
-            }
-            Center {
                 LargeHeadline("Inner border layout center")
                 Button({
                     onClick {
-                        console.log("Button 1 " + transitionState)
-                        if (transitionState == TransitionStates.SHOWN)
-                            transitionState = TransitionStates.HIDE
-                        else
-                            transitionState = TransitionStates.SHOW
-//                        westAnimating = true
-//                        westHidden = !westHidden
-                        console.log("Button 2 " + transitionState)
+//                        console.log("Button 1 " + transitionState)
+//                        if (transitionState == TransitionStates.SHOWN)
+//                            transitionState = TransitionStates.HIDE
+//                        else
+//                            transitionState = TransitionStates.SHOW
+//                        console.log("Button 2 " + transitionState)
+                        westOpened = !westOpened
                     }
                 }) {
                     Text("Toggle west")
                 }
+                Button({
+                    onClick {
+                       eastOpened = !eastOpened
+                    }
+                }) {
+                    Text("Toggle east")
+                }
+                LargeBody(
+                    """
+                    Collapse:
+                    1. change from expanded to 0px
+                    2. after animation is finished set display: none
+                    
+                    Expand:
+                    1. remove display:none to make the element visible again
+                    2. change from 0px to original size
+                """.trimIndent()
+                )
                 LargeBody(loremIpsum)
             }
             East {
-                Div({ style { width(175.px) } }) {
+                CollapsiblePanel(eastOpened, reverse = true) {
                     LargeBody(loremIpsum.take(200))
                 }
             }
@@ -167,6 +189,8 @@ fun main() {
 
     }
 }
+
+
 
 enum class TransitionStates {
     HIDE,
