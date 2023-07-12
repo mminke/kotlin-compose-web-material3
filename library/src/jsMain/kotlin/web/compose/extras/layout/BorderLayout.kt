@@ -1,4 +1,4 @@
-package web.compose.material3.example
+package web.compose.extras.layout
 
 import androidx.compose.runtime.Composable
 import org.jetbrains.compose.web.attributes.AttrsScope
@@ -7,6 +7,9 @@ import org.jetbrains.compose.web.css.DisplayStyle.Companion.Flex
 import org.jetbrains.compose.web.css.FlexDirection.Companion.Column
 import org.jetbrains.compose.web.dom.Div
 import org.w3c.dom.HTMLElement
+
+private typealias AttributeBuilder = AttrsScope<HTMLElement>.() -> Unit
+private typealias ContentBuilder = @Composable () -> Unit
 
 private object BorderLayoutStyleSheet : StyleSheet() {
     val borderLayout by style {
@@ -18,7 +21,6 @@ private object BorderLayoutStyleSheet : StyleSheet() {
         flex(1)
         margin(0.px)
         padding(0.px)
-        border(1.px, LineStyle.Dashed, Color.red)
     }
     val middle by style {
         display(Flex)
@@ -32,32 +34,17 @@ private object BorderLayoutStyleSheet : StyleSheet() {
         overflow("auto")
         margin(0.px)
         padding(0.px)
-
-        backgroundColor(Color.gray)
-        borderRadius(25.px)
-
-        border(1.px, LineStyle.Dashed, Color.yellow)
     }
     val south by style {
         flex(1)
         margin(0.px)
         padding(0.px)
-
-        border(1.px, LineStyle.Dashed, Color.blue)
     }
     val east by style {
         flex(1)
     }
     val west by style {
         flex(1)
-
-        /**
-         *   -webkit-transition: all 2s ease;
-         *   -moz-transition: all 2s ease;
-         *   -o-transition: all 2s ease;
-         *   -ms-transition: all 2s ease;
-         *   transition: all 2s ease;
-         */
     }
 }
 
@@ -71,62 +58,104 @@ fun BorderLayout(
     Style(BorderLayoutStyleSheet)
 
     Div({ classes(BorderLayoutStyleSheet.borderLayout) }) {
-        Div({ classes(BorderLayoutStyleSheet.north) }) {
+        Div({
+            classes(BorderLayoutStyleSheet.north)
+            borderLayoutBuilder.northAttrs?.invoke(this)
+        }) {
             borderLayoutBuilder.northContent?.invoke()
         }
-        Div({classes(BorderLayoutStyleSheet.middle)}) {
+
+        Div({ classes(BorderLayoutStyleSheet.middle) }) {
             Div({
                 classes(BorderLayoutStyleSheet.west)
                 borderLayoutBuilder.westAttrs?.invoke(this)
             }) {
                 borderLayoutBuilder.westContent?.invoke()
             }
-            Div({ classes(BorderLayoutStyleSheet.center) }) {
+
+            Div({
+                classes(BorderLayoutStyleSheet.center)
+                borderLayoutBuilder.centerAttrs?.invoke(this)
+            }) {
                 borderLayoutBuilder.centerContent?.invoke()
             }
-            Div({classes(BorderLayoutStyleSheet.east)}) {
+
+            Div({
+                classes(BorderLayoutStyleSheet.east)
+                borderLayoutBuilder.eastAttrs?.invoke(this)
+            }) {
                 borderLayoutBuilder.eastContent?.invoke()
             }
         }
 
-        Div({ classes(BorderLayoutStyleSheet.south) }) {
+        Div({
+            classes(BorderLayoutStyleSheet.south)
+            borderLayoutBuilder.southAttrs?.invoke(this)
+        }) {
             borderLayoutBuilder.southContent?.invoke()
         }
     }
 }
 
 class BorderLayoutBuilder {
-    var northContent: (@Composable () -> Unit)? = null
+    var northAttrs: AttributeBuilder? = null
         private set
-    var centerContent: (@Composable () -> Unit)? = null
+    var northContent: ContentBuilder? = null
         private set
-    var southContent: (@Composable () -> Unit)? = null
+    var eastAttrs: AttributeBuilder? = null
         private set
-    var eastContent: (@Composable () -> Unit)? = null
+    var eastContent: ContentBuilder? = null
+        private set
+    var centerAttrs: AttributeBuilder? = null
+        private set
+    var centerContent: ContentBuilder? = null
+        private set
+    var westAttrs: AttributeBuilder? = null
+        private set
+    var westContent: ContentBuilder? = null
+        private set
+    var southAttrs: AttributeBuilder? = null
+        private set
+    var southContent: ContentBuilder? = null
         private set
 
-    var westAttrs: (AttrsScope<HTMLElement>.() -> Unit)? = null
-        private set
-    var westContent: (@Composable () -> Unit)? = null
-        private set
-
-    fun North(content: @Composable () -> Unit) {
+    fun North(
+        attrs: AttributeBuilder? = null,
+        content: ContentBuilder? = null
+    ) {
+        northAttrs = attrs
         northContent = content
     }
-    fun Center(content: @Composable () -> Unit) {
-        centerContent = content
-    }
-    fun South(content: @Composable () -> Unit) {
-        southContent = content
-    }
-    fun East(content: @Composable () -> Unit) {
-        eastContent = content
-    }
+
     fun West(
-        attrs: (AttrsScope<HTMLElement>.() -> Unit)? = null,
-        content: (@Composable () -> Unit)
+        attrs: AttributeBuilder? = null,
+        content: ContentBuilder? = null
     ) {
         westAttrs = attrs
         westContent = content
+    }
+
+    fun Center(
+        attrs: AttributeBuilder? = null,
+        content: ContentBuilder? = null
+    ) {
+        centerAttrs = attrs
+        centerContent = content
+    }
+
+    fun East(
+        attrs: AttributeBuilder? = null,
+        content: ContentBuilder? = null
+    ) {
+        eastAttrs = attrs
+        eastContent = content
+    }
+
+    fun South(
+        attrs: AttributeBuilder? = null,
+        content: ContentBuilder? = null
+    ) {
+        southAttrs = attrs
+        southContent = content
     }
 }
