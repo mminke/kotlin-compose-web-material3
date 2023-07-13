@@ -95,8 +95,8 @@ fun Material3WidgetShowCase() {
         var westOpened by remember { mutableStateOf(true) }
         var eastOpened by remember { mutableStateOf(true) }
 
-        BorderLayout {
-            North({style { backgroundColor(currentColorScheme.sysColorSurface) }}) {
+        BorderLayout({ style { backgroundColor(currentColorScheme.sysColorSurfaceContainer) } }) {
+            North {
                 Div({
                     style {
                         display(Flex)
@@ -119,25 +119,27 @@ fun Material3WidgetShowCase() {
                     })
                 }
             }
-            West({style { backgroundColor(currentColorScheme.sysColorSurface) }}) {
+            West {
                 CollapsiblePanel(westOpened) {
+                    LargeTitle("Press Home to show/hide")
                     LargeBody(loremIpsum.take(200))
                 }
             }
             Center({
                 style {
-                    backgroundColor(currentColorScheme.sysColorSurfaceContainerLowest)
+                    backgroundColor(currentColorScheme.sysColorSurface)
                     borderRadius(25.px)
                 }
             }) {
                 ShowcaseContent()
             }
-            East({style { backgroundColor(currentColorScheme.sysColorSurface) }}) {
+            East {
                 CollapsiblePanel(eastOpened, reverse = true) {
+                    LargeTitle("Press Edit to show/hide")
                     LargeBody(loremIpsum.take(200))
                 }
             }
-            South({style { backgroundColor(currentColorScheme.sysColorSurface) }}) {
+            South {
                 NavigationBar {
                     NavigationTab({ label = "Home"; onClick { westOpened = !westOpened } }) {
                         Icon({ slot = "activeIcon" }, "home")

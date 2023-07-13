@@ -50,6 +50,7 @@ private object BorderLayoutStyleSheet : StyleSheet() {
 
 @Composable
 fun BorderLayout(
+    attrs: AttributeBuilder? = null,
     buildContent: @Composable BorderLayoutBuilder.() -> Unit
 ) {
     val borderLayoutBuilder = BorderLayoutBuilder()
@@ -57,7 +58,10 @@ fun BorderLayout(
 
     Style(BorderLayoutStyleSheet)
 
-    Div({ classes(BorderLayoutStyleSheet.borderLayout) }) {
+    Div({
+        classes(BorderLayoutStyleSheet.borderLayout)
+        attrs?.invoke(this)
+    }) {
         Div({
             classes(BorderLayoutStyleSheet.north)
             borderLayoutBuilder.northAttrs?.invoke(this)

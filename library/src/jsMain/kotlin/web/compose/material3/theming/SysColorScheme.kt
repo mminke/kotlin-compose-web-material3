@@ -26,16 +26,15 @@ data class SysColorScheme(
     val sysColorOnBackground: CSSColorValue,
     val sysColorSurface: CSSColorValue,
     val sysColorOnSurface: CSSColorValue,
+    val sysColorSurfaceDim: CSSColorValue, // = Color("#141218"),
+    val sysColorSurfaceBright: CSSColorValue, // = Color("#3B383E"),
+    val sysColorSurfaceContainerLowest: CSSColorValue,
+    val sysColorSurfaceContainerLow: CSSColorValue, // = Color("#1D1B20"),
+    val sysColorSurfaceContainer: CSSColorValue, // = Color("#211F26"),
+    val sysColorSurfaceContainerHigh: CSSColorValue, // = Color("#2B2930"),
+    val sysColorSurfaceContainerHighest: CSSColorValue, // = Color("#36343B"),
     val sysColorSurfaceVariant: CSSColorValue,
     val sysColorOnSurfaceVariant: CSSColorValue,
-//sysColorSurfaceDim = Color("#141218"),
-//sysColorSurfaceBright = Color("#3B383E"),
-    val sysColorSurfaceContainerLowest: CSSColorValue,
-//sysColorSurfaceContainerLow = Color("#1D1B20"),
-//sysColorSurfaceContainer = Color("#211F26"),
-//sysColorSurfaceContainerHigh = Color("#2B2930"),
-//sysColorSurfaceContainerHighest = Color("#36343B"),
-
     val sysColorInverseSurface: CSSColorValue,
     val sysColorInverseOnSurface: CSSColorValue,
     val sysColorInversePrimary: CSSColorValue,
@@ -72,9 +71,15 @@ data class SysColorScheme(
             MdSysColorVariables.mdSysColorOnBackground(sysColorOnBackground)
             MdSysColorVariables.mdSysColorSurface(sysColorSurface)
             MdSysColorVariables.mdSysColorOnSurface(sysColorOnSurface)
+            MdSysColorVariables.mdSysColorSurfaceDim(sysColorSurfaceDim)
+            MdSysColorVariables.mdSysColorSurfaceBright(sysColorSurfaceBright)
+            MdSysColorVariables.mdSysColorSurfaceContainerLowest(sysColorSurfaceContainerLowest)
+            MdSysColorVariables.mdSysColorSurfaceContainerLow(sysColorSurfaceContainerLow)
+            MdSysColorVariables.mdSysColorSurfaceContainer(sysColorSurfaceContainer)
+            MdSysColorVariables.mdSysColorSurfaceContainerHigh(sysColorSurfaceContainerHigh)
+            MdSysColorVariables.mdSysColorSurfaceContainerHighest(sysColorSurfaceContainerHighest)
             MdSysColorVariables.mdSysColorSurfaceVariant(sysColorSurfaceVariant)
             MdSysColorVariables.mdSysColorOnSurfaceVariant(sysColorOnSurfaceVariant)
-            MdSysColorVariables.mdSysColorSurfaceContainerLowest(sysColorSurfaceContainerLowest)
             MdSysColorVariables.mdSysColorInverseSurface(sysColorInverseSurface)
             MdSysColorVariables.mdSysColorInverseOnSurface(sysColorInverseOnSurface)
             MdSysColorVariables.mdSysColorInversePrimary(sysColorInversePrimary)
@@ -108,9 +113,15 @@ object MdSysColorVariables {
     val mdSysColorOnBackground = CSSStyleVariable<CSSColorValue>("md-sys-color-on-background")
     val mdSysColorSurface = CSSStyleVariable<CSSColorValue>("md-sys-color-surface")
     val mdSysColorOnSurface = CSSStyleVariable<CSSColorValue>("md-sys-color-on-surface")
+    val mdSysColorSurfaceDim = CSSStyleVariable<CSSColorValue>("md-sys-color-surface-dim")
+    val mdSysColorSurfaceBright = CSSStyleVariable<CSSColorValue>("md-sys-color-surface-bright")
+    val mdSysColorSurfaceContainerLowest = CSSStyleVariable<CSSColorValue>("md-sys-color-surface-container-lowest")
+    val mdSysColorSurfaceContainerLow = CSSStyleVariable<CSSColorValue>("md-sys-color-surface-container-low")
+    val mdSysColorSurfaceContainer = CSSStyleVariable<CSSColorValue>("md-sys-color-surface-container")
+    val mdSysColorSurfaceContainerHigh = CSSStyleVariable<CSSColorValue>("md-sys-color-surface-container-high")
+    val mdSysColorSurfaceContainerHighest = CSSStyleVariable<CSSColorValue>("md-sys-color-surface-container-highest")
     val mdSysColorSurfaceVariant = CSSStyleVariable<CSSColorValue>("md-sys-color-surface-variant")
     val mdSysColorOnSurfaceVariant = CSSStyleVariable<CSSColorValue>("md-sys-color-on-surface-variant")
-    val mdSysColorSurfaceContainerLowest = CSSStyleVariable<CSSColorValue>("md-sys-color-surface-container-lowest")
     val mdSysColorInverseSurface = CSSStyleVariable<CSSColorValue>("md-sys-color-inverse-surface")
     val mdSysColorInverseOnSurface = CSSStyleVariable<CSSColorValue>("md-sys-color-inverse-on-surface")
     val mdSysColorInversePrimary = CSSStyleVariable<CSSColorValue>("md-sys-color-inverse-primary")
