@@ -23,12 +23,12 @@ fun <TElement : MdProgressElement> MdProgressTagElement(
     content = content
 )
 
-var AttrsScope<MdProgressElement>.progress: Progress
+var AttrsScope<MdProgressElement>.value: ProgressValue
     get() {
         throw InvalidCallException()
     }
-    set(progress) {
-        this.attr("progress", progress.value.toString())
+    set(value) {
+        this.attr("value", value.toString())
     }
 
 var AttrsScope<MdProgressElement>.buffer: Buffer
@@ -47,7 +47,7 @@ fun AttrsScope<MdProgressElement>.fourColor(value: Boolean = true) {
     if (value) attr("four-color", "")
 }
 
-value class Progress(val value: Float) {
+value class ProgressValue(val value: Float) {
     init {
         require(value >= 0 && value <= 1) { }
     }

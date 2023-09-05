@@ -21,7 +21,7 @@ fun FocusRing(
     webComponentLoader
 }
 
-private val webComponentLoader = jsRequire("@material/web/focus/focus-ring.js")
+private val webComponentLoader = jsRequire("@material/web/focus/md-focus-ring.js")
 
 var AttrsScope<FocusRingElement>.visible: Boolean
     get() = throw InvalidCallException()
