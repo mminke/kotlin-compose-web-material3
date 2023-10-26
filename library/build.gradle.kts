@@ -56,7 +56,7 @@ publishing {
     }
     publications {
         create<MavenPublication>("kotlin-compose-web-material3") {
-            from(components["java"])
+            from(components["kotlin"])
         }
     }
 }
