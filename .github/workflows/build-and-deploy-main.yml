@@ -42,6 +42,7 @@ jobs:
           build-root-directory: library
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
 
 #  publish:
 #    needs: build
