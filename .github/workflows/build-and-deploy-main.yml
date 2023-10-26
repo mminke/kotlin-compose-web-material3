@@ -8,33 +8,32 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout project sources
-        uses: actions/checkout@v3
-      - name: Gradle build library and publish local
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: publishToMavenLocal
-          build-root-directory: library
-      - name: Gradle build showcase
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: jsBrowserProductionWebpack
-          build-root-directory: example
-      - name: Create github pages artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: example/build/distributions
-
-  publish:
-    needs: build
-    runs-on: ubuntu-latest
 
     permissions:
       contents: read
       packages: write
 
     steps:
+      - name: Checkout project sources
+        uses: actions/checkout@v3
+
+      - name: Gradle build library and publish local
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: publishToMavenLocal
+          build-root-directory: library
+
+      - name: Gradle build showcase
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: jsBrowserProductionWebpack
+          build-root-directory: example
+
+      - name: Create github pages artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: example/build/distributions
+
       - name: Gradle publish library to GitHub packages
         uses: gradle/gradle-build-action@v2
         with:
@@ -42,6 +41,23 @@ jobs:
           build-root-directory: library
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+#  publish:
+#    needs: build
+#    runs-on: ubuntu-latest
+#
+#    permissions:
+#      contents: read
+#      packages: write
+#
+#    steps:
+#      - name: Gradle publish library to GitHub packages
+#        uses: gradle/gradle-build-action@v2
+#        with:
+#          arguments: publish
+#          build-root-directory: library
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   deploy:
     needs: build
