@@ -28,6 +28,7 @@ jobs:
 
   publish:
     needs: build
+    runs-on: ubuntu-latest
 
     steps:
       - name: Gradle publish library to GitHub packages
@@ -38,6 +39,7 @@ jobs:
 
   deploy:
     needs: build
+    runs-on: ubuntu-latest
 
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
@@ -49,8 +51,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
-    # Specify runner + deployment step
-    runs-on: ubuntu-latest
     steps:
       - name: Deploy github pages artifact
         id: deployment
