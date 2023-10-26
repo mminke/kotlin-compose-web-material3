@@ -1,0 +1,23 @@
+name: Build branches
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project sources
+        uses: actions/checkout@v3
+      - name: Gradle build library and publish local
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: publishToMavenLocal
+          build-root-directory: library
+      - name: Gradle build showcase
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: jsBrowserProductionWebpack
+          build-root-directory: example

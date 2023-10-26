@@ -30,7 +30,7 @@ fun IconButtonsShowcase() {
         onClick { clickedValue = "tonal icon button clicked" }
         style { padding(5.px) }
     }) { Icon("public") }
-    StandardIconButton({
+    IconButton({
         onClick { toggleButtonSelected = !toggleButtonSelected }
         style { padding(5.px) }
     }) { Icon("menu") }

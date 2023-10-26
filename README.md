@@ -48,3 +48,19 @@ Currently, there is no general available artifact yet. Therefor the best way to 
       implementation("web.compose.material3:web-material3-js:1.0-SNAPSHOT")
    }
     ```
+
+4. To use the correct material design 3 styles and fonts use the MaterialTheme composable as a top level wrapper.
+
+   For example
+
+    ```kotlin
+    MaterialTheme(defaultColorScheme, defaultFontScheme) {
+        Row {
+            NavigationBar {}
+            Column { 
+                FilledButton( { label = "Click me!" })
+            }
+        }
+    }   
+    ```
+This uses the default color and font schemes.

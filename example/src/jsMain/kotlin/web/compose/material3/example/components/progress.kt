@@ -13,7 +13,7 @@ fun ProgressIndicatorShowcase() {
 
     Div({ style { height(25.px) } }) {
         LinearProgress({
-            progress = Progress(0.3f)
+            value = ProgressValue(0.3f)
         })
     }
     Div({ style { height(25.px) } }) {
@@ -24,7 +24,7 @@ fun ProgressIndicatorShowcase() {
     }
     Div {
         CircularProgress({
-            progress = Progress(0.7f)
+            value = ProgressValue(0.7f)
         })
     }
     Div {

@@ -24,7 +24,7 @@ fun ButtonShowcase() {
     OutlinedButton({ onClick { clickedValue = "outlined button clicked" } }) { Text("Outlined Button") }
     ElevatedButton({ onClick { clickedValue = "elevated button clicked" } }) { Text("Elevated Button") }
     TextButton({ onClick { clickedValue = "text button clicked" } }) { Text("Text Button") }
-    TonalButton({ onClick { clickedValue = "tonal button clicked" } }) { Text("Tonal Button") }
+    FilledTonalButton({ onClick { clickedValue = "tonal button clicked" } }) { Text("Tonal Button") }
 
     LargeTitle("FAB")
     Fab({ size = FabSize.SMALL; onClick { clickedValue = "Small FAB clicked" } }) {

@@ -6,15 +6,15 @@ import org.jetbrains.compose.web.dom.ContentBuilder
 import web.compose.material3.jsRequire
 
 @Composable
-fun StandardIconButton(
+fun IconButton(
     attrs: AttrBuilderContext<MdIconButtonElement>? = null,
     content: ContentBuilder<MdIconButtonElement>? = null
 ) = MdIconButtonTagElement(
-    tagName = "md-standard-icon-button",
+    tagName = "md-icon-button",
     applyAttrs = attrs,
     content = content
 ).also {
     webComponentLoader
 }
 
-private val webComponentLoader = jsRequire("@material/web/iconbutton/standard-icon-button.js")
+private val webComponentLoader = jsRequire("@material/web/iconbutton/icon-button.js")

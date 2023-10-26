@@ -17,4 +17,4 @@ fun CircularProgress(
     webComponentLoader
 }
 
-private val webComponentLoader = jsRequire("@material/web/circularprogress/circular-progress.js")
+private val webComponentLoader = jsRequire("@material/web/progress/circular-progress.js")

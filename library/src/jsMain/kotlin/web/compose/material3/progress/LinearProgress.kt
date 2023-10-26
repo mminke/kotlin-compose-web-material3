@@ -18,4 +18,4 @@ fun LinearProgress(
     webComponentLoader
 }
 
-private val webComponentLoader = jsRequire("@material/web/linearprogress/linear-progress.js")
+private val webComponentLoader = jsRequire("@material/web/progress/linear-progress.js")
