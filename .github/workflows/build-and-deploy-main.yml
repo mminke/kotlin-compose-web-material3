@@ -25,7 +25,17 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           path: example/build/distributions
-          
+
+  publish:
+    needs: build
+
+    steps:
+      - name: Gradle publish library to GitHub packages
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: publish
+          build-root-directory: library
+
   deploy:
     needs: build
 

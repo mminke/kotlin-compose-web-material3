@@ -30,6 +30,14 @@ If you are looking for a much more mature library for material design (as far as
 
 https://github.com/mpetuska/kmdc
 
+## Running locally
+
+To run the example project locally start it using:
+
+```bash
+$ ./gradlew jsBrowserDevelopmentRun
+```
+
 ## Usage
 
 Currently, there is no general available artifact yet. Therefor the best way to start experimenting with this library is to:
