@@ -27,25 +27,13 @@ fun Tabs(
 
 private val webComponentLoader = jsRequire("@material/web/tabs/tabs.js")
 
-var AttrsScope<MdTabsElement>.variant: Variant
-    get() {
-        throw InvalidCallException()
-    }
-    set(variant) {
-        this.attr("variant", variant.value)
-    }
-
-var AttrsScope<MdTabsElement>.selected: Int
+var AttrsScope<MdTabsElement>.activeTabIndex: Int
     get() {
         throw InvalidCallException()
     }
     set(value) {
-        this.attr("selected", value.toString())
+        this.attr("activeTabIndex", value.toString())
     }
-
-fun AttrsScope<MdTabsElement>.disabled(value: Boolean = true) {
-    if (value) attr("disabled", "")
-}
 
 fun AttrsScope<MdTabsElement>.selectOnFocus(value: Boolean = true) {
     if (value) attr("selectOnFocus", "")
@@ -55,9 +43,4 @@ fun AttrsScope<MdTabsElement>.onChange(handler: (SyntheticEvent<EventTarget>) ->
     addEventListener("change") {
         handler(it)
     }
-}
-
-enum class Variant(val value: String) {
-    PRIMARY("primary"),
-    SECONDARY("secondary")
 }

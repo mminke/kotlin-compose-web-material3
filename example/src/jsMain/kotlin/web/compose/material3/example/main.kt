@@ -47,7 +47,6 @@ import web.compose.material3.themes.defaultDarkColorScheme
 import web.compose.material3.themes.defaultFontScheme
 import web.compose.material3.theming.MaterialTheme
 import web.compose.material3.theming.MdSysTypeScaleTokens
-import web.compose.material3.theming.SysColorScheme
 import web.compose.material3.theming.TypeScaleTokens.Companion.applyStyle
 
 data class ListDataItem(
@@ -165,23 +164,25 @@ fun ShowcaseContent() {
 
     var activeTab by remember { mutableStateOf(0) }
     Tabs({
-        variant = Variant.PRIMARY
-        selected = activeTab
-        onChange { activeTab = it.target.asDynamic().selected }
+        activeTabIndex = activeTab
+        onChange {
+            console.info(it)
+            activeTab = it.target.asDynamic().activeTabIndex
+        }
     }) {
-        Tab {
+        PrimaryTab {
             Icon("check_circle")
             Text("Stable widgets")
         }
-        Tab {
+        PrimaryTab {
             Icon("circle")
             Text("Beta widgets")
         }
-        Tab {
+        PrimaryTab {
             Icon("bolt")
             Text("Alfa widgets")
         }
-        Tab {
+        PrimaryTab {
             Icon("add_circle")
             Text("Extra widgets")
         }

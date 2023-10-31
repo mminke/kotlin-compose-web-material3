@@ -4,7 +4,7 @@ plugins {
     id("maven-publish")
 }
 
-group = "web.compose.material3"
+group = "compose.html.material3"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -31,6 +31,8 @@ kotlin {
         }
         binaries.executable()
     }
+
+    @Suppress("UNUSED_VARIABLE")
     sourceSets {
         val jsMain by getting {
             dependencies {
@@ -60,7 +62,7 @@ publishing {
         }
     }
     publications {
-        create<MavenPublication>("kotlin-compose-web-material3") {
+        create<MavenPublication>("compose-html-material3") {
             from(components["kotlin"])
         }
     }

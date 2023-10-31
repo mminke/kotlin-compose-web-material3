@@ -12,4 +12,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "web-material3"
+rootProject.name = "compose-html-material3"

@@ -4,7 +4,7 @@ plugins {
     id("maven-publish")
 }
 
-group = "web.compose.material3"
+group = "compose.html.material3"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -32,13 +32,15 @@ kotlin {
         }
         binaries.executable()
     }
+
+    @Suppress("UNUSED_VARIABLE")
     sourceSets {
         val jsMain by getting {
             dependencies {
                 implementation(compose.html.core)
                 implementation(compose.runtime)
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:1.6.4")
-                implementation("web.compose.material3:web-material3-js:1.0-SNAPSHOT")
+                implementation("compose.html.material3:compose-html-material3-js:1.0-SNAPSHOT")
             }
         }
         val jsTest by getting {
